@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.robet.rtrain">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/trains"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/trains"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity
+            android:name=".Welcome"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".userLogin" />
+        <activity android:name=".adminLogin" />
+        <activity android:name=".guestLogin" />
+        <activity android:name=".Index" />
+        <activity android:name=".forgot" />
+        <activity android:name=".register" />
+        <activity android:name=".forgot2" />
+        <activity android:name=".adminForgot" />
+        <activity android:name=".adminForgot2" />
+        <activity android:name=".IndexTicket" />
+        <activity android:name=".IndexFeatures" />
+        <activity android:name=".IndexShop" />
+        <activity android:name=".IndexSettings" />
+        <activity android:name=".IndexAdmin" />
+        <activity android:name=".addCredit" />
+        <activity android:name=".showHistory" />
+        <activity android:name=".AdminManageUser" />
+        <activity android:name=".AdminManageData" />
+        <activity android:name=".AdminSetting" />
+        <activity android:name=".UserAdd" />
+        <activity android:name=".UserEdit" />
+        <activity android:name=".AdminManageAdmin" />
+        <activity android:name=".AdminManageTrainAdd" />
+        <activity android:name=".AdminManageTrainEdit" />
+        <activity android:name=".AdminManageTrainShow" />
+        <activity android:name=".AdminEdit" />
+        <activity android:name=".AdminAdd" />
+    </application>
+
+</manifest>

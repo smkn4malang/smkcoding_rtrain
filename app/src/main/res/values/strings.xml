@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">R-Train</string>
+    <string name="title_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="slide1_title">Welcome To</string>
+    <string name="slide1_desc">Tell you all about train</string>
+    <string name="slide2_title">Ticket</string>
+    <string name="slide2_desc">Buy train tickets easily</string>
+    <string name="slide3_title">Featured</string>
+    <string name="slide3_desc">Complete with various Features</string>
+    <string-array name="time">
+        <item>08.00</item>
+        <item>12.00</item>
+        <item>17.00</item>
+    </string-array>
+    <string-array name="category">
+        <item>ekonomi</item>
+        <item>bisnis</item>
+        <item>express</item>
+    </string-array>
+</resources>

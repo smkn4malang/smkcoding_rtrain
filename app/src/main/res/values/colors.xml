@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="back">#4A708B</color>
+
+    <color name="slider1">#008B45</color>
+    <color name="slider2">#CD5555</color>
+    <color name="slider3">#4B0082</color>
+
+    <color name="indots1">#008B8B</color><!-- dark cyan -->
+    <color name="indots2">#8B008B</color><!-- dark magenta -->
+    <color name="indots3">#00BFFF</color><!-- deep sky blue -->
+
+    <color name="acdots1">#00FFFF</color><!-- cyan -->
+    <color name="acdots2">#FF00FF</color><!-- magenta -->
+    <color name="acdots3">#1E90FF</color>
+    <color name="button_link">#757573</color><!-- dodger blue -->
+
+    <array name="indots_array">
+        <item>@color/indots1</item>
+        <item>@color/indots2</item>
+        <item>@color/indots3</item>
+    </array>
+
+    <array name="acdots_array">
+        <item>@color/acdots1</item>
+        <item>@color/acdots2</item>
+        <item>@color/acdots3</item>
+    </array>
+</resources>
