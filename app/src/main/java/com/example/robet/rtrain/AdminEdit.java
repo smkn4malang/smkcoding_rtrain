@@ -19,7 +19,6 @@ import retrofit2.Response;
 
 public class AdminEdit extends AppCompatActivity {
 
-    Intent intent;
     Bundle bundle;
     Loading loading;
     HashMap<String, String> data;
@@ -44,8 +43,7 @@ public class AdminEdit extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loading = new Loading(this);
-        intent = getIntent();
-        bundle = intent.getExtras();
+        bundle = getIntent().getExtras();
         data = (HashMap<String, String>) bundle.get("extra");
 
         id = data.get("id");
@@ -100,9 +98,12 @@ public class AdminEdit extends AppCompatActivity {
                             info = response.body().getInfo();
                             message = response.body().getMessage();
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            AdminEdit.this.finish();
 
-                            if(info == true){
-                                AdminEdit.this.finish();
+                            if(!info){
+                                startActivity(getIntent());
+                            } else {
+                                new AdminManageAdmin().startActivity(getIntent());
                             }
 
                         }

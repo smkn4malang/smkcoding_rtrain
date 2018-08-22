@@ -122,8 +122,8 @@ public class IndexSettings extends AppCompatActivity {
                 break;
             case R.id.btHistory:
 
-                newAct = new Intent(getApplicationContext(), showHistory.class);
-                startActivity(newAct);
+//                newAct = new Intent(getApplicationContext(), historyShow.class);
+//                startActivity(newAct);
 
                 break;
             case R.id.btLogout:

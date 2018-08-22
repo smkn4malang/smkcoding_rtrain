@@ -32,7 +32,6 @@ public class UserEdit extends AppCompatActivity {
     @BindView(R.id.btUpdate)
     Button btUpdate;
 
-    Intent intent;
     Bundle bundle;
     Loading loading;
     HashMap<String, String> data;
@@ -47,8 +46,7 @@ public class UserEdit extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loading = new Loading(this);
-        intent = getIntent();
-        bundle = intent.getExtras();
+        bundle = getIntent().getExtras();
         data = (HashMap<String, String>) bundle.get("extra");
 
         id = data.get("id");
@@ -107,9 +105,12 @@ public class UserEdit extends AppCompatActivity {
                             info = response.body().getInfo();
                             message = response.body().getMessage();
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            UserEdit.this.finish();
 
-                            if(info == true){
-                                UserEdit.this.finish();
+                            if(!info){
+                                startActivity(getIntent());
+                            } else {
+                                new AdminManageUser().startActivity(getIntent());
                             }
 
                         }

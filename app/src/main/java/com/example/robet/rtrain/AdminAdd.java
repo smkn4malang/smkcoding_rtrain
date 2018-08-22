@@ -74,9 +74,9 @@ public class AdminAdd extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             info = response.body().getInfo();
-
-                            if(info == true){
-                                AdminAdd.this.finish();
+                            AdminAdd.this.finish();
+                            if(info == false){
+                                startActivity(getIntent());
                             }
                         }
 

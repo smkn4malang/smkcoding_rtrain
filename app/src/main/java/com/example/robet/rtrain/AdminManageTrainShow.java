@@ -4,11 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdminManageTrainShow extends AppCompatActivity {
 
@@ -17,6 +24,8 @@ public class AdminManageTrainShow extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    trainAdapter adapter;
+    Loading loading;
     Intent intent;
 
     @Override
@@ -24,6 +33,30 @@ public class AdminManageTrainShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_manage_train_show);
         ButterKnife.bind(this);
+
+        loading = new Loading(this);
+        adapter = new trainAdapter();
+
+        RecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.setAdapter(adapter);
+        RecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        loading.start();
+
+        RestApi.getData().TrainShow().enqueue(new Callback<TrainResponse>() {
+            @Override
+            public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
+                loading.stop();
+                adapter.trainList.addAll(response.body().getTrain());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<TrainResponse> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @OnClick(R.id.fab)

@@ -37,7 +37,6 @@
         <activity android:name=".IndexSettings" />
         <activity android:name=".IndexAdmin" />
         <activity android:name=".addCredit" />
-        <activity android:name=".showHistory" />
         <activity android:name=".AdminManageUser" />
         <activity android:name=".AdminManageData" />
         <activity android:name=".AdminSetting" />

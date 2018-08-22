@@ -75,15 +75,12 @@ public class AdminManageTrainAdd extends AppCompatActivity {
                 RestApi.getData().TrainAdd(trainName, destination, depart, cars, price, time, category).enqueue(new Callback<Value>() {
                     @Override
                     public void onResponse(Call<Value> call, Response<Value> response) {
+
                         loading.stop();
-                        if(response.body().getInfo() == false){
-                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            intent = new Intent(getApplicationContext(), AdminManageTrainShow.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                        Toast.makeText(getApplicationContext(), response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                        AdminManageTrainAdd.this.finish();
+                        if(response.body().getInfo() == false) {
+                            startActivity(getIntent());
                         }
                     }
 

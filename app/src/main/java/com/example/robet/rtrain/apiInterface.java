@@ -87,12 +87,6 @@ public interface apiInterface {
             @Field("pay") String pay
     );
 
-    @FormUrlEncoded
-    @POST("public/index.php/history/show")
-    Call<HistoryResponse> HistoryShow(
-            @Field("id") int id
-    );
-
     @GET("public/index.php/user/show")
     Call<UserShowResponse> UserShow();
 
@@ -158,6 +152,28 @@ public interface apiInterface {
     @FormUrlEncoded
     @POST("public/index.php/admin/delete")
     Call<Value> AdminDelete(
+            @Field("id") String id
+    );
+
+    @GET("public/index.php/train/show")
+    Call<TrainResponse> TrainShow();
+
+    @FormUrlEncoded
+    @POST("public/index.php/train/update")
+    Call<Value> TrainUpdate(
+            @Field("id") String id,
+            @Field("name") String name,
+            @Field("category") String category,
+            @Field("destination") String destination,
+            @Field("depart") String depart,
+            @Field("cars") String cars,
+            @Field("price") String price,
+            @Field("time") String time
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/train/delete")
+    Call<Value> TrainDelete(
             @Field("id") String id
     );
 }
