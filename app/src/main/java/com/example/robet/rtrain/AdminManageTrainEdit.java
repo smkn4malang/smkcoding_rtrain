@@ -1,5 +1,6 @@
 package com.example.robet.rtrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -173,7 +174,7 @@ public class AdminManageTrainEdit extends AppCompatActivity {
                             if(!info){
                                 startActivity(getIntent());
                             } else {
-                                new AdminManageTrainShow().startActivity(getIntent());
+                                startActivity(new Intent(getApplicationContext(), AdminManageTrainShow.class));
                             }
 
                         }

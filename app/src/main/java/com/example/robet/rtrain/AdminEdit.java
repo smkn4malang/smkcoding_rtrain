@@ -103,7 +103,7 @@ public class AdminEdit extends AppCompatActivity {
                             if(!info){
                                 startActivity(getIntent());
                             } else {
-                                new AdminManageAdmin().startActivity(getIntent());
+                                startActivity(new Intent(getApplicationContext(), AdminManageAdmin.class));
                             }
 
                         }

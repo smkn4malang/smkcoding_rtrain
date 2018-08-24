@@ -110,7 +110,7 @@ public class UserEdit extends AppCompatActivity {
                             if(!info){
                                 startActivity(getIntent());
                             } else {
-                                new AdminManageUser().startActivity(getIntent());
+                                startActivity(new Intent(getApplicationContext(), AdminManageUser.class));
                             }
 
                         }

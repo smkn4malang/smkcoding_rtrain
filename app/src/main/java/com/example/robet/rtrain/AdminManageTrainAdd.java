@@ -79,6 +79,8 @@ public class AdminManageTrainAdd extends AppCompatActivity {
                         loading.stop();
                         Toast.makeText(getApplicationContext(), response.body().getMessage(),Toast.LENGTH_SHORT).show();
                         AdminManageTrainAdd.this.finish();
+                        startActivity(new Intent(getApplicationContext(), AdminManageTrainShow.class));
+
                         if(response.body().getInfo() == false) {
                             startActivity(getIntent());
                         }

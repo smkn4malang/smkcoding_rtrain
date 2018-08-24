@@ -1,5 +1,6 @@
 package com.example.robet.rtrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -80,8 +81,9 @@ public class UserAdd extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             info = response.body().getInfo();
                             UserAdd.this.finish();
+                            startActivity(new Intent(getApplicationContext(), AdminManageUser.class));
 
-                            if(info == false){
+                            if(!info){
                                 startActivity(getIntent());
                             }
                         }

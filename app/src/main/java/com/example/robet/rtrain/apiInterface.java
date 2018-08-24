@@ -176,4 +176,32 @@ public interface apiInterface {
     Call<Value> TrainDelete(
             @Field("id") String id
     );
+
+    @FormUrlEncoded
+    @POST("public/index.php/admin/change/username")
+    Call<Value> AdminChangeUsername(
+            @Field("id") int id,
+            @Field("username") String username
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/admin/change/email")
+    Call<Value> AdminChangeEmail(
+            @Field("id") int id,
+            @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/admin/change/password")
+    Call<Value> AdminChangePassword(
+            @Field("id") int id,
+            @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/admin/change/name")
+    Call<Value> AdminChangeName(
+            @Field("id") int id,
+            @Field("name") String name
+    );
 }

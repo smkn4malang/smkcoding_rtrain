@@ -78,9 +78,10 @@ public class adminLogin extends AppCompatActivity {
 
                                     config.setName(name);
                                     config.setInfo("admin", true);
-                                    config.setUsername(response.body().getUsername());
+                                    config.setId(response.body().getId());
+                                    config.setUsername(username);
                                     config.setEmail(response.body().getEmail());
-                                    config.setPassword(response.body().getPassword());
+                                    config.setPassword(password);
 
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                     newAct = new Intent(getApplicationContext(), IndexAdmin.class);

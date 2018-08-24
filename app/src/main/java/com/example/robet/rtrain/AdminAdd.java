@@ -1,5 +1,6 @@
 package com.example.robet.rtrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +76,8 @@ public class AdminAdd extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             info = response.body().getInfo();
                             AdminAdd.this.finish();
+                            startActivity(new Intent(getApplicationContext(), AdminManageAdmin.class));
+
                             if(info == false){
                                 startActivity(getIntent());
                             }
