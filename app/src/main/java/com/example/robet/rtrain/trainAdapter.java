@@ -15,7 +15,7 @@ import java.util.List;
 
 public class trainAdapter extends RecyclerView.Adapter<trainAdapter.MainViewAdapter> {
 
-    List<TrainItem> trainList = new ArrayList<>();
+    List<ManageTrainItem> trainList = new ArrayList<>();
     int i = 0;
     HashMap<String, String> map = new HashMap<>();
 

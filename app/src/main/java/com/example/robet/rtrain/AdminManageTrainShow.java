@@ -6,8 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -43,16 +41,16 @@ public class AdminManageTrainShow extends AppCompatActivity {
 
         loading.start();
 
-        RestApi.getData().TrainShow().enqueue(new Callback<TrainResponse>() {
+        RestApi.getData().TrainShow().enqueue(new Callback<ManageTrainResponse>() {
             @Override
-            public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
+            public void onResponse(Call<ManageTrainResponse> call, Response<ManageTrainResponse> response) {
                 loading.stop();
                 adapter.trainList.addAll(response.body().getTrain());
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<TrainResponse> call, Throwable t) {
+            public void onFailure(Call<ManageTrainResponse> call, Throwable t) {
                 loading.stop();
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }

@@ -2,19 +2,10 @@ package com.example.robet.rtrain;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TrainItem{
-
-	@SerializedName("seat")
-	private String seat;
-
-	@SerializedName("date")
-	private String date;
+public class ManageTrainItem {
 
 	@SerializedName("cars")
 	private String cars;
-
-	@SerializedName("booked")
-	private int booked;
 
 	@SerializedName("price")
 	private String price;
@@ -37,36 +28,12 @@ public class TrainItem{
 	@SerializedName("depart")
 	private String depart;
 
-	public void setSeat(String seat){
-		this.seat = seat;
-	}
-
-	public String getSeat(){
-		return seat;
-	}
-
-	public void setDate(String date){
-		this.date = date;
-	}
-
-	public String getDate(){
-		return date;
-	}
-
 	public void setCars(String cars){
 		this.cars = cars;
 	}
 
 	public String getCars(){
 		return cars;
-	}
-
-	public void setBooked(int booked){
-		this.booked = booked;
-	}
-
-	public int getBooked(){
-		return booked;
 	}
 
 	public void setPrice(String price){

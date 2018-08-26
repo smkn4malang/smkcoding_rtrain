@@ -156,7 +156,7 @@ public interface apiInterface {
     );
 
     @GET("public/index.php/train/show")
-    Call<TrainResponse> TrainShow();
+    Call<ManageTrainResponse> TrainShow();
 
     @FormUrlEncoded
     @POST("public/index.php/train/update")
@@ -228,7 +228,7 @@ public interface apiInterface {
 
     @FormUrlEncoded
     @POST("public/index.php/booking/search")
-    Call<Value> ItemUpdate(
+    Call<Value> BookingSearch(
             @Field("destination") String destination,
             @Field("depart") String depart,
             @Field("time") String time,
