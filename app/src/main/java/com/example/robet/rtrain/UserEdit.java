@@ -74,6 +74,7 @@ public class UserEdit extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                         UserEdit.this.finish();
+                        startActivity(new Intent(getApplicationContext(), AdminManageUser.class));
                     }
 
                     @Override

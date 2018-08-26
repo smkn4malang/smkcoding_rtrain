@@ -2,7 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:id="@+id/trainEdit">
+    android:id="@+id/itemEdit">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/itemPic"
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -24,33 +31,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="category"
-            android:id="@+id/tvCategory"
+            android:text="price"
+            android:id="@+id/tvPrice"
             android:layout_marginLeft="10dp"
             android:textSize="20sp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginLeft="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="depart"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:id="@+id/tvDepart"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="destination"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:id="@+id/tvDestination"/>
 
     </LinearLayout>
     <LinearLayout

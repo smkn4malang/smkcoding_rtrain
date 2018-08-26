@@ -204,4 +204,41 @@ public interface apiInterface {
             @Field("id") int id,
             @Field("name") String name
     );
+
+    @GET("public/index.php/item/show")
+    Call<ItemResponse> ItemShow();
+
+    @GET("public/index.php/booking/show")
+    Call<TrainResponse> BookingShow();
+
+    @FormUrlEncoded
+    @POST("public/index.php/item/update")
+    Call<Value> ItemUpdate(
+            @Field("id") String id,
+            @Field("name") String name,
+            @Field("price") String price,
+            @Field("desc") String desc
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/item/delete")
+    Call<Value> ItemDelete(
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/booking/search")
+    Call<Value> ItemUpdate(
+            @Field("destination") String destination,
+            @Field("depart") String depart,
+            @Field("time") String time,
+            @Field("category") String category,
+            @Field("date") String date
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/booing/ticket")
+    Call<Value> ShowTicket(
+            @Field("id") String id
+    );
 }

@@ -32,8 +32,8 @@ public class trainAdapter extends RecyclerView.Adapter<trainAdapter.MainViewAdap
 
         holder.tvId.setText(trainList.get(position).getId());
         holder.tvName.setText(trainList.get(position).getName());
-        holder.tvDepart.setText("asal   : " + trainList.get(position).getDepart());
-        holder.tvDestination.setText("tujuan : " +trainList.get(position).getDestination());
+        holder.tvDepart.setText("asal   : \n" + trainList.get(position).getDepart());
+        holder.tvDestination.setText("tujuan : \n" +trainList.get(position).getDestination());
         holder.tvCategory.setText(trainList.get(position).getCategory());
 
         if(i % 2 == 0){

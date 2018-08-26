@@ -79,13 +79,13 @@ public class AdminManageTrainEdit extends AppCompatActivity {
         }
 
         switch (time) {
-            case "08.00":
+            case "08.00.00":
                 indexTime = 0;
                 break;
-            case "12.00":
+            case "12.00.00":
                 indexTime = 1;
                 break;
-            case "17.00":
+            case "17.00.00":
                 indexTime = 2;
                 break;
         }
@@ -113,6 +113,7 @@ public class AdminManageTrainEdit extends AppCompatActivity {
                         loading.stop();
                         Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         AdminManageTrainEdit.this.finish();
+                        startActivity(new Intent(getApplicationContext(), AdminManageTrainShow.class));
                     }
 
                     @Override

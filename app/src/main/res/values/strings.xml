@@ -11,9 +11,9 @@
     <string name="slide3_title">Featured</string>
     <string name="slide3_desc">Complete with various Features</string>
     <string-array name="time">
-        <item>08.00</item>
-        <item>12.00</item>
-        <item>17.00</item>
+        <item>08.00.00</item>
+        <item>12.00.00</item>
+        <item>17.00.00</item>
     </string-array>
     <string-array name="category">
         <item>ekonomi</item>

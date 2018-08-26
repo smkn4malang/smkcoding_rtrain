@@ -69,6 +69,7 @@ public class AdminEdit extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                         AdminEdit.this.finish();
+                        startActivity(new Intent(getApplicationContext(), AdminManageAdmin.class));
                     }
 
                     @Override
