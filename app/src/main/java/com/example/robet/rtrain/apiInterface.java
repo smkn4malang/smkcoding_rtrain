@@ -208,9 +208,6 @@ public interface apiInterface {
     @GET("public/index.php/item/show")
     Call<ItemResponse> ItemShow();
 
-    @GET("public/index.php/booking/show")
-    Call<TrainResponse> BookingShow();
-
     @FormUrlEncoded
     @POST("public/index.php/item/update")
     Call<Value> ItemUpdate(
@@ -226,19 +223,30 @@ public interface apiInterface {
             @Field("id") String id
     );
 
+    /*
+        form user and guest
+     */
+
+    @GET("pubic/index.php/booking/show")
+    Call<TrainResponse> BookingShow();
+
     @FormUrlEncoded
     @POST("public/index.php/booking/search")
-    Call<Value> BookingSearch(
-            @Field("destination") String destination,
-            @Field("depart") String depart,
-            @Field("time") String time,
-            @Field("category") String category,
+    Call<TrainResponse> BookingSearch(
             @Field("date") String date
     );
 
+    @GET("public/index.php/booking/city")
+    Call<CityResponse> CityList();
+
     @FormUrlEncoded
-    @POST("public/index.php/booing/ticket")
-    Call<Value> ShowTicket(
-            @Field("id") String id
+    @POST("public/index.php/booking/seat")
+    Call<SeatResponse> SeatList(
+            @Field("trainId") String trainId,
+            @Field("date") String date,
+            @Field("time") String time,
+            @Field("category") String category,
+            @Field("destination") String destination,
+            @Field("depart") String depart
     );
 }

@@ -17,8 +17,8 @@ import retrofit2.Response;
 
 public class IndexTicket extends AppCompatActivity {
 
-    TicketAdapter adapter;
     Loading loading;
+    TrainAdapter adapter;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.fab)
@@ -30,8 +30,8 @@ public class IndexTicket extends AppCompatActivity {
         setContentView(R.layout.index_ticket);
         ButterKnife.bind(this);
 
-        adapter = new TicketAdapter();
         loading = new Loading(this);
+        adapter = new TrainAdapter();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -42,13 +42,14 @@ public class IndexTicket extends AppCompatActivity {
             @Override
             public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
                 loading.stop();
-                adapter.trainList.addAll(response.body().getTrain());
+                adapter.listTrain.addAll(response.body().getTrain());
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<TrainResponse> call, Throwable t) {
                 loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

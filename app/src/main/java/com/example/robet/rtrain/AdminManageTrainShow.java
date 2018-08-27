@@ -22,7 +22,7 @@ public class AdminManageTrainShow extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
-    trainAdapter adapter;
+    ManageTrainAdapter adapter;
     Loading loading;
     Intent intent;
 
@@ -33,7 +33,7 @@ public class AdminManageTrainShow extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loading = new Loading(this);
-        adapter = new trainAdapter();
+        adapter = new ManageTrainAdapter();
 
         RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerView.setAdapter(adapter);

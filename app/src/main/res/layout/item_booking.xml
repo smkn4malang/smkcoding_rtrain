@@ -14,42 +14,16 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="20dp"
+            android:layout_width="15dp"
             android:layout_height="match_parent"
             android:background="@drawable/left_radius"
             android:id="@+id/LeftLayout"
             android:orientation="horizontal" />
 
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_pointer"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:src="@drawable/ic_dotted"/>
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_dot"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -58,27 +32,41 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/tvDestination"
-                android:text="destination"
-                android:textSize="18sp"
+                android:id="@+id/tvName"
+                android:text="Train Name"
+                android:textSize="20sp"
                 android:textColor="#000000"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvDepart"
+                android:id="@+id/tvCategory"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="40dp"
                 android:textSize="18sp"
-                android:text="depart"
+                android:text="category"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPrice"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:text="Price"
                 android:textColor="#000000"/>
 
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_dotted"
+            android:layout_marginLeft="20dp"/>
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:orientation="vertical">
 

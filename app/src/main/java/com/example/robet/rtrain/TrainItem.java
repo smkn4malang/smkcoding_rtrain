@@ -10,9 +10,6 @@ public class TrainItem{
 	@SerializedName("date")
 	private String date;
 
-	@SerializedName("cars")
-	private String cars;
-
 	@SerializedName("booked")
 	private int booked;
 
@@ -22,9 +19,6 @@ public class TrainItem{
 	@SerializedName("name")
 	private String name;
 
-	@SerializedName("destination")
-	private String destination;
-
 	@SerializedName("id")
 	private String id;
 
@@ -33,9 +27,6 @@ public class TrainItem{
 
 	@SerializedName("category")
 	private String category;
-
-	@SerializedName("depart")
-	private String depart;
 
 	public void setSeat(String seat){
 		this.seat = seat;
@@ -51,14 +42,6 @@ public class TrainItem{
 
 	public String getDate(){
 		return date;
-	}
-
-	public void setCars(String cars){
-		this.cars = cars;
-	}
-
-	public String getCars(){
-		return cars;
 	}
 
 	public void setBooked(int booked){
@@ -85,14 +68,6 @@ public class TrainItem{
 		return name;
 	}
 
-	public void setDestination(String destination){
-		this.destination = destination;
-	}
-
-	public String getDestination(){
-		return destination;
-	}
-
 	public void setId(String id){
 		this.id = id;
 	}
@@ -115,13 +90,5 @@ public class TrainItem{
 
 	public String getCategory(){
 		return category;
-	}
-
-	public void setDepart(String depart){
-		this.depart = depart;
-	}
-
-	public String getDepart(){
-		return depart;
 	}
 }

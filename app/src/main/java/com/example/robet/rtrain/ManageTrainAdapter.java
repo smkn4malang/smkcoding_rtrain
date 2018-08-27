@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class trainAdapter extends RecyclerView.Adapter<trainAdapter.MainViewAdapter> {
+public class ManageTrainAdapter extends RecyclerView.Adapter<ManageTrainAdapter.MainViewAdapter> {
 
     List<ManageTrainItem> trainList = new ArrayList<>();
     int i = 0;
