@@ -35,6 +35,10 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
     @Override
     public void onBindViewHolder(@NonNull final MainViewHolder holder, final int position) {
 
+        if (listTrain.get(position).getSeat().equals(listTrain.get(position).getBooked())) {
+            holder.showTicket.setCardBackgroundColor(Color.rgb(255, 106, 106));
+        }
+
         color = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
         holder.leftLayout.setBackgroundColor(color);
 
@@ -58,9 +62,16 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
                 map.put("date", listTrain.get(position).getDate());
                 map.put("seat", listTrain.get(position).getSeat());
 
-                Intent intent = new Intent(holder.itemView.getContext(), CityList.class);
-                intent.putExtra("extra", map);
-                holder.itemView.getContext().startActivity(intent);
+                if (listTrain.get(position).getSeat().equals(listTrain.get(position).getBooked())) {
+
+                    Toast.makeText(holder.itemView.getContext(), "tiket untuk kereta tersebut telah penuh",
+                            Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Intent intent = new Intent(holder.itemView.getContext(), CityList.class);
+                    intent.putExtra("extra", map);
+                    holder.itemView.getContext().startActivity(intent);
+                }
             }
         });
 

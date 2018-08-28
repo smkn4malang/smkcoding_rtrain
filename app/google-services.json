@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "100500288554",
+    "firebase_url": "https://rtrain-2001.firebaseio.com",
+    "project_id": "rtrain-2001",
+    "storage_bucket": "rtrain-2001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100500288554:android:3eb9d36473076b03",
+        "android_client_info": {
+          "package_name": "com.example.robet.rtrain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100500288554-kr5lrohh7v1vd501ler6qu37pj4h71hk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.robet.rtrain",
+            "certificate_hash": "612cd58734b8a2616dc5b130c7cb7784ef2ee5e7"
+          }
+        },
+        {
+          "client_id": "100500288554-2gp59jj73opiecuic9app9prig3bi6hq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUoFQIG6sNN9rZ0cFgkaoCQPbtzf_h_sw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100500288554-2gp59jj73opiecuic9app9prig3bi6hq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

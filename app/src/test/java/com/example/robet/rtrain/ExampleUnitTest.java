@@ -1,4 +1,4 @@
-package com.dycode.edu.r_train;
+package ccom.example.robet.rtrain;
 
 import org.junit.Test;
 

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.dycode.edu.r_train"
+        applicationId "com.example.robet.rtrain"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
@@ -35,8 +35,10 @@ dependencies {
     implementation 'com.android.support:design:28.0.0-alpha1'
     implementation 'com.android.support:cardview-v7:28.0.0-alpha1'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'com.github.nguyenhoanglam:ImagePicker:1.3.0'
-    implementation 'android.arch.persistence.room:runtime:1.1.1'
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 }
+apply plugin: 'com.google.gms.google-services'

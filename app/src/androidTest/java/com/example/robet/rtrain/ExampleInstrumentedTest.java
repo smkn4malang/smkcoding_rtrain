@@ -1,4 +1,4 @@
-package com.dycode.edu.r_train;
+package com.example.robet.rtrain;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
