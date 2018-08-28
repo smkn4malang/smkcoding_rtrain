@@ -61,7 +61,7 @@ public class TrainShow extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
+        month = calendar.get(Calendar.MONTH) + 1;
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
@@ -100,8 +100,9 @@ public class TrainShow extends AppCompatActivity {
                 topBisnis.setBackground(getDrawable(colorPrimary));
                 topExpress.setBackground(getDrawable(colorPrimary));
                 category = "ekonomi";
-                trainSearch(category, date);
-
+                adapter.listTrain.clear();
+                adapter.notifyDataSetChanged();
+                trainSearch(date, category);
 
                 break;
             case R.id.bisnis:
@@ -110,7 +111,9 @@ public class TrainShow extends AppCompatActivity {
                 topBisnis.setBackground(getDrawable(indots3));
                 topExpress.setBackground(getDrawable(colorPrimary));
                 category = "bisnis";
-                trainSearch(category, date);
+                adapter.listTrain.clear();
+                adapter.notifyDataSetChanged();
+                trainSearch(date, category);
 
                 break;
             case R.id.express:
@@ -119,7 +122,9 @@ public class TrainShow extends AppCompatActivity {
                 topBisnis.setBackground(getDrawable(colorPrimary));
                 topExpress.setBackground(getDrawable(indots3));
                 category = "express";
-                trainSearch(category, date);
+                adapter.listTrain.clear();
+                adapter.notifyDataSetChanged();
+                trainSearch(date, category);
 
                 break;
             case R.id.fab:
@@ -137,7 +142,10 @@ public class TrainShow extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
 
-                date = mYear + "-" + mMonth + "-" + mDay;
+                year = mYear;
+                month = mMonth + 1;
+                day = mDay;
+                date = year + "-" + month + "-" + day;
 
                 trainSearch(date, category);
 
@@ -147,11 +155,10 @@ public class TrainShow extends AppCompatActivity {
 
     }
 
-    private void trainSearch(String date, String category) {
+    private void trainSearch(String mDate, String mCategory) {
 
-        adapter.listTrain.clear();
         loading.start();
-        RestApi.getData().TrainSearch(date, category).enqueue(new Callback<TrainResponse>() {
+        RestApi.getData().TrainSearch(mDate,mCategory).enqueue(new Callback<TrainResponse>() {
             @Override
             public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
                 loading.stop();
