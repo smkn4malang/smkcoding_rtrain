@@ -230,4 +230,11 @@ public interface apiInterface {
             @Field("price") String price,
             @Field("cars") String cars
     );
+
+    @FormUrlEncoded
+    @POST("public/index.php/train/search")
+    Call<TrainResponse> TrainSearch(
+            @Field("date") String date,
+            @Field("category") String category
+    );
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,8 +29,12 @@ public class Index extends AppCompatActivity {
     TextView tvPromo;
     @BindView(R.id.Promo)
     RecyclerView Promo;
+    @BindView(R.id.btLogout)
+    CardView btLogout;
     @BindView(R.id.drawSettings)
     ImageView drawSettings;
+    @BindView(R.id.scrollHorizontal)
+    HorizontalScrollView scrollHorizontal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +44,7 @@ public class Index extends AppCompatActivity {
 
         config = new Config(this);
         loading = new Loading(this);
-
-        if (config.getInfo("user")) {
-            drawSettings.setBackgroundResource(R.drawable.setting);
-        } else if (config.getInfo("guest")) {
-            drawSettings.setBackgroundResource(R.drawable.logout);
-        }
+        scrollHorizontal.setVerticalScrollBarEnabled(false);
     }
 
     @OnClick({R.id.btTicket, R.id.btShop, R.id.btSetting})

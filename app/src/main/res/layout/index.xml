@@ -53,117 +53,144 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:id="@+id/scrollHorizontal"
+                android:scrollbars="none">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:orientation="horizontal">
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="20dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="15dp"
-                        android:id="@+id/btTicket">
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="5dp"
-                            android:src="@drawable/ticket" />
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/btTicket"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="20dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="15dp">
 
-                    </android.support.v7.widget.CardView>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/ticket" />
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/btShop"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="20dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="15dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/shop" />
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/btSetting"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="20dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="15dp">
+
+                            <ImageView
+                                android:id="@+id/drawSettings"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/setting" />
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/btLogout"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="20dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="15dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/logout" />
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="20dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="15dp"
-                        android:id="@+id/btShop">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/shop" />
-
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="20dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="15dp"
-                        android:id="@+id/btSetting">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/setting"
-                            android:id="@+id/drawSettings"/>
-
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/back"
                 android:text="Feature"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="35sp"
-                android:textStyle="italic|bold"
-                android:textAlignment="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/back"/>
+                android:textStyle="italic|bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"></LinearLayout>
 
             <TextView
+                android:id="@+id/tvPromo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/back"
                 android:text="Promo"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="35sp"
-                android:textStyle="italic|bold"
-                android:textAlignment="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/back"
-                android:id="@+id/tvPromo"/>
+                android:textStyle="italic|bold" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/Promo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/Promo"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 

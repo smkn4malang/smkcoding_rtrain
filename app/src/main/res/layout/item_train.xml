@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="10dp"
         app:cardElevation="20dp">
 
         <LinearLayout
@@ -76,7 +76,7 @@
                     android:drawableStart="@drawable/ic_time_mini"
                     android:text="  Time"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tvDate"
@@ -86,7 +86,7 @@
                     android:drawableStart="@drawable/ic_calendar_mini"
                     android:text="  Date"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tvSeat"
@@ -95,7 +95,7 @@
                     android:layout_marginTop="10dp"
                     android:text="seat seat"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tvBooked"
@@ -104,7 +104,7 @@
                     android:layout_marginTop="10dp"
                     android:text="booked book"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 

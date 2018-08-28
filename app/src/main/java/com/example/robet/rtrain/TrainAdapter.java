@@ -1,5 +1,6 @@
 package com.example.robet.rtrain;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,8 +20,8 @@ import java.util.Random;
 public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHolder> {
 
     ArrayList<TrainItem> listTrain = new ArrayList<>();
-    HashMap<String, String> map = new HashMap<>();
-    Random random = new Random();
+    private HashMap<String, String> map = new HashMap<>();
+    private Random random = new Random();
     int color;
 
     @NonNull
@@ -38,11 +40,11 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
 
         holder.name.setText(listTrain.get(position).getName());
         holder.category.setText(listTrain.get(position).getCategory());
-        holder.price.setText(listTrain.get(position).getPrice());
+        holder.price.setText("Rp " + listTrain.get(position).getPrice());
         holder.seat.setText("seat: " + listTrain.get(position).getSeat());
-        holder.time.setText(listTrain.get(position).getTime());
-        holder.date.setText(listTrain.get(position).getDate());
-        holder.booked.setText("booked: "  + listTrain.get(position).getDate());
+        holder.time.setText("  " + listTrain.get(position).getTime());
+        holder.date.setText("  " + listTrain.get(position).getDate());
+        holder.booked.setText("booked: " + listTrain.get(position).getBooked());
 
         holder.showTicket.setOnClickListener(new View.OnClickListener() {
             @Override
