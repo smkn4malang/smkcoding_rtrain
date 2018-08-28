@@ -91,18 +91,6 @@ public interface apiInterface {
     Call<UserShowResponse> UserShow();
 
     @FormUrlEncoded
-    @POST("public/index.php/train/add")
-    Call<Value> TrainAdd(
-            @Field("trainName") String trainName,
-            @Field("destination") String destination,
-            @Field("depart") String depart,
-            @Field("cars") String cars,
-            @Field("price") String price,
-            @Field("time") String time,
-            @Field("category") String category
-    );
-
-    @FormUrlEncoded
     @POST("public/index.php/user/update")
     Call<Value> UserUpdate(
             @Field("id") String id,
@@ -155,28 +143,6 @@ public interface apiInterface {
             @Field("id") String id
     );
 
-    @GET("public/index.php/train/show")
-    Call<ManageTrainResponse> TrainShow();
-
-    @FormUrlEncoded
-    @POST("public/index.php/train/update")
-    Call<Value> TrainUpdate(
-            @Field("id") String id,
-            @Field("name") String name,
-            @Field("category") String category,
-            @Field("destination") String destination,
-            @Field("depart") String depart,
-            @Field("cars") String cars,
-            @Field("price") String price,
-            @Field("time") String time
-    );
-
-    @FormUrlEncoded
-    @POST("public/index.php/train/delete")
-    Call<Value> TrainDelete(
-            @Field("id") String id
-    );
-
     @FormUrlEncoded
     @POST("public/index.php/admin/change/username")
     Call<Value> AdminChangeUsername(
@@ -223,24 +189,11 @@ public interface apiInterface {
             @Field("id") String id
     );
 
-    /*
-        form user and guest
-     */
-
-    @GET("pubic/index.php/booking/show")
-    Call<TrainResponse> BookingShow();
-
-    @FormUrlEncoded
-    @POST("public/index.php/booking/search")
-    Call<TrainResponse> BookingSearch(
-            @Field("date") String date
-    );
-
-    @GET("public/index.php/booking/city")
+    @GET("public/index.php/city/show")
     Call<CityResponse> CityList();
 
     @FormUrlEncoded
-    @POST("public/index.php/booking/seat")
+    @POST("public/index.php/seat/show")
     Call<SeatResponse> SeatList(
             @Field("trainId") String trainId,
             @Field("date") String date,
@@ -248,5 +201,33 @@ public interface apiInterface {
             @Field("category") String category,
             @Field("destination") String destination,
             @Field("depart") String depart
+    );
+
+    @GET("public/index.php/train/show")
+    Call<TrainResponse> trainShow();
+
+    @FormUrlEncoded
+    @POST("public/index.php/train/add")
+    Call<Value> TrainAdd(
+            @Field("name") String name,
+            @Field("category") String category,
+            @Field("price") String price,
+            @Field("cars") String cars
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/train/delete")
+    Call<Value> TrainDelete(
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/train/update")
+    Call<Value> TrainUpdate(
+            @Field("id") String id,
+            @Field("name") String name,
+            @Field("category") String category,
+            @Field("price") String price,
+            @Field("cars") String cars
     );
 }

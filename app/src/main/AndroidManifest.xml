@@ -31,12 +31,8 @@
         <activity android:name=".forgot2" />
         <activity android:name=".adminForgot" />
         <activity android:name=".adminForgot2" />
-        <activity android:name=".IndexTicket" />
-        <activity android:name=".IndexFeatures" />
-        <activity android:name=".IndexShop" />
-        <activity android:name=".IndexSettings" />
+        <activity android:name=".TrainShow" />
         <activity android:name=".IndexAdmin" />
-        <activity android:name=".addCredit" />
         <activity android:name=".AdminManageUser" />
         <activity android:name=".AdminManageData" />
         <activity android:name=".AdminSetting" />
@@ -50,7 +46,9 @@
         <activity android:name=".AdminAdd" />
         <activity android:name=".ItemShow" />
         <activity android:name=".ItemEdit" />
-        <activity android:name=".ItemAdd"></activity>
+        <activity android:name=".ItemAdd" />
+        <activity android:name=".CityList" />
+        <activity android:name=".UserSetting"></activity>
     </application>
 
 </manifest>

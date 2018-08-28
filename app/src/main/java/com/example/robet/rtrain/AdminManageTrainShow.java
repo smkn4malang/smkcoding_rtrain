@@ -41,16 +41,16 @@ public class AdminManageTrainShow extends AppCompatActivity {
 
         loading.start();
 
-        RestApi.getData().TrainShow().enqueue(new Callback<ManageTrainResponse>() {
+        RestApi.getData().trainShow().enqueue(new Callback<TrainResponse>() {
             @Override
-            public void onResponse(Call<ManageTrainResponse> call, Response<ManageTrainResponse> response) {
+            public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
                 loading.stop();
-                adapter.trainList.addAll(response.body().getTrain());
+//                adapter.trainList.addAll(response.body().getTrain());
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<ManageTrainResponse> call, Throwable t) {
+            public void onFailure(Call<TrainResponse> call, Throwable t) {
                 loading.stop();
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }

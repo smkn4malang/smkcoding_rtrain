@@ -164,7 +164,7 @@ public class AdminManageTrainEdit extends AppCompatActivity {
                     time = spTime.getSelectedItem().toString();
 
                     loading.start();
-                    RestApi.getData().TrainUpdate(id, name, category, destination, depart, cars, price, time).enqueue(new Callback<Value>() {
+                    RestApi.getData().TrainUpdate(id, name, category, price, cars).enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
 

@@ -72,7 +72,7 @@ public class AdminManageTrainAdd extends AppCompatActivity {
                 category = spCategory.getSelectedItem().toString();
 
                 loading.start();
-                RestApi.getData().TrainAdd(trainName, destination, depart, cars, price, time, category).enqueue(new Callback<Value>() {
+                RestApi.getData().TrainAdd(trainName, category, price, cars).enqueue(new Callback<Value>() {
                     @Override
                     public void onResponse(Call<Value> call, Response<Value> response) {
 

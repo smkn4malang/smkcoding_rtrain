@@ -3,9 +3,11 @@ package com.example.robet.rtrain;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -13,19 +15,21 @@ import butterknife.OnClick;
 
 public class Index extends AppCompatActivity {
 
-    @BindView(R.id.btTicket)
-    LinearLayout btTicket;
-    @BindView(R.id.btFeature)
-    LinearLayout btFeature;
-    @BindView(R.id.btShop)
-    LinearLayout btShop;
-    @BindView(R.id.btSetting)
-    LinearLayout btSetting;
-    @BindView(R.id.btLogout)
-    LinearLayout btLogout;
-
     Config config;
-    Intent newAct;
+    Intent intent;
+    Loading loading;
+    @BindView(R.id.btTicket)
+    CardView btTicket;
+    @BindView(R.id.btShop)
+    CardView btShop;
+    @BindView(R.id.btSetting)
+    CardView btSetting;
+    @BindView(R.id.tvPromo)
+    TextView tvPromo;
+    @BindView(R.id.Promo)
+    RecyclerView Promo;
+    @BindView(R.id.drawSettings)
+    ImageView drawSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,51 +38,40 @@ public class Index extends AppCompatActivity {
         ButterKnife.bind(this);
 
         config = new Config(this);
+        loading = new Loading(this);
 
-        if (config.getInfo("user") == true) {
-            btSetting.setVisibility(View.VISIBLE);
-            btLogout.setVisibility(View.GONE);
-        } else if (config.getInfo("guest") == true) {
-            btSetting.setVisibility(View.GONE);
-            btLogout.setVisibility(View.VISIBLE);
+        if (config.getInfo("user")) {
+            drawSettings.setBackgroundResource(R.drawable.setting);
+        } else if (config.getInfo("guest")) {
+            drawSettings.setBackgroundResource(R.drawable.logout);
         }
     }
 
-
-    @OnClick({R.id.btTicket, R.id.btFeature, R.id.btShop, R.id.btSetting, R.id.btLogout})
+    @OnClick({R.id.btTicket, R.id.btShop, R.id.btSetting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btTicket:
 
-                newAct = new Intent(getApplicationContext(), IndexTicket.class);
-                startActivity(newAct);
-
-                break;
-            case R.id.btFeature:
-
-                newAct = new Intent(getApplicationContext(), IndexFeatures.class);
-                startActivity(newAct);
+                startActivity(new Intent(getApplicationContext(), TrainShow.class));
 
                 break;
             case R.id.btShop:
-
-                newAct = new Intent(getApplicationContext(), IndexShop.class);
-                startActivity(newAct);
-
                 break;
             case R.id.btSetting:
 
-                newAct = new Intent(getApplicationContext(), IndexSettings.class);
-                startActivity(newAct);
+                if (config.getInfo("guest")) {
 
-                break;
-            case R.id.btLogout:
+                    config.setInfo("guest", false);
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
 
-                config.setInfo("guest", false);
-                newAct = new Intent(getApplicationContext(), MainActivity.class);
-                newAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                newAct.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(newAct);
+                } else if (config.getInfo("user")) {
+
+                    startActivity(new Intent(getApplicationContext(), UserSetting.class));
+
+                }
 
                 break;
         }

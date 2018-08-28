@@ -111,6 +111,7 @@ public class Welcome extends AppCompatActivity {
 
     private void launchHomeScreen(){
         pref.setFlaunch(false);
+
         if(pref.getInfo("admin")==true){
             Intent intent = new Intent(getApplicationContext(), IndexAdmin.class);
             startActivity(intent);
@@ -121,6 +122,7 @@ public class Welcome extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
+
         finish();
     }
 

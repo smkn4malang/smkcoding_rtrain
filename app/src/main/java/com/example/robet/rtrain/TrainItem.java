@@ -91,4 +91,19 @@ public class TrainItem{
 	public String getCategory(){
 		return category;
 	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"TrainItem{" + 
+			"seat = '" + seat + '\'' + 
+			",date = '" + date + '\'' + 
+			",booked = '" + booked + '\'' + 
+			",price = '" + price + '\'' + 
+			",name = '" + name + '\'' + 
+			",id = '" + id + '\'' + 
+			",time = '" + time + '\'' + 
+			",category = '" + category + '\'' + 
+			"}";
+		}
 }

@@ -15,4 +15,12 @@ public class TrainResponse{
 	public List<TrainItem> getTrain(){
 		return train;
 	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"TrainResponse{" + 
+			"train = '" + train + '\'' + 
+			"}";
+		}
 }

@@ -15,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class IndexTicket extends AppCompatActivity {
+public class TrainShow extends AppCompatActivity {
 
     Loading loading;
     TrainAdapter adapter;
@@ -27,7 +27,7 @@ public class IndexTicket extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.index_ticket);
+        setContentView(R.layout.ticket_show);
         ButterKnife.bind(this);
 
         loading = new Loading(this);
@@ -38,7 +38,7 @@ public class IndexTicket extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         loading.start();
-        RestApi.getData().BookingShow().enqueue(new Callback<TrainResponse>() {
+        RestApi.getData().trainShow().enqueue(new Callback<TrainResponse>() {
             @Override
             public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
                 loading.stop();
@@ -52,6 +52,7 @@ public class IndexTicket extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     @OnClick(R.id.fab)
