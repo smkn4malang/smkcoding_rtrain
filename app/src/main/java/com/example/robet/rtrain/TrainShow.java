@@ -143,7 +143,7 @@ public class TrainShow extends AppCompatActivity {
             public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
 
                 year = mYear;
-                month = mMonth + 1;
+                month = mMonth;
                 day = mDay;
                 date = year + "-" + month + "-" + day;
 
