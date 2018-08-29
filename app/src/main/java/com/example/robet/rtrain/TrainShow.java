@@ -11,7 +11,10 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +50,7 @@ public class TrainShow extends AppCompatActivity {
     LinearLayout navigation;
 
     String category, date;
-    int day, month, year;
+    int day, month, year, date1, date2;
     Calendar calendar;
 
     @Override
@@ -58,12 +61,13 @@ public class TrainShow extends AppCompatActivity {
 
         loading = new Loading(this);
         adapter = new TrainAdapter();
+        category = "none";
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH) + 1;
         day = calendar.get(Calendar.DAY_OF_MONTH);
-
+        date1 = (year * 10000) + (month * 100) + day;
 
         if (date == null || date.isEmpty()) {
             date =  day + "-" + month + "-" + year;
@@ -143,15 +147,25 @@ public class TrainShow extends AppCompatActivity {
             public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
 
                 year = mYear;
-                month = mMonth;
+                month = mMonth + 1;
                 day = mDay;
-                date = year + "-" + month + "-" + day;
+                date2 = (year * 10000) + (month * 100) + day;
 
-                trainSearch(date, category);
+                if(date1 > date2){
+
+                    Toast.makeText(getApplicationContext(), "anda harus memilih tanggal dengan benar",
+                            Toast.LENGTH_SHORT).show();
+
+                } else {
+                    date = year + "-" + month + "-" + day;
+                    adapter.listTrain.clear();
+                    adapter.notifyDataSetChanged();
+                    trainSearch(date, category);
+                }
 
             }
 
-        },year, month, day).show();
+        },year, calendar.get(Calendar.MONTH), day).show();
 
     }
 
