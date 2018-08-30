@@ -1,6 +1,5 @@
 package com.example.robet.rtrain;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -11,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -40,7 +37,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         }
 
         color = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
-        holder.leftLayout.setBackgroundColor(color);
+        holder.topLayout.setBackgroundColor(color);
 
         holder.name.setText(listTrain.get(position).getName());
         holder.category.setText(listTrain.get(position).getCategory());
@@ -75,7 +72,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout leftLayout;
+        LinearLayout topLayout;
         CardView showTicket;
         TextView name, category, price, seat, date;
 
@@ -87,7 +84,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
             price = itemView.findViewById(R.id.tvPrice);
             seat = itemView.findViewById(R.id.tvSeat);
             date = itemView.findViewById(R.id.tvDate);
-            leftLayout = itemView.findViewById(R.id.LeftLayout);
+            topLayout = itemView.findViewById(R.id.TopLayout);
             showTicket = itemView.findViewById(R.id.ShowTicket);
 
         }

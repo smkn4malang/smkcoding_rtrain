@@ -22,9 +22,6 @@ public class TrainItem{
 	@SerializedName("id")
 	private String id;
 
-	@SerializedName("time")
-	private String time;
-
 	@SerializedName("category")
 	private String category;
 
@@ -76,14 +73,6 @@ public class TrainItem{
 		return id;
 	}
 
-	public void setTime(String time){
-		this.time = time;
-	}
-
-	public String getTime(){
-		return time;
-	}
-
 	public void setCategory(String category){
 		this.category = category;
 	}
@@ -102,7 +91,6 @@ public class TrainItem{
 			",price = '" + price + '\'' + 
 			",name = '" + name + '\'' + 
 			",id = '" + id + '\'' + 
-			",time = '" + time + '\'' + 
 			",category = '" + category + '\'' + 
 			"}";
 		}

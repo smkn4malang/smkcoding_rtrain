@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp">
+    android:layout_height="200dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/ShowTicket"
@@ -15,81 +15,59 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <LinearLayout
-                android:id="@+id/LeftLayout"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/left_radius"
-                android:orientation="horizontal" />
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@drawable/top_radius"
+                android:id="@+id/TopLayout"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TrainName"
+                android:textColor="#000000"
+                android:id="@+id/tvName"
+                android:textSize="18sp"/>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="category"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:id="@+id/tvCategory"/>
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="13dp"
-                    android:text="Train Name"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Date"
+                android:layout_marginTop="10dp"
+                android:textColor="#000000"
+                android:drawableStart="@drawable/ic_date_mini"
+                android:id="@+id/tvDate"/>
 
-                <TextView
-                    android:id="@+id/tvCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="category"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="seat: seat"
+                android:textColor="#000000"
+                android:id="@+id/tvSeat"
+                android:layout_marginTop="5dp"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical"
-                android:gravity="">
-
-                <TextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:drawableStart="@drawable/ic_calendar_mini"
-                    android:text="  Date"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/tvSeat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="seat seat"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/tvPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Price"
-                    android:textColor="#000000"
-                    android:layout_marginTop="10dp"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvPrice"/>
 
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

@@ -237,7 +237,4 @@ public interface apiInterface {
             @Field("date") String date,
             @Field("category") String category
     );
-
-    @GET("public/index.php/time/show")
-    Call<CityResponse> TimeShow();
 }
