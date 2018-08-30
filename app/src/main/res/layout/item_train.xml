@@ -50,16 +50,6 @@
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/tvPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Price"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -67,16 +57,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:orientation="vertical"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_time_mini"
-                    android:text="  Time"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
+                android:gravity="">
 
                 <TextView
                     android:id="@+id/tvDate"
@@ -86,7 +67,7 @@
                     android:drawableStart="@drawable/ic_calendar_mini"
                     android:text="  Date"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvSeat"
@@ -95,16 +76,16 @@
                     android:layout_marginTop="10dp"
                     android:text="seat seat"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tvBooked"
+                    android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="booked book"
+                    android:text="Price"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:layout_marginTop="10dp"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

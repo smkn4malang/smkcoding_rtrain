@@ -46,9 +46,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         holder.category.setText(listTrain.get(position).getCategory());
         holder.price.setText("Rp " + listTrain.get(position).getPrice());
         holder.seat.setText("seat: " + listTrain.get(position).getSeat());
-        holder.time.setText("  " + listTrain.get(position).getTime());
         holder.date.setText("  " + listTrain.get(position).getDate());
-        holder.booked.setText("booked: " + listTrain.get(position).getBooked());
 
         holder.showTicket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,20 +56,13 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
                 map.put("trainName", listTrain.get(position).getName());
                 map.put("category", listTrain.get(position).getCategory());
                 map.put("price", listTrain.get(position).getPrice());
-                map.put("time", listTrain.get(position).getTime());
                 map.put("date", listTrain.get(position).getDate());
                 map.put("seat", listTrain.get(position).getSeat());
 
-                if (listTrain.get(position).getSeat().equals(listTrain.get(position).getBooked())) {
+                Intent intent = new Intent(holder.itemView.getContext(), CityList.class);
+                intent.putExtra("extra", map);
+                holder.itemView.getContext().startActivity(intent);
 
-                    Toast.makeText(holder.itemView.getContext(), "tiket untuk kereta tersebut telah penuh",
-                            Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Intent intent = new Intent(holder.itemView.getContext(), CityList.class);
-                    intent.putExtra("extra", map);
-                    holder.itemView.getContext().startActivity(intent);
-                }
             }
         });
 
@@ -86,7 +77,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
 
         LinearLayout leftLayout;
         CardView showTicket;
-        TextView name, category, price, seat, time, date, booked;
+        TextView name, category, price, seat, date;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,9 +86,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
             category = itemView.findViewById(R.id.tvCategory);
             price = itemView.findViewById(R.id.tvPrice);
             seat = itemView.findViewById(R.id.tvSeat);
-            time = itemView.findViewById(R.id.tvTime);
             date = itemView.findViewById(R.id.tvDate);
-            booked = itemView.findViewById(R.id.tvBooked);
             leftLayout = itemView.findViewById(R.id.LeftLayout);
             showTicket = itemView.findViewById(R.id.ShowTicket);
 
