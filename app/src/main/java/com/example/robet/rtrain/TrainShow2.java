@@ -29,10 +29,11 @@ public class TrainShow2 extends Activity {
     Loading loading;
     HashMap<String, String> map;
     Bundle bundle;
-    String time, destination, depart, text;
-    ArrayList<CityItem> cityItem = new ArrayList<>();
-    ArrayList<TimeItem> timeItem = new ArrayList<>();
+    String time, destination, depart, text, name;
     ListView listView;
+    int i = 0, j = 0;
+    String[] cityAdapterItem;
+    String[] timeAdapterItem;
     ArrayAdapter<String> CityAdapter;
     ArrayAdapter<String> TimeAdapter;
 
@@ -66,24 +67,16 @@ public class TrainShow2 extends Activity {
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");
 
-        String[] cityAdapterItem = new String[cityItem.size()];
-        String[] timeAdapterItem = new String[timeItem.size()];
-        for(int i = 0; i <= cityItem.size(); i++){
-            cityAdapterItem[i] = cityItem.get(i).getName();
-            timeAdapterItem[i] = timeItem.get(i).getTime();
-        }
-
-        CityAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
-                R.id.tvItem, cityAdapterItem);
-
-        TimeAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
-                R.id.tvItem, timeAdapterItem);
-
         loading.start();
         RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                cityItem.addAll(response.body().getCity());
+                j = Integer.valueOf(response.body().getCity().size());
+                cityAdapterItem = new String[j];
+                for(i = 0; i < j; i++){
+                    name = response.body().getCity().get(i).getName();
+                    cityAdapterItem[i] = name;
+                }
             }
 
             @Override
@@ -92,12 +85,15 @@ public class TrainShow2 extends Activity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
         RestApi.getData().TimeList().enqueue(new Callback<TimeResponse>() {
             @Override
             public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
                 loading.stop();
-                timeItem.addAll(response.body().getTime());
+                j = Integer.valueOf(response.body().getTime().size());
+                for(i = 0; i < j; i++){
+                    name = response.body().getTime().get(i).getTime();
+                    timeAdapterItem[i] = name;
+                }
             }
 
             @Override
@@ -106,6 +102,13 @@ public class TrainShow2 extends Activity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        CityAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
+                R.id.tvItem, cityAdapterItem);
+
+        TimeAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
+                R.id.tvItem, timeAdapterItem);
+
 
     }
 
