@@ -47,7 +47,7 @@
         <activity android:name=".ItemShow" />
         <activity android:name=".ItemEdit" />
         <activity android:name=".ItemAdd" />
-        <activity android:name=".CityList" />
+        <activity android:name=".TrainShow2" />
         <activity android:name=".UserSetting" />
 
         <service android:name=".pushNotificationToken">
@@ -68,7 +68,8 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@drawable/trains" />
 
-        <activity android:name=".PickSeat"></activity>
+        <activity android:name=".PickSeat" />
+        <activity android:name=".SeatPick"></activity>
     </application>
 
 </manifest>

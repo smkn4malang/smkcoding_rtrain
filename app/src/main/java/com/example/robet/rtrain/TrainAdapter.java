@@ -43,7 +43,6 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         holder.category.setText(listTrain.get(position).getCategory());
         holder.price.setText("Rp " + listTrain.get(position).getPrice());
         holder.seat.setText("seat: " + listTrain.get(position).getSeat());
-        holder.date.setText("  " + listTrain.get(position).getDate());
 
         holder.showTicket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +55,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
                 map.put("date", listTrain.get(position).getDate());
                 map.put("seat", listTrain.get(position).getSeat());
 
-                Intent intent = new Intent(holder.itemView.getContext(), CityList.class);
+                Intent intent = new Intent(holder.itemView.getContext(), TrainShow2.class);
                 intent.putExtra("extra", map);
                 holder.itemView.getContext().startActivity(intent);
 
@@ -74,7 +73,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
 
         LinearLayout topLayout;
         CardView showTicket;
-        TextView name, category, price, seat, date;
+        TextView name, category, price, seat;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,7 +82,6 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
             category = itemView.findViewById(R.id.tvCategory);
             price = itemView.findViewById(R.id.tvPrice);
             seat = itemView.findViewById(R.id.tvSeat);
-            date = itemView.findViewById(R.id.tvDate);
             topLayout = itemView.findViewById(R.id.TopLayout);
             showTicket = itemView.findViewById(R.id.ShowTicket);
 
