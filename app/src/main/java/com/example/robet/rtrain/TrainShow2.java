@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,6 +34,8 @@ public class TrainShow2 extends Activity {
     String time, destination, depart, text, name;
     ListView listView;
     int i = 0;
+    List<CityItem> listCity;
+    List<TimeItem> listTime;
     String[] cityAdapterItem;
     String[] timeAdapterItem;
     ArrayAdapter<String> CityAdapter;
@@ -71,12 +75,9 @@ public class TrainShow2 extends Activity {
         RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                int size = Integer.valueOf(response.body().getCity().size());
-                cityAdapterItem = new String[size];
-                for(i = 0; i < size; i++){
-                    name = response.body().getCity().get(i).getName();
-                    cityAdapterItem[i] = name;
-                }
+                listCity = response.body().getCity();
+                int size = Integer.valueOf(listCity.size());
+                Toast.makeText(getApplicationContext(), size, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -89,12 +90,7 @@ public class TrainShow2 extends Activity {
             @Override
             public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
                 loading.stop();
-                int size = Integer.valueOf(response.body().getTime().size());
-                timeAdapterItem = new String[size];
-                for(i = 0; i < size; i++){
-                    name = response.body().getTime().get(i).getTime();
-                    timeAdapterItem[i] = name;
-                }
+                listTime = response.body().getTime();
             }
 
             @Override
@@ -104,10 +100,10 @@ public class TrainShow2 extends Activity {
             }
         });
 
-//        CityAdapter = new ArrayAdapter<>(this, R.layout.list_dialog_item,
+//        CityAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
 //                R.id.tvItem, cityAdapterItem);
 //
-//        TimeAdapter = new ArrayAdapter<>(this, R.layout.list_dialog_item,
+//        TimeAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
 //                R.id.tvItem, timeAdapterItem);
 
 
