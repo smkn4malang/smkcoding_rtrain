@@ -31,7 +31,7 @@ public class TrainShow2 extends Activity {
     Bundle bundle;
     String time, destination, depart, text, name;
     ListView listView;
-    int i = 0, j = 0;
+    int i = 0;
     String[] cityAdapterItem;
     String[] timeAdapterItem;
     ArrayAdapter<String> CityAdapter;
@@ -71,9 +71,9 @@ public class TrainShow2 extends Activity {
         RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                j = Integer.valueOf(response.body().getCity().size());
-                cityAdapterItem = new String[j];
-                for(i = 0; i < j; i++){
+                int size = Integer.valueOf(response.body().getCity().size());
+                cityAdapterItem = new String[size];
+                for(i = 0; i < size; i++){
                     name = response.body().getCity().get(i).getName();
                     cityAdapterItem[i] = name;
                 }
@@ -89,8 +89,9 @@ public class TrainShow2 extends Activity {
             @Override
             public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
                 loading.stop();
-                j = Integer.valueOf(response.body().getTime().size());
-                for(i = 0; i < j; i++){
+                int size = Integer.valueOf(response.body().getTime().size());
+                timeAdapterItem = new String[size];
+                for(i = 0; i < size; i++){
                     name = response.body().getTime().get(i).getTime();
                     timeAdapterItem[i] = name;
                 }
@@ -103,92 +104,92 @@ public class TrainShow2 extends Activity {
             }
         });
 
-        CityAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
-                R.id.tvItem, cityAdapterItem);
-
-        TimeAdapter = new ArrayAdapter<String>(this, R.layout.list_dialog_item,
-                R.id.tvItem, timeAdapterItem);
+//        CityAdapter = new ArrayAdapter<>(this, R.layout.list_dialog_item,
+//                R.id.tvItem, cityAdapterItem);
+//
+//        TimeAdapter = new ArrayAdapter<>(this, R.layout.list_dialog_item,
+//                R.id.tvItem, timeAdapterItem);
 
 
     }
 
-    @OnClick({R.id.btDepart, R.id.btDestination, R.id.btTime, R.id.btBack, R.id.btNext})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btDepart:
-                showDialog(listView, CityAdapter, 1);
-                break;
-            case R.id.btDestination:
-                showDialog(listView, CityAdapter, 2);
-                break;
-            case R.id.btTime:
-                showDialog(listView, TimeAdapter, 3);
-                break;
-            case R.id.btBack:
-
-                TrainShow2.this.finish();
-
-                break;
-            case R.id.btNext:
-
-                if(depart.isEmpty() && destination.isEmpty() && time.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    String message;
-                    message = depart + "\n" + destination + "\n" + time;
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-
-                    map.put("time", time);
-                    map.put("destination", destination);
-                    map.put("depart", depart);
-
-                    Intent intent = new Intent(getApplicationContext(), SeatPick.class);
-                    intent.putExtra("extra", map);
-                    startActivity(intent);
-
-                }
-
-                break;
-        }
-    }
-
-    public void showDialog(ListView mListView, ArrayAdapter<String> arrayAdapter, final int type){
-
-        mListView.setAdapter(arrayAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                ViewGroup viewGroup = (ViewGroup) view;
-                TextView tvText = viewGroup.findViewById(R.id.tvItem);
-                text = tvText.getText().toString();
-
-                switch (type){
-                    case 1:
-                        depart = text;
-                        tvDepart.setText(text);
-                        break;
-                    case 2:
-                        destination = text;
-                        tvDestination.setText(text);
-                        break;
-                    case 3:
-                        time = text;
-                        tvTime.setText(text);
-                        break;
-                }
-
-            }
-        });
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
-
-        alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("ok", null);
-        alertDialogBuilder.setView(mListView);
-
-        AlertDialog dialog = alertDialogBuilder.create();
-        dialog.show();
-    }
+//    @OnClick({R.id.btDepart, R.id.btDestination, R.id.btTime, R.id.btBack, R.id.btNext})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.btDepart:
+//                showDialog(listView, CityAdapter, 1);
+//                break;
+//            case R.id.btDestination:
+//                showDialog(listView, CityAdapter, 2);
+//                break;
+//            case R.id.btTime:
+//                showDialog(listView, TimeAdapter, 3);
+//                break;
+//            case R.id.btBack:
+//
+//                TrainShow2.this.finish();
+//
+//                break;
+//            case R.id.btNext:
+//
+//                if(depart.isEmpty() && destination.isEmpty() && time.isEmpty()){
+//                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+//                } else {
+//
+//                    String message;
+//                    message = depart + "\n" + destination + "\n" + time;
+//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+//
+//                    map.put("time", time);
+//                    map.put("destination", destination);
+//                    map.put("depart", depart);
+//
+//                    Intent intent = new Intent(getApplicationContext(), SeatPick.class);
+//                    intent.putExtra("extra", map);
+//                    startActivity(intent);
+//
+//                }
+//
+//                break;
+//        }
+//    }
+//
+//    public void showDialog(ListView mListView, ArrayAdapter<String> arrayAdapter, final int type){
+//
+//        mListView.setAdapter(arrayAdapter);
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                ViewGroup viewGroup = (ViewGroup) view;
+//                TextView tvText = viewGroup.findViewById(R.id.tvItem);
+//                text = tvText.getText().toString();
+//
+//                switch (type){
+//                    case 1:
+//                        depart = text;
+//                        tvDepart.setText(text);
+//                        break;
+//                    case 2:
+//                        destination = text;
+//                        tvDestination.setText(text);
+//                        break;
+//                    case 3:
+//                        time = text;
+//                        tvTime.setText(text);
+//                        break;
+//                }
+//
+//            }
+//        });
+//
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+//
+//        alertDialogBuilder.setCancelable(true);
+//        alertDialogBuilder.setPositiveButton("ok", null);
+//        alertDialogBuilder.setView(mListView);
+//
+//        AlertDialog dialog = alertDialogBuilder.create();
+//        dialog.show();
+//    }
 }
