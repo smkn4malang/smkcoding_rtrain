@@ -48,6 +48,10 @@ public class TrainShow2 extends Activity {
         setContentView(R.layout.train_show_2);
         ButterKnife.bind(this);
 
+        if(!new PurchaseTicket().status){
+            TrainShow2.this.finish();
+        }
+
         loading = new Loading(this);
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");

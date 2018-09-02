@@ -1,5 +1,6 @@
 package com.example.robet.rtrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -25,6 +26,9 @@ public class SeatPick extends AppCompatActivity {
     HashMap<String, String> map;
     SeatAdapter adapter;
     Loading loading;
+    boolean seat[];
+    int i = 0;
+    String choose = "";
 
     @BindView(R.id.tvTrainName)
     TextView tvTrainName;
@@ -43,10 +47,17 @@ public class SeatPick extends AppCompatActivity {
         setContentView(R.layout.seat_pick);
         ButterKnife.bind(this);
 
+        if(!new PurchaseTicket().status){
+            SeatPick.this.finish();
+        }
+
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");
         adapter = new SeatAdapter();
         loading = new Loading(this);
+
+        tvTrainName.setText(map.get("trainName"));
+        tvCategory.setText(map.get("category"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerView.setAdapter(adapter);
@@ -62,6 +73,14 @@ public class SeatPick extends AppCompatActivity {
             @Override
             public void onResponse(Call<SeatResponse> call, Response<SeatResponse> response) {
                 loading.stop();
+
+                int size = response.body().getSeat().size();
+                seat =new boolean[size];
+                for(i = 0; i < size; i++){
+                    seat[i] = false;
+                }
+
+                adapter.seat = seat;
                 adapter.ListSeat.addAll(response.body().getSeat());
                 adapter.notifyDataSetChanged();
             }
@@ -82,6 +101,29 @@ public class SeatPick extends AppCompatActivity {
                 SeatPick.this.finish();
                 break;
             case R.id.btNext:
+
+                seat = adapter.seat;
+                int size = seat.length;
+
+                for(i = 0; i < size; i++){
+                    if(seat[i]){
+                        if(choose.equals("")){
+                            choose = String.valueOf(i + 1);
+                        } else {
+                            choose += "," + String.valueOf(i + 1);
+                        }
+                    }
+                }
+
+                if(!choose.equals("")) {
+                    map.put("choose", choose);
+                    Intent intent = new Intent(getApplicationContext(), PurchaseTicket.class);
+                    intent.putExtra("extra", map);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "anda harus memilih minimal satu tempat", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }

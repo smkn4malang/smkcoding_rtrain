@@ -69,7 +69,9 @@
             android:resource="@drawable/trains" />
 
         <activity android:name=".PickSeat" />
-        <activity android:name=".SeatPick"></activity>
+        <activity android:name=".SeatPick" />
+        <activity android:name=".PurchaseTicket" />
+        <activity android:name=".History"></activity>
     </application>
 
 </manifest>

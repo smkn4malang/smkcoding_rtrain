@@ -16,13 +16,6 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.MainViewHolder
     int i = 0;
     boolean[] seat;
 
-    public  SeatAdapter(){
-        this.seat = new boolean[ListSeat.size()];
-        for(i = 0; i < ListSeat.size(); i++){
-            seat[i] = false;
-        }
-    }
-
     @NonNull
     @Override
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,9 +37,9 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.MainViewHolder
                 if(ListSeat.get(position).isStatus()){
                     if(!seat[position]){
                         holder.seatList.setCardBackgroundColor(Color.YELLOW);
-//                        seat[position] = true;
+                        seat[position] = true;
                     } else {
-//                        seat[position] = false;
+                        seat[position] = false;
                         holder.seatList.setCardBackgroundColor(Color.WHITE);
                     }
                 } else {

@@ -1,6 +1,7 @@
 package com.example.robet.rtrain;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,12 @@ public class TrainShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ticket_show);
         ButterKnife.bind(this);
+
+        if(!new PurchaseTicket().status){
+            TrainShow.this.finish();
+            new PurchaseTicket().status = true;
+            startActivity(new Intent(getApplicationContext(), History.class));
+        }
 
         loading = new Loading(this);
         adapter = new TrainAdapter();
