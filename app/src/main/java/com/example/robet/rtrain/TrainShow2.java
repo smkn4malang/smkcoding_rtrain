@@ -104,7 +104,7 @@ public class TrainShow2 extends Activity {
                 break;
             case R.id.btNext:
 
-                String mTime, mDestination, mDepart;
+                final String mTime, mDestination, mDepart;
                 mTime = spTime.getSelectedItem().toString();
                 mDepart = etFrom.getText().toString();
                 mDestination = etTo.getText().toString();
@@ -129,13 +129,42 @@ public class TrainShow2 extends Activity {
                     } else if (!destinationStat){
                         Toast.makeText(getApplicationContext(), "pilih kota tujuan dengan benar", Toast.LENGTH_SHORT).show();
                     } else {
-                        map.put("time", mTime);
-                        map.put("depart", mDepart);
-                        map.put("destination", mDestination);
 
-                        Intent intent = new Intent(getApplicationContext(), SeatPick.class);
-                        intent.putExtra("extra", map);
-                        startActivity(intent);
+                        loading.start();
+                        RestApi.getData().trainStatus(
+                                map.get("trainId"),
+                                map.get("date"),
+                                mTime,
+                                map.get("category"),
+                                mDestination,
+                                mDepart
+                        ).enqueue(new Callback<Value>() {
+                            @Override
+                            public void onResponse(Call<Value> call, Response<Value> response) {
+                                loading.stop();
+
+                                if(!response.body().getInfo()){
+                                    Toast.makeText(getApplicationContext(), "kereta tersebut telah penuh", Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                    map.put("time", mTime);
+                                    map.put("depart", mDepart);
+                                    map.put("destination", mDestination);
+
+                                    Intent intent = new Intent(getApplicationContext(), SeatPick.class);
+                                    intent.putExtra("extra", map);
+                                    startActivity(intent);
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Value> call, Throwable t) {
+                                loading.stop();
+                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
                 }
 

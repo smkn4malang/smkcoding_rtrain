@@ -240,4 +240,15 @@ public interface apiInterface {
 
     @GET("public/index.php/time/show")
     Call<TimeResponse> TimeList();
+
+    @FormUrlEncoded
+    @POST("public/index.php/train/status")
+    Call<Value> trainStatus(
+            @Field("trainId") String trainId,
+            @Field("date") String date,
+            @Field("time") String time,
+            @Field("category") String category,
+            @Field("destination") String destination,
+            @Field("depart") String depart
+    );
 }
