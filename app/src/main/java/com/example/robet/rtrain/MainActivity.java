@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.robet.rtrain.AdminPage.adminLogin;
+import com.example.robet.rtrain.ClientPage.guestLogin;
+import com.example.robet.rtrain.ClientPage.userLogin;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

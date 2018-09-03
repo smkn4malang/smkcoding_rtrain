@@ -1,5 +1,14 @@
 package com.example.robet.rtrain;
 
+import com.example.robet.rtrain.gson.AdminResponse;
+import com.example.robet.rtrain.gson.CityResponse;
+import com.example.robet.rtrain.gson.ItemResponse;
+import com.example.robet.rtrain.gson.SeatResponse;
+import com.example.robet.rtrain.gson.TimeResponse;
+import com.example.robet.rtrain.gson.TrainResponse;
+import com.example.robet.rtrain.gson.UserShowResponse;
+import com.example.robet.rtrain.support.Value;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

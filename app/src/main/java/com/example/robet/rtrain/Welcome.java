@@ -18,6 +18,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.robet.rtrain.ClientPage.Index;
+import com.example.robet.rtrain.ClientPage.IndexAdmin;
+import com.example.robet.rtrain.support.Config;
+
 public class Welcome extends AppCompatActivity {
 
     private ViewPager VPager;

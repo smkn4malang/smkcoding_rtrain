@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_index"
     android:orientation="vertical"
-    tools:context=".adminLogin">
+    tools:context=".AdminPage.adminLogin">
 
     <ImageView
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.robet.rtrain.AdminSetting">
+    tools:context="com.example.robet.rtrain.AdminPage.AdminSetting">
 
     <LinearLayout
         android:layout_width="match_parent"

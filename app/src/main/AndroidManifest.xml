@@ -22,40 +22,40 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".userLogin" />
-        <activity android:name=".adminLogin" />
-        <activity android:name=".guestLogin" />
-        <activity android:name=".Index" />
-        <activity android:name=".forgot" />
-        <activity android:name=".register" />
-        <activity android:name=".forgot2" />
-        <activity android:name=".adminForgot" />
-        <activity android:name=".adminForgot2" />
-        <activity android:name=".TrainShow" />
-        <activity android:name=".IndexAdmin" />
-        <activity android:name=".AdminManageUser" />
-        <activity android:name=".AdminManageData" />
-        <activity android:name=".AdminSetting" />
-        <activity android:name=".UserAdd" />
-        <activity android:name=".UserEdit" />
-        <activity android:name=".AdminManageAdmin" />
-        <activity android:name=".AdminManageTrainAdd" />
-        <activity android:name=".AdminManageTrainEdit" />
-        <activity android:name=".AdminManageTrainShow" />
-        <activity android:name=".AdminEdit" />
-        <activity android:name=".AdminAdd" />
-        <activity android:name=".ItemShow" />
-        <activity android:name=".ItemEdit" />
-        <activity android:name=".ItemAdd" />
-        <activity android:name=".TrainShow2" />
-        <activity android:name=".UserSetting" />
+        <activity android:name=".ClientPage.userLogin" />
+        <activity android:name=".AdminPage.adminLogin" />
+        <activity android:name=".ClientPage.guestLogin" />
+        <activity android:name=".ClientPage.Index" />
+        <activity android:name=".ClientPage.forgot" />
+        <activity android:name=".ClientPage.register" />
+        <activity android:name=".ClientPage.forgot2" />
+        <activity android:name=".AdminPage.adminForgot" />
+        <activity android:name=".AdminPage.adminForgot2" />
+        <activity android:name=".ClientPage.TrainShow" />
+        <activity android:name=".ClientPage.IndexAdmin" />
+        <activity android:name=".AdminPage.AdminManageUser" />
+        <activity android:name=".AdminPage.AdminManageData" />
+        <activity android:name=".AdminPage.AdminSetting" />
+        <activity android:name=".ClientPage.UserAdd" />
+        <activity android:name=".ClientPage.UserEdit" />
+        <activity android:name=".AdminPage.AdminManageAdmin" />
+        <activity android:name=".AdminPage.AdminManageTrainAdd" />
+        <activity android:name=".AdminPage.AdminManageTrainEdit" />
+        <activity android:name=".AdminPage.AdminManageTrainShow" />
+        <activity android:name=".AdminPage.AdminEdit" />
+        <activity android:name=".AdminPage.AdminAdd" />
+        <activity android:name=".AdminPage.ItemShow" />
+        <activity android:name=".AdminPage.ItemEdit" />
+        <activity android:name=".AdminPage.ItemAdd" />
+        <activity android:name=".ClientPage.TrainShow2" />
+        <activity android:name=".ClientPage.UserSetting" />
 
-        <service android:name=".pushNotificationToken">
+        <service android:name=".notification.pushNotificationToken">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".PushNotificationService">
+        <service android:name=".notification.PushNotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -68,10 +68,10 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@drawable/trains" />
 
-        <activity android:name=".PickSeat" />
-        <activity android:name=".SeatPick" />
-        <activity android:name=".PurchaseTicket" />
-        <activity android:name=".History"></activity>
+        <activity android:name=".ClientPage.PickSeat" />
+        <activity android:name=".ClientPage.SeatPick" />
+        <activity android:name=".ClientPage.PurchaseTicket" />
+        <activity android:name=".ClientPage.History"></activity>
     </application>
 
 </manifest>
