@@ -1,6 +1,7 @@
 package com.example.robet.rtrain;
 
 import com.example.robet.rtrain.gson.AdminResponse;
+import com.example.robet.rtrain.gson.CartResponse;
 import com.example.robet.rtrain.gson.CityResponse;
 import com.example.robet.rtrain.gson.ItemResponse;
 import com.example.robet.rtrain.gson.SeatResponse;
@@ -209,7 +210,8 @@ public interface apiInterface {
             @Field("time") String time,
             @Field("category") String category,
             @Field("destination") String destination,
-            @Field("depart") String depart
+            @Field("depart") String depart,
+            @Field("cart") String cart
     );
 
     @GET("public/index.php/train/show")
@@ -258,6 +260,13 @@ public interface apiInterface {
             @Field("time") String time,
             @Field("category") String category,
             @Field("destination") String destination,
-            @Field("depart") String depart
+            @Field("depart") String depart,
+            @Field("cart") String cart
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/cart/show")
+    Call<CartResponse> cartShow(
+            @Field("id") String id
     );
 }

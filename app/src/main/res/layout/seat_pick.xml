@@ -7,70 +7,97 @@
     tools:context=".ClientPage.SeatPick">
 
     <LinearLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/header"
-        android:background="@color/back">
+        android:background="@color/back"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TrainName"
-            android:textSize="25dp"
-            android:layout_margin="5dp"
             android:id="@+id/tvTrainName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="TrainName"
             android:textColor="#000"
-            android:textStyle="bold"/>
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="category"
-            android:textSize="20dp"
             android:layout_marginLeft="10dp"
-            android:id="@+id/tvCategory"/>
+            android:text="category"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:text="pilih tempat duduk"
             android:textColor="#000"
-            android:layout_gravity="center"
             android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_margin="5dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header"
-        android:layout_above="@id/footer"
-        android:id="@+id/recyclerView"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:id="@+id/cardView">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gerbong"
+            android:textSize="18dp"
+            android:layout_margin="5dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:id="@+id/tvCart"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/footer"
+        android:layout_below="@id/cardView"
+        android:layout_margin="10dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="15dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
         android:id="@+id/footer"
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:id="@+id/btBack"
-            android:text="Back"/>
-
-        <Button
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
+            android:text="Back" />
+
+        <Button
             android:id="@+id/btNext"
-            android:text="Next"/>
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="Next" />
 
     </LinearLayout>
 

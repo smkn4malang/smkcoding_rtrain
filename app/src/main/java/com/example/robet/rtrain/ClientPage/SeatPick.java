@@ -7,14 +7,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
-import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.adapter.SeatAdapter;
 import com.example.robet.rtrain.gson.SeatResponse;
+import com.example.robet.rtrain.support.Loading;
+import com.example.robet.rtrain.support.RestApi;
 
 import java.util.HashMap;
 
@@ -45,6 +46,10 @@ public class SeatPick extends AppCompatActivity {
     Button btBack;
     @BindView(R.id.btNext)
     Button btNext;
+    @BindView(R.id.tvCart)
+    TextView tvCart;
+    @BindView(R.id.footer)
+    LinearLayout footer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class SeatPick extends AppCompatActivity {
         setContentView(R.layout.seat_pick);
         ButterKnife.bind(this);
 
-        if(!new PurchaseTicket().status){
+        if (!new PurchaseTicket().status) {
             SeatPick.this.finish();
         }
 
@@ -63,6 +68,7 @@ public class SeatPick extends AppCompatActivity {
 
         tvTrainName.setText(map.get("trainName"));
         tvCategory.setText(map.get("category"));
+        tvCart.setText(map.get("cart"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerView.setAdapter(adapter);
@@ -73,14 +79,15 @@ public class SeatPick extends AppCompatActivity {
                 map.get("time"),
                 map.get("category"),
                 map.get("destination"),
-                map.get("depart")).enqueue(new Callback<SeatResponse>() {
+                map.get("depart"),
+                map.get("cart")).enqueue(new Callback<SeatResponse>() {
             @Override
             public void onResponse(Call<SeatResponse> call, Response<SeatResponse> response) {
                 loading.stop();
 
                 int size = response.body().getSeat().size();
-                seat =new boolean[size];
-                for(i = 0; i < size; i++){
+                seat = new boolean[size];
+                for (i = 0; i < size; i++) {
                     seat[i] = false;
                 }
 
@@ -109,9 +116,9 @@ public class SeatPick extends AppCompatActivity {
                 seat = adapter.seat;
                 int size = seat.length;
 
-                for(i = 0; i < size; i++){
-                    if(seat[i]){
-                        if(choose.equals("")){
+                for (i = 0; i < size; i++) {
+                    if (seat[i]) {
+                        if (choose.equals("")) {
                             choose = String.valueOf(i + 1);
                         } else {
                             choose += "," + String.valueOf(i + 1);
@@ -119,7 +126,7 @@ public class SeatPick extends AppCompatActivity {
                     }
                 }
 
-                if(!choose.equals("")) {
+                if (!choose.equals("")) {
                     map.put("choose", choose);
                     Intent intent = new Intent(getApplicationContext(), PurchaseTicket.class);
                     intent.putExtra("extra", map);
