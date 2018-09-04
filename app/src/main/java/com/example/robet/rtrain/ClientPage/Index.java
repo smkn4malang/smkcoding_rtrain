@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
@@ -36,8 +37,8 @@ public class Index extends AppCompatActivity {
     RecyclerView Promo;
     @BindView(R.id.btLogout)
     CardView btLogout;
-    @BindView(R.id.drawSettings)
-    ImageView drawSettings;
+    @BindView(R.id.btHistory)
+    CardView btHistory;
     @BindView(R.id.scrollHorizontal)
     HorizontalScrollView scrollHorizontal;
 
@@ -52,32 +53,45 @@ public class Index extends AppCompatActivity {
         scrollHorizontal.setVerticalScrollBarEnabled(false);
     }
 
-    @OnClick({R.id.btTicket, R.id.btShop, R.id.btSetting})
+    @OnClick({R.id.btTicket, R.id.btShop, R.id.btSetting, R.id.btLogout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+
             case R.id.btTicket:
-
                 startActivity(new Intent(getApplicationContext(), TrainShow.class));
-
                 break;
+
             case R.id.btShop:
+                startActivity(new Intent(getApplicationContext(), Shop.class));
                 break;
+
             case R.id.btSetting:
-
                 if (config.getInfo("guest")) {
-
-                    config.setInfo("guest", false);
-                    intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-
+                    Toast.makeText(getApplicationContext(), "anda harus menjadi user dahulu", Toast.LENGTH_SHORT).show();
                 } else if (config.getInfo("user")) {
-
                     startActivity(new Intent(getApplicationContext(), UserSetting.class));
-
                 }
+                break;
+            case R.id.btLogout:
 
+                config.setInfo("user", false);
+                config.setInfo("guest", false);
+                config.setInfo("admin", false);
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+                break;
+        }
+    }
+
+    @OnClick({R.id.btHistory})
+    public void onFeatureClicked(View view){
+        switch (view.getId()){
+            case R.id.btHistory:
+                startActivity(new Intent(getApplicationContext(), History.class));
                 break;
         }
     }

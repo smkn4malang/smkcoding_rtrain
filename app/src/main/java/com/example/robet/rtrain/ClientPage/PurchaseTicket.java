@@ -80,7 +80,7 @@ public class PurchaseTicket extends AppCompatActivity {
         price = Integer.valueOf(map.get("amount"));
         cart = map.get("cart");
         category = map.get("category");
-        userId = config.getName();
+        userId = String.valueOf(config.getId());
         credit = config.getCredit();
 
         tvTrainName.setText(trainName);
@@ -118,7 +118,10 @@ public class PurchaseTicket extends AppCompatActivity {
                         public void onResponse(Call<Value> call, Response<Value> response) {
                             loading.stop();
                             if(response.body().getInfo()){
+
                                 Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                config.setCredit(response.body().getCredit());
+
                                 Intent intent = new Intent(getApplicationContext(), Index.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

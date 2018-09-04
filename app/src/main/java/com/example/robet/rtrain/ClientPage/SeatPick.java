@@ -129,7 +129,6 @@ public class SeatPick extends AppCompatActivity {
 
                 price = Integer.valueOf(map.get("price"));
                 amount *= price;
-                Toast.makeText(getApplicationContext(), String.valueOf(amount), Toast.LENGTH_SHORT).show();
 
                 if (!choose.equals("")) {
                     map.put("amount", String.valueOf(amount));
