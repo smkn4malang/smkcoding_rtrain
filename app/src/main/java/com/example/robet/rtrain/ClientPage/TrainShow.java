@@ -63,12 +63,6 @@ public class TrainShow extends AppCompatActivity {
         setContentView(R.layout.ticket_show);
         ButterKnife.bind(this);
 
-        if(!new PurchaseTicket().status){
-            TrainShow.this.finish();
-            new PurchaseTicket().status = true;
-            startActivity(new Intent(getApplicationContext(), History.class));
-        }
-
         loading = new Loading(this);
         adapter = new TrainAdapter();
         category = "none";

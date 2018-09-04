@@ -269,4 +269,19 @@ public interface apiInterface {
     Call<CartResponse> cartShow(
             @Field("id") String id
     );
+
+    @FormUrlEncoded
+    @POST("public/index.php/ticket/purchase")
+    Call<Value> ticketPurchase(
+            @Field("trainId") String trainId,
+            @Field("userId") String userId,
+            @Field("date") String date,
+            @Field("seat") String seat,
+            @Field("destination") String destination,
+            @Field("depart") String depart,
+            @Field("time") String time,
+            @Field("price") String price,
+            @Field("credit") String credit,
+            @Field("cart") String cart
+    );
 }

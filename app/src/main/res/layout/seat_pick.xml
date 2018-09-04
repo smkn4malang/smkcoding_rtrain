@@ -7,58 +7,44 @@
     tools:context=".ClientPage.SeatPick">
 
     <LinearLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:background="@color/back"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvTrainName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="TrainName"
-            android:textColor="#000"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="category"
-            android:textSize="20dp" />
+        android:id="@+id/linear"
+        android:background="@drawable/top_corner">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:text="pilih tempat duduk"
-            android:textColor="#000"
-            android:textSize="15dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header"
-        android:id="@+id/cardView">
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Gerbong"
             android:textSize="20dp"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:textColor="#000000"
             android:gravity="center"
-            android:id="@+id/tvCart"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:id="@+id/tvCart"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardView"
+        android:layout_below="@id/linear"
+        android:background="@drawable/top_corner">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="silahkan pilih tempat duduk"
+            android:textSize="15dp"
+            android:layout_margin="5dp"
+            android:textColor="#000000"
+            android:gravity="center"/>
 
     </LinearLayout>
 
@@ -67,9 +53,12 @@
         android:layout_height="match_parent"
         android:layout_above="@id/footer"
         android:layout_below="@id/cardView"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         app:cardElevation="10dp"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@color/back">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

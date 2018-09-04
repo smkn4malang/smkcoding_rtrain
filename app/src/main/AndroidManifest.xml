@@ -71,7 +71,8 @@
         <activity android:name=".ClientPage.PickSeat" />
         <activity android:name=".ClientPage.SeatPick" />
         <activity android:name=".ClientPage.PurchaseTicket" />
-        <activity android:name=".ClientPage.History"></activity>
+        <activity android:name=".ClientPage.History" />
+        <activity android:name=".ClientPage.PurchaseTicketGuest"></activity>
     </application>
 
 </manifest>

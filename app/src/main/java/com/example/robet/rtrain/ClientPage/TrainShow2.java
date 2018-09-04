@@ -61,10 +61,6 @@ public class TrainShow2 extends Activity {
         setContentView(R.layout.train_show_2);
         ButterKnife.bind(this);
 
-        if (!new PurchaseTicket().status) {
-            TrainShow2.this.finish();
-        }
-
         loading = new Loading(this);
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");
@@ -167,6 +163,8 @@ public class TrainShow2 extends Activity {
                         Toast.makeText(getApplicationContext(), "pilih kota asal dengan benar", Toast.LENGTH_SHORT).show();
                     } else if (!destinationStat) {
                         Toast.makeText(getApplicationContext(), "pilih kota tujuan dengan benar", Toast.LENGTH_SHORT).show();
+                    } else if (mDepart.equals(mDestination)){
+                        Toast.makeText(getApplicationContext(), "anda harus memilih kota yang berbeda", Toast.LENGTH_SHORT).show();
                     } else {
 
                         loading.start();

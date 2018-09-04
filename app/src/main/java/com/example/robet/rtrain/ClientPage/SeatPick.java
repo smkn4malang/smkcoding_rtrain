@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.adapter.SeatAdapter;
 import com.example.robet.rtrain.gson.SeatResponse;
+import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 
@@ -32,24 +33,25 @@ public class SeatPick extends AppCompatActivity {
     HashMap<String, String> map;
     SeatAdapter adapter;
     Loading loading;
+    Config config;
     boolean seat[];
     int i = 0;
+    int amount = 0;
+    int price = 0;
     String choose = "";
 
-    @BindView(R.id.tvTrainName)
-    TextView tvTrainName;
-    @BindView(R.id.tvCategory)
-    TextView tvCategory;
+    @BindView(R.id.tvCart)
+    TextView tvCart;
+    @BindView(R.id.linear)
+    LinearLayout linear;
+    @BindView(R.id.cardView)
+    LinearLayout cardView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.btBack)
     Button btBack;
     @BindView(R.id.btNext)
     Button btNext;
-    @BindView(R.id.tvCart)
-    TextView tvCart;
-    @BindView(R.id.footer)
-    LinearLayout footer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +59,13 @@ public class SeatPick extends AppCompatActivity {
         setContentView(R.layout.seat_pick);
         ButterKnife.bind(this);
 
-        if (!new PurchaseTicket().status) {
-            SeatPick.this.finish();
-        }
-
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");
         adapter = new SeatAdapter();
         loading = new Loading(this);
+        config = new Config(this);
 
-        tvTrainName.setText(map.get("trainName"));
-        tvCategory.setText(map.get("category"));
         tvCart.setText(map.get("cart"));
-
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerView.setAdapter(adapter);
 
@@ -109,6 +105,10 @@ public class SeatPick extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btBack:
+                map.remove("time");
+                map.remove("depart");
+                map.remove("destination");
+                map.remove("cart");
                 SeatPick.this.finish();
                 break;
             case R.id.btNext:
@@ -118,6 +118,7 @@ public class SeatPick extends AppCompatActivity {
 
                 for (i = 0; i < size; i++) {
                     if (seat[i]) {
+                        amount += 1;
                         if (choose.equals("")) {
                             choose = String.valueOf(i + 1);
                         } else {
@@ -126,11 +127,22 @@ public class SeatPick extends AppCompatActivity {
                     }
                 }
 
+                price = Integer.valueOf(map.get("price"));
+                amount *= price;
+                Toast.makeText(getApplicationContext(), String.valueOf(amount), Toast.LENGTH_SHORT).show();
+
                 if (!choose.equals("")) {
+                    map.put("amount", String.valueOf(amount));
                     map.put("choose", choose);
-                    Intent intent = new Intent(getApplicationContext(), PurchaseTicket.class);
-                    intent.putExtra("extra", map);
-                    startActivity(intent);
+                    if(config.getInfo("user")) {
+                        Intent intent = new Intent(getApplicationContext(), PurchaseTicket.class);
+                        intent.putExtra("extra", map);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), PurchaseTicketGuest.class);
+                        intent.putExtra("extra", map);
+                        startActivity(intent);
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "anda harus memilih minimal satu tempat", Toast.LENGTH_SHORT).show();
                 }
