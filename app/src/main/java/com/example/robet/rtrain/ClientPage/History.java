@@ -45,7 +45,7 @@ public class History extends AppCompatActivity {
         loading = new Loading(this);
         config = new Config(this);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(adapter);
 
         RestApi.getData().historyShow(String.valueOf(config.getId())).enqueue(new Callback<HistoryResponse>() {

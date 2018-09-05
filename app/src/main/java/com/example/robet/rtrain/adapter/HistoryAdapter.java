@@ -10,17 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.robet.rtrain.ClientPage.HistoryItems;
 import com.example.robet.rtrain.ClientPage.HistoryTickets;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.HistoryItem;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MainViewHolder> {
 
-    public List<HistoryItem> listHistory;
+    public ArrayList<HistoryItem> listHistory = new ArrayList<>();
     Random random = new Random();
     int color;
 
@@ -38,8 +37,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MainView
         color = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
         holder.topLayout.setBackgroundColor(color);
 
-        holder.purchaseId.setText("Id pembelian : " + listHistory.get(position).getPurchaseId());
-        holder.type.setText(listHistory.get(position).getType());
+        holder.purchaseId.setText("Id: " + listHistory.get(position).getPurchaseId());
+        holder.type.setText("barang: " + listHistory.get(position).getType());
         holder.date.setText(listHistory.get(position).getDate());
 
         holder.ShowHistory.setOnClickListener(new View.OnClickListener() {
