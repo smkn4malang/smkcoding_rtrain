@@ -112,7 +112,7 @@ public class PurchaseTicket extends AppCompatActivity {
                     loading.start();
                     RestApi.getData().ticketPurchase(
                             trainId, userId, date, seat, destination, depart,
-                            time, String.valueOf(price), String.valueOf(credit), cart
+                            time, String.valueOf(price), String.valueOf(credit), cart, "user"
                     ).enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {

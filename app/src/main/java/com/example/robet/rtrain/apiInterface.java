@@ -3,6 +3,7 @@ package com.example.robet.rtrain;
 import com.example.robet.rtrain.gson.AdminResponse;
 import com.example.robet.rtrain.gson.CartResponse;
 import com.example.robet.rtrain.gson.CityResponse;
+import com.example.robet.rtrain.gson.HistoryResponse;
 import com.example.robet.rtrain.gson.ItemResponse;
 import com.example.robet.rtrain.gson.SeatResponse;
 import com.example.robet.rtrain.gson.TimeResponse;
@@ -282,6 +283,13 @@ public interface apiInterface {
             @Field("time") String time,
             @Field("price") String price,
             @Field("credit") String credit,
-            @Field("cart") String cart
+            @Field("cart") String cart,
+            @Field("type") String type
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/history/show")
+    Call<HistoryResponse> historyShow(
+            @Field("id") String id
     );
 }
