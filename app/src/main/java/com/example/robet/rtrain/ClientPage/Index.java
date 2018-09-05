@@ -15,6 +15,7 @@ import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
+import com.example.robet.rtrain.support.RestApi;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +40,6 @@ public class Index extends AppCompatActivity {
     CardView btLogout;
     @BindView(R.id.btHistory)
     CardView btHistory;
-    @BindView(R.id.scrollHorizontal)
-    HorizontalScrollView scrollHorizontal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,21 +47,18 @@ public class Index extends AppCompatActivity {
         setContentView(R.layout.index);
         ButterKnife.bind(this);
 
+        RestApi.getData().systemHistoryDelete();
+
         config = new Config(this);
         loading = new Loading(this);
-        scrollHorizontal.setVerticalScrollBarEnabled(false);
     }
 
-    @OnClick({R.id.btTicket, R.id.btShop, R.id.btSetting, R.id.btLogout})
+    @OnClick({R.id.btTicket, R.id.btSetting, R.id.btLogout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
             case R.id.btTicket:
                 startActivity(new Intent(getApplicationContext(), TrainShow.class));
-                break;
-
-            case R.id.btShop:
-                startActivity(new Intent(getApplicationContext(), Shop.class));
                 break;
 
             case R.id.btSetting:
@@ -87,11 +83,20 @@ public class Index extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.btHistory})
+    @OnClick({R.id.btHistory, R.id.btShop, R.id.btCredit})
     public void onFeatureClicked(View view){
         switch (view.getId()){
+
             case R.id.btHistory:
                 startActivity(new Intent(getApplicationContext(), History.class));
+                break;
+
+            case R.id.btShop:
+                startActivity(new Intent(getApplicationContext(), Shop.class));
+                break;
+
+            case R.id.btCredit:
+                startActivity(new Intent(getApplicationContext(), AddCredit.class));
                 break;
         }
     }

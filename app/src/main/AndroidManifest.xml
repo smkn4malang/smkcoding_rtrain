@@ -75,7 +75,8 @@
         <activity android:name=".ClientPage.PurchaseTicketGuest" />
         <activity android:name=".ClientPage.Shop" />
         <activity android:name=".ClientPage.HistoryItems" />
-        <activity android:name=".ClientPage.HistoryTickets"></activity>
+        <activity android:name=".ClientPage.HistoryTickets" />
+        <activity android:name=".ClientPage.AddCredit"></activity>
     </application>
 
 </manifest>

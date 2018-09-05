@@ -292,4 +292,19 @@ public interface apiInterface {
     Call<HistoryResponse> historyShow(
             @Field("id") String id
     );
+
+    @FormUrlEncoded
+    @POST("public/index.php/history/delete")
+    Call<Value> historyDelete(
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/history/delete/all")
+    Call<Value> historyDeleteAll(
+            @Field("userId") String userId
+    );
+
+    @GET("public/index.php/system/history/delete")
+    Call<Value> systemHistoryDelete();
 }

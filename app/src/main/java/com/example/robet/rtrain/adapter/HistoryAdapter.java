@@ -38,7 +38,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MainView
         holder.topLayout.setBackgroundColor(color);
 
         holder.purchaseId.setText("Id: " + listHistory.get(position).getPurchaseId());
-        holder.type.setText("barang: " + listHistory.get(position).getType());
+        holder.type.setText("barang:\n" + listHistory.get(position).getType());
         holder.date.setText(listHistory.get(position).getDate());
 
         holder.ShowHistory.setOnClickListener(new View.OnClickListener() {

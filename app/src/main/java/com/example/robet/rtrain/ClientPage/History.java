@@ -14,6 +14,7 @@ import com.example.robet.rtrain.gson.HistoryResponse;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
+import com.example.robet.rtrain.support.Value;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +49,7 @@ public class History extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(adapter);
 
+        loading.start();
         RestApi.getData().historyShow(String.valueOf(config.getId())).enqueue(new Callback<HistoryResponse>() {
             @Override
             public void onResponse(Call<HistoryResponse> call, Response<HistoryResponse> response) {
@@ -72,6 +74,23 @@ public class History extends AppCompatActivity {
                 History.this.finish();
                 break;
             case R.id.btClear:
+
+                loading.start();
+                RestApi.getData().historyDeleteAll(String.valueOf(config.getId())).enqueue(new Callback<Value>() {
+                    @Override
+                    public void onResponse(Call<Value> call, Response<Value> response) {
+                        loading.stop();
+                        Toast.makeText(getApplicationContext(), "berhasil menghapus history", Toast.LENGTH_SHORT).show();
+                        History.this.finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Value> call, Throwable t) {
+                        loading.stop();
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 break;
         }
     }
