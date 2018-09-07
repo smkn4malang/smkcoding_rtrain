@@ -36,7 +36,6 @@ import retrofit2.Response;
 public class Index extends AppCompatActivity{
 
     Config config;
-    Intent intent;
     Loading loading;
     int tax, pay;
     String[] time, city;
@@ -51,8 +50,6 @@ public class Index extends AppCompatActivity{
     TextView tvPromo;
     @BindView(R.id.Promo)
     RecyclerView Promo;
-    @BindView(R.id.btLogout)
-    CardView btLogout;
     @BindView(R.id.btHistory)
     CardView btHistory;
     @BindView(R.id.tvName)
@@ -76,7 +73,7 @@ public class Index extends AppCompatActivity{
 
     }
 
-    @OnClick({R.id.btTicket, R.id.btSetting, R.id.btLogout})
+    @OnClick({R.id.btTicket, R.id.btSetting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -90,18 +87,6 @@ public class Index extends AppCompatActivity{
                 } else if (config.getInfo("user")) {
                     startActivity(new Intent(getApplicationContext(), UserSetting.class));
                 }
-                break;
-            case R.id.btLogout:
-
-                config.setInfo("user", false);
-                config.setInfo("guest", false);
-                config.setInfo("admin", false);
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-
                 break;
         }
     }
