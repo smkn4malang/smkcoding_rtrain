@@ -2,10 +2,19 @@ package com.example.robet.rtrain.support;
 
 public class TicketHistory {
 
-    String trainName, category, date, seat, destination, depart, time;
+    String trainName, category, date, seat, destination, depart, time, price;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public String getTrainName() {
         return trainName;
+
     }
 
     public void setTrainName(String trainName) {

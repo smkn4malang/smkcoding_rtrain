@@ -50,8 +50,6 @@ public class PurchaseTicket extends AppCompatActivity {
     Button btBack;
     @BindView(R.id.btBuy)
     Button btBuy;
-    @BindView(R.id.spPay)
-    Spinner spPay;
 
     Bundle bundle;
     HashMap<String, String> map;

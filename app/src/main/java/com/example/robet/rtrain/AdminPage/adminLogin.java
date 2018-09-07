@@ -9,7 +9,6 @@ import android.support.design.widget.TextInputEditText;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.support.Config;
-import com.example.robet.rtrain.ClientPage.IndexAdmin;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
-import com.example.robet.rtrain.ClientPage.UserAdd;
 import com.example.robet.rtrain.adapter.UserShowAdapter;
 import com.example.robet.rtrain.gson.UserShowResponse;
 

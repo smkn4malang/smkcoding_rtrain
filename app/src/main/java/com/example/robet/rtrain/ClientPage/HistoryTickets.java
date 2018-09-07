@@ -68,7 +68,7 @@ public class HistoryTickets extends AppCompatActivity {
             public void onResponse(Call<TicketHistory> call, Response<TicketHistory> response) {
 
                 int cars = Integer.valueOf(response.body().getSeat());
-                cars = (cars + 1) /20;
+                cars = (cars / 20) + 1;
 
                 loading.stop();
                 tvTrainName.setText(response.body().getTrainName());
@@ -79,6 +79,7 @@ public class HistoryTickets extends AppCompatActivity {
                 tvDepart.setText(response.body().getDepart());
                 tvTime.setText(response.body().getTrainName());
                 tvCart.setText(String.valueOf(cars));
+                tvPrice.setText(response.body().getPrice());
 
             }
 

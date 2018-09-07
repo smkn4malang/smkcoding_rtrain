@@ -1,4 +1,4 @@
-package com.example.robet.rtrain.ClientPage;
+package com.example.robet.rtrain.AdminPage;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.robet.rtrain.ClientPage.SeatPick;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.CartResponse;
@@ -27,11 +26,9 @@ import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -225,15 +222,13 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
                             map.put("destination", mDestination);
                             map.put("cart", mCart);
 
+                            dialog.cancel();
                             Intent intent = new Intent(mCtx, SeatPick.class);
                             intent.putExtra("extra", map);
                             view.getContext().startActivity(intent);
                         }
                     }
                 }
-
-                dialog.cancel();
-
             }
         });
     }

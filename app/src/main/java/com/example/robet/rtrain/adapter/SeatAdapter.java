@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
@@ -29,6 +30,8 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.MainViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final MainViewHolder holder, final int position) {
+
+        holder.seatNum.setText(ListSeat.get(position).getSeatNum());
 
         if(!ListSeat.get(position).isStatus()){
             holder.seatList.setCardBackgroundColor(Color.RED);
@@ -61,10 +64,12 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.MainViewHolder
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
         CardView seatList;
+        TextView seatNum;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
             seatList = itemView.findViewById(R.id.seatList);
+            seatNum = itemView.findViewById(R.id.seatNum);
         }
     }
 }

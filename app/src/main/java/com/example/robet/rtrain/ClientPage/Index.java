@@ -1,7 +1,6 @@
 package com.example.robet.rtrain.ClientPage;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,13 +15,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.robet.rtrain.gson.CityResponse;
 import com.example.robet.rtrain.gson.TimeResponse;
 import com.example.robet.rtrain.support.Config;
@@ -31,7 +26,6 @@ import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -46,7 +40,6 @@ public class Index extends AppCompatActivity{
     Loading loading;
     int tax, pay;
     String[] time, city;
-    Snackbar snackbar;
 
     @BindView(R.id.btTicket)
     CardView btTicket;
@@ -80,14 +73,6 @@ public class Index extends AppCompatActivity{
 
         tvName.setText(config.getName());
         tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
-
-        snackbar = Snackbar.make(findViewById(R.id.llIndex), "no internet connection", Snackbar.LENGTH_LONG);
-        snackbar.setAction("RETRY", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getData();
-            }
-        });
 
     }
 
@@ -241,28 +226,28 @@ public class Index extends AppCompatActivity{
                     time[i] = response.body().getTime().get(i).getTime();
                 }
                 config.setTime(time);
+
+                RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
+                    @Override
+                    public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                        int size = response.body().getCity().size();
+                        city = new String[size];
+                        for(int i = 0; i < size; i++){
+                            city[i] = response.body().getCity().get(i).getName();
+                        }
+                        config.setCity(city);
+                    }
+
+                    @Override
+                    public void onFailure(Call<CityResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
             public void onFailure(Call<TimeResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
-            @Override
-            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                int size = response.body().getCity().size();
-                city = new String[size];
-                for(int i = 0; i < size; i++){
-                    city[i] = response.body().getCity().get(i).getName();
-                }
-                config.setCity(city);
-            }
-
-            @Override
-            public void onFailure(Call<CityResponse> call, Throwable t) {
-                snackbar.show();
+                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
             }
         });
 

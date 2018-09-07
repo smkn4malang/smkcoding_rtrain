@@ -32,12 +32,12 @@
         <activity android:name=".AdminPage.adminForgot" />
         <activity android:name=".AdminPage.adminForgot2" />
         <activity android:name=".ClientPage.TrainShow" />
-        <activity android:name=".ClientPage.IndexAdmin" />
+        <activity android:name=".AdminPage.IndexAdmin" />
         <activity android:name=".AdminPage.AdminManageUser" />
         <activity android:name=".AdminPage.AdminManageData" />
         <activity android:name=".AdminPage.AdminSetting" />
-        <activity android:name=".ClientPage.UserAdd" />
-        <activity android:name=".ClientPage.UserEdit" />
+        <activity android:name=".AdminPage.UserAdd" />
+        <activity android:name=".AdminPage.UserEdit" />
         <activity android:name=".AdminPage.AdminManageAdmin" />
         <activity android:name=".AdminPage.AdminManageTrainAdd" />
         <activity android:name=".AdminPage.AdminManageTrainEdit" />

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
-import com.example.robet.rtrain.ClientPage.UserEdit;
+import com.example.robet.rtrain.AdminPage.UserEdit;
 import com.example.robet.rtrain.gson.UserShowItem;
 
 import java.util.ArrayList;

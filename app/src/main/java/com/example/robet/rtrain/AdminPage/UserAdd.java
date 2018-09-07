@@ -1,4 +1,4 @@
-package com.example.robet.rtrain.ClientPage;
+package com.example.robet.rtrain.AdminPage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.support.design.widget.TextInputEditText;
 import android.widget.Toast;
 
-import com.example.robet.rtrain.AdminPage.AdminManageUser;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;

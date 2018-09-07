@@ -1,15 +1,15 @@
 # smkcoding_rtrain
 deskripsi: aplikasi untuk memudahkan kita dalam membeli tiket kereta api se-Indonesia.<br>
-![addCredit](ss/addCredit.jpg)
-![history](ss/history.jpg)
-![Index](ss/Index.jpg)
-![listHistory](ss/listHistory.jpg)
-![listTrain](ss/listTrain.jpg)
-![PickDate](ss/PickDate.jpg)
-![PickDestination](ss/PickDestination.jpg)
-![PickSeat](ss/PickSeat.jpg)
-![SeatSelected](ss/SeatSelected.jpg)
-![TrainSearch](ss/TrainSearch)
+![addCredit](ss/addCredit.jpg | width=100)
+![history](ss/history.jpg | width=100)
+![Index](ss/Index.jpg | width=100)
+![listHistory](ss/listHistory.jpg | width=100)
+![listTrain](ss/listTrain.jpg | width=100)
+![PickDate](ss/PickDate.jpg | width=100)
+![PickDestination](ss/PickDestination.jpg | width=100)
+![PickSeat](ss/PickSeat.jpg | width=100)
+![SeatSelected](ss/SeatSelected.jpg | width=100)
+![TrainSearch](ss/TrainSearch | width=100)
 
 Thanks to: <br>
 pluspng.com <br>
