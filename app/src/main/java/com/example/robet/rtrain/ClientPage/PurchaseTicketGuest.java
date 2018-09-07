@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,22 +48,14 @@ public class PurchaseTicketGuest extends AppCompatActivity {
     TextView tvSeat;
     @BindView(R.id.tvPrice)
     TextView tvPrice;
-    @BindView(R.id.btAlfamaret)
-    LinearLayout btAlfamaret;
-    @BindView(R.id.btIndomaret)
-    LinearLayout btIndomaret;
-    @BindView(R.id.btBri)
-    LinearLayout btBri;
-    @BindView(R.id.btMandiri)
-    LinearLayout btMandiri;
-    @BindView(R.id.btBca)
-    LinearLayout btBca;
     @BindView(R.id.etPay)
     TextInputEditText etPay;
     @BindView(R.id.btBack)
     Button btBack;
     @BindView(R.id.btBuy)
     Button btBuy;
+    @BindView(R.id.spPay)
+    Spinner spPay;
 
     HashMap<String, String> map;
     Bundle bundle;
@@ -83,7 +78,6 @@ public class PurchaseTicketGuest extends AppCompatActivity {
         config = new Config(this);
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");
-        btAlfamaret.setBackgroundResource(R.drawable.stroke2);
         tax = 2500;
 
         trainId = map.get("trainId");
@@ -109,76 +103,46 @@ public class PurchaseTicketGuest extends AppCompatActivity {
         tvSeat.setText(seat);
         tvPrice.setText(String.valueOf(finalPrice));
 
+        String[] mPay = {"alfamaret", "indomaret", "bca", "bri", "mandiri"};
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(PurchaseTicketGuest.this,
+                android.R.layout.simple_spinner_dropdown_item, mPay);
+        spPay.setAdapter(adapter);
+        spPay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int index = adapterView.getSelectedItemPosition();
+                switch(index){
+                    case 0:
+                        tax = 2500;
+                        break;
+                    case 1:
+                        tax = 2500;
+                        break;
+                    case 2:
+                        tax = 5000;
+                        break;
+                    case 3:
+                        tax = 7500;
+                        break;
+                    case 4:
+                        tax = 5000;
+                        break;
+                }
+                finalPrice = price + tax;
+                tvPrice.setText(String.valueOf(finalPrice));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
-    @OnClick({R.id.btAlfamaret, R.id.btIndomaret, R.id.btBri, R.id.btMandiri, R.id.btBca, R.id.btBack, R.id.btBuy, R.id.llButton})
+    @OnClick({R.id.btBack, R.id.btBuy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btAlfamaret:
-
-                btAlfamaret.setBackgroundResource(R.drawable.stroke2);
-                btIndomaret.setBackgroundResource(R.drawable.stroke1);
-                btMandiri.setBackgroundResource(R.drawable.stroke1);
-                btBca.setBackgroundResource(R.drawable.stroke1);
-                btBri.setBackgroundResource(R.drawable.stroke1);
-
-                tax = 2500;
-                finalPrice = price + tax;
-                tvPrice.setText(String.valueOf(finalPrice));
-
-                break;
-            case R.id.btIndomaret:
-
-                btAlfamaret.setBackgroundResource(R.drawable.stroke1);
-                btIndomaret.setBackgroundResource(R.drawable.stroke2);
-                btMandiri.setBackgroundResource(R.drawable.stroke1);
-                btBca.setBackgroundResource(R.drawable.stroke1);
-                btBri.setBackgroundResource(R.drawable.stroke1);
-
-                tax = 3000;
-                finalPrice = price + tax;
-                tvPrice.setText(String.valueOf(finalPrice));
-
-                break;
-            case R.id.btBri:
-
-                btAlfamaret.setBackgroundResource(R.drawable.stroke1);
-                btIndomaret.setBackgroundResource(R.drawable.stroke1);
-                btMandiri.setBackgroundResource(R.drawable.stroke1);
-                btBca.setBackgroundResource(R.drawable.stroke1);
-                btBri.setBackgroundResource(R.drawable.stroke2);
-
-                tax = 5000;
-                finalPrice = price + tax;
-                tvPrice.setText(String.valueOf(finalPrice));
-
-                break;
-            case R.id.btMandiri:
-
-                btAlfamaret.setBackgroundResource(R.drawable.stroke2);
-                btIndomaret.setBackgroundResource(R.drawable.stroke1);
-                btMandiri.setBackgroundResource(R.drawable.stroke1);
-                btBca.setBackgroundResource(R.drawable.stroke1);
-                btBri.setBackgroundResource(R.drawable.stroke1);
-
-                tax = 2000;
-                finalPrice = price + tax;
-                tvPrice.setText(String.valueOf(finalPrice));
-
-                break;
-            case R.id.btBca:
-
-                btAlfamaret.setBackgroundResource(R.drawable.stroke2);
-                btIndomaret.setBackgroundResource(R.drawable.stroke1);
-                btMandiri.setBackgroundResource(R.drawable.stroke1);
-                btBca.setBackgroundResource(R.drawable.stroke1);
-                btBri.setBackgroundResource(R.drawable.stroke1);
-
-                tax = 5000;
-                finalPrice = price + tax;
-                tvPrice.setText(String.valueOf(finalPrice));
-
-                break;
             case R.id.btBack:
                 map.remove("choose");
                 PurchaseTicketGuest.this.finish();

@@ -1,6 +1,5 @@
 package com.example.robet.rtrain.adapter;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -12,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.robet.rtrain.R;
-import com.example.robet.rtrain.ClientPage.TrainShow2;
 import com.example.robet.rtrain.gson.TrainItem;
 
 import java.util.ArrayList;
@@ -60,9 +58,14 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
                 map.put("date", listTrain.get(position).getDate());
                 map.put("seat", listTrain.get(position).getSeat());
 
-                Intent intent = new Intent(holder.itemView.getContext(), TrainShow2.class);
-                intent.putExtra("extra", map);
-                holder.itemView.getContext().startActivity(intent);
+//                Intent intent = new Intent(holder.itemView.getContext(), TrainShow2.class);
+//                intent.putExtra("extra", map);
+//                holder.itemView.getContext().startActivity(intent);
+
+                Train2Adapter trainAdapter = new Train2Adapter(holder.itemView.getContext());
+                trainAdapter.create(map);
+                trainAdapter.build();
+                trainAdapter.show();
 
             }
         });

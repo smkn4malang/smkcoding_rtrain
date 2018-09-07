@@ -92,12 +92,34 @@ public class Config {
         return pref.getString("password", "");
     }
 
-    public void setUserEditPostion(int position){
-        editor.putInt("UserEditPosition", position);
+    public void setCity(String[] city){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < city.length; i++){
+            stringBuilder.append(city[i]).append(",");
+        }
+        editor.putString("city", stringBuilder.toString());
         editor.commit();
     }
 
-    public int getUserEditPosition(){
-        return pref.getInt("UserEditPosition", 0);
+    public String[] getCity(){
+        String data = pref.getString("city", "nothing");
+        String[] city = data.split(",");
+        return  city;
     }
+
+    public void setTime(String[] city){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < city.length; i++){
+            stringBuilder.append(city[i]).append(",");
+        }
+        editor.putString("time", stringBuilder.toString());
+        editor.commit();
+    }
+
+    public String[] getTime(){
+        String data = pref.getString("time", "nothing");
+        String[] time = data.split(",");
+        return time;
+    }
+
 }

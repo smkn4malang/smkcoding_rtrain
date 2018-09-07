@@ -9,6 +9,8 @@ import com.example.robet.rtrain.gson.SeatResponse;
 import com.example.robet.rtrain.gson.TimeResponse;
 import com.example.robet.rtrain.gson.TrainResponse;
 import com.example.robet.rtrain.gson.UserShowResponse;
+import com.example.robet.rtrain.support.ItemHistory;
+import com.example.robet.rtrain.support.TicketHistory;
 import com.example.robet.rtrain.support.Value;
 
 import retrofit2.Call;
@@ -93,9 +95,7 @@ public interface apiInterface {
     @POST("public/index.php/credit/add")
     Call<Value> creditAdd(
             @Field("id") int id,
-            @Field("credit") String credit,
-            @Field("tax") int tax,
-            @Field("pay") String pay
+            @Field("credit") String credit
     );
 
     @GET("public/index.php/user/show")
@@ -302,9 +302,21 @@ public interface apiInterface {
     @FormUrlEncoded
     @POST("public/index.php/history/delete/all")
     Call<Value> historyDeleteAll(
-            @Field("userId") String userId
+            @Field("id") String id
     );
 
     @GET("public/index.php/system/history/delete")
     Call<Value> systemHistoryDelete();
+
+    @FormUrlEncoded
+    @POST("public/index.php/history/ticket")
+    Call<TicketHistory> ticketHistory(
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/history/item")
+    Call<ItemHistory> itemHistory(
+            @Field("id") String id
+    );
 }

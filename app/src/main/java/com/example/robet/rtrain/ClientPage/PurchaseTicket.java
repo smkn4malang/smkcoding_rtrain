@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,8 @@ public class PurchaseTicket extends AppCompatActivity {
     Button btBack;
     @BindView(R.id.btBuy)
     Button btBuy;
+    @BindView(R.id.spPay)
+    Spinner spPay;
 
     Bundle bundle;
     HashMap<String, String> map;
@@ -101,6 +104,7 @@ public class PurchaseTicket extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btBack:
                 map.remove("choose");
+                new SeatPick().map.remove("choose");
                 PurchaseTicket.this.finish();
                 break;
             case R.id.btBuy:
