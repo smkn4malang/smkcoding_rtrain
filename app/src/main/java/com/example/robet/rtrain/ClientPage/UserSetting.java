@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
@@ -50,6 +51,7 @@ public class UserSetting extends AppCompatActivity {
 
     Config config;
     Loading loading;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class UserSetting extends AppCompatActivity {
                 editDialog(2);
                 break;
             case R.id.btBack:
+                intent = new Intent();
+                setResult(1, intent);
                 UserSetting.this.finish();
                 break;
             case R.id.btLogout:
@@ -81,7 +85,7 @@ public class UserSetting extends AppCompatActivity {
                 config.setInfo("user", false);
                 config.setInfo("guest", false);
 
-                Intent intent = new Intent(getApplicationContext(), Index.class);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -93,7 +97,13 @@ public class UserSetting extends AppCompatActivity {
     private void editDialog(final int type){
 
         LayoutInflater layoutInflater = LayoutInflater.from(UserSetting.this);
-        View view = layoutInflater.inflate(R.layout.item_edit, null);
+        View view;
+
+        if(type == 1){
+            view = layoutInflater.inflate(R.layout.item_edit_name, null);
+        } else {
+            view = layoutInflater.inflate(R.layout.item_edit_password, null);
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(UserSetting.this);
         builder.setView(view);
@@ -105,33 +115,15 @@ public class UserSetting extends AppCompatActivity {
 
         final TextInputEditText etText;
         CardView btChange, btCancel;
-        TextInputLayout layout;
-        LinearLayout top;
 
         etText = view.findViewById(R.id.etText);
         btChange = view.findViewById(R.id.btChange);
         btCancel = view.findViewById(R.id.btCancel);
-        layout = view.findViewById(R.id.layout);
-        top = view.findViewById(R.id.top);
 
-        Random random = new Random();
-        int color = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
-        top.setBackgroundColor(color);
-
-
-        switch(type){
-            case 1:
-                etText.setHint("name");
-                etText.setText(config.getName());
-                etText.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-                layout.setPasswordVisibilityToggleEnabled(false);
-                break;
-            case 2:
-                etText.setHint("password");
-                etText.setText(config.getPassword());
-                etText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                layout.setPasswordVisibilityToggleEnabled(true);
-                break;
+        if(type == 1){
+            etText.setText(config.getName());
+        } else {
+            etText.setText(config.getPassword());
         }
 
         btChange.setOnClickListener(new View.OnClickListener() {
@@ -144,12 +136,12 @@ public class UserSetting extends AppCompatActivity {
                         RestApi.getData().ChangeName(config.getId(), etText.getText().toString()).enqueue(new Callback<Value>() {
                             @Override
                             public void onResponse(Call<Value> call, Response<Value> response) {
+
                                 loading.stop();
                                 String message = response.body().getMessage();
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 config.setName(etText.getText().toString());
                                 tvName.setText(etText.getText().toString());
-                                new Index().tvName.setText(etText.getText().toString());
                                 dialog.cancel();
                             }
 
@@ -167,6 +159,7 @@ public class UserSetting extends AppCompatActivity {
                         RestApi.getData().ChangePW(config.getId(), config.getPassword()).enqueue(new Callback<Value>() {
                             @Override
                             public void onResponse(Call<Value> call, Response<Value> response) {
+
                                 loading.stop();
                                 String message;
                                 message = response.body().getMessage();
@@ -174,6 +167,7 @@ public class UserSetting extends AppCompatActivity {
                                 config.setPassword(etText.getText().toString());
                                 tvPassword.setText(etText.getText().toString());
                                 dialog.cancel();
+
                             }
 
                             @Override

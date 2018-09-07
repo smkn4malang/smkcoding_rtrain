@@ -10,6 +10,6 @@ public class ItemEdit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_edit);
+        setContentView(R.layout.item_edit_name);
     }
 }

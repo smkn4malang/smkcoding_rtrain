@@ -85,7 +85,8 @@ public class Index extends AppCompatActivity{
                 if (config.getInfo("guest")) {
                     Toast.makeText(getApplicationContext(), "anda harus menjadi user dahulu", Toast.LENGTH_SHORT).show();
                 } else if (config.getInfo("user")) {
-                    startActivity(new Intent(getApplicationContext(), UserSetting.class));
+                    Intent intent = new Intent(getApplicationContext(), UserSetting.class);
+                    startActivityForResult(intent, 1);
                 }
                 break;
         }
@@ -236,5 +237,12 @@ public class Index extends AppCompatActivity{
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == 1){
+            tvName.setText(config.getName());
+        }
     }
 }
