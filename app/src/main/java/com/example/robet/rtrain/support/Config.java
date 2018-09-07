@@ -122,4 +122,28 @@ public class Config {
         return time;
     }
 
+    public void setCart(String[] cart){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < cart.length; i++){
+            stringBuilder.append(cart[i]).append(",");
+        }
+        editor.putString("cart", stringBuilder.toString());
+        editor.commit();
+    }
+
+    public String[] getCart(){
+        String mCart = pref.getString("cart", "nothing");
+        String[] cart = mCart.split(",");
+        return cart;
+    }
+
+    public void setStatus(boolean status){
+        editor.putBoolean("status", status);
+        editor.commit();
+    }
+
+    public boolean getStatus(){
+        return pref.getBoolean("status", false);
+    }
+
 }

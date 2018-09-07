@@ -47,7 +47,6 @@
         <activity android:name=".AdminPage.ItemShow" />
         <activity android:name=".AdminPage.ItemEdit" />
         <activity android:name=".AdminPage.ItemAdd" />
-        <activity android:name=".ClientPage.TrainShow2" />
         <activity android:name=".ClientPage.UserSetting" />
 
         <service android:name=".notification.pushNotificationToken">

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -45,6 +46,7 @@ public class Index extends AppCompatActivity{
     Loading loading;
     int tax, pay;
     String[] time, city;
+    Snackbar snackbar;
 
     @BindView(R.id.btTicket)
     CardView btTicket;
@@ -79,39 +81,14 @@ public class Index extends AppCompatActivity{
         tvName.setText(config.getName());
         tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
 
-        RestApi.getData().TimeList().enqueue(new Callback<TimeResponse>() {
+        snackbar = Snackbar.make(findViewById(R.id.llIndex), "no internet connection", Snackbar.LENGTH_LONG);
+        snackbar.setAction("RETRY", new View.OnClickListener() {
             @Override
-            public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
-                int size = response.body().getTime().size();
-                time = new String[size];
-                for(int i = 0; i < size; i++){
-                    time[i] = response.body().getTime().get(i).getTime();
-                }
-                config.setTime(time);
-            }
-
-            @Override
-            public void onFailure(Call<TimeResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                getData();
             }
         });
 
-        RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
-            @Override
-            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                int size = response.body().getCity().size();
-                city = new String[size];
-                for(int i = 0; i < size; i++){
-                    city[i] = response.body().getCity().get(i).getName();
-                }
-                config.setCity(city);
-            }
-
-            @Override
-            public void onFailure(Call<CityResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @OnClick({R.id.btTicket, R.id.btSetting, R.id.btLogout})
@@ -251,5 +228,43 @@ public class Index extends AppCompatActivity{
 
                 break;
         }
+    }
+
+    public void  getData(){
+
+        RestApi.getData().TimeList().enqueue(new Callback<TimeResponse>() {
+            @Override
+            public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
+                int size = response.body().getTime().size();
+                time = new String[size];
+                for(int i = 0; i < size; i++){
+                    time[i] = response.body().getTime().get(i).getTime();
+                }
+                config.setTime(time);
+            }
+
+            @Override
+            public void onFailure(Call<TimeResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
+            @Override
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                int size = response.body().getCity().size();
+                city = new String[size];
+                for(int i = 0; i < size; i++){
+                    city[i] = response.body().getCity().get(i).getName();
+                }
+                config.setCity(city);
+            }
+
+            @Override
+            public void onFailure(Call<CityResponse> call, Throwable t) {
+                snackbar.show();
+            }
+        });
+
     }
 }

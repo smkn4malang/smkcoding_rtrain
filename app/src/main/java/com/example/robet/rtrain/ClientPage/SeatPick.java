@@ -105,17 +105,7 @@ public class SeatPick extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btBack:
-
-                TrainShow2 train = new TrainShow2();
-                map.remove("time");
-                map.remove("depart");
-                map.remove("destination");
-                map.remove("cart");
-                train.map.remove("time");
-                train.map.remove("depart");
-                train.map.remove("destination");
-                train.map.remove("cart");
-
+                map.clear();
                 SeatPick.this.finish();
                 break;
             case R.id.btNext:
