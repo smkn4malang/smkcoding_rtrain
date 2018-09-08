@@ -67,7 +67,6 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@drawable/trains" />
 
-        <activity android:name=".ClientPage.PickSeat" />
         <activity android:name=".ClientPage.SeatPick" />
         <activity android:name=".ClientPage.PurchaseTicket" />
         <activity android:name=".ClientPage.History" />

@@ -118,8 +118,8 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         LayoutInflater layoutInflater = LayoutInflater.from(mCtx);
         View view = layoutInflater.inflate(R.layout.train_show_2, null);
 
-        etDepart = view.findViewById(R.id.etTo);
-        etDestination = view.findViewById(R.id.etFrom);
+        etDepart = view.findViewById(R.id.etFrom);
+        etDestination = view.findViewById(R.id.etTo);
         spCart = view.findViewById(R.id.spCart);
         spTime = view.findViewById(R.id.spTime);
         btBack = view.findViewById(R.id.btBack);

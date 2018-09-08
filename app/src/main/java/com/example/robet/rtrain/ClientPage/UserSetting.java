@@ -65,6 +65,14 @@ public class UserSetting extends AppCompatActivity {
         loading = new Loading(this);
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        intent = new Intent();
+        setResult(1, intent);
+        UserSetting.this.finish();
+    }
+
     @OnClick({R.id.btName, R.id.btPassword, R.id.btBack, R.id.btLogout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -119,12 +127,6 @@ public class UserSetting extends AppCompatActivity {
         etText = view.findViewById(R.id.etText);
         btChange = view.findViewById(R.id.btChange);
         btCancel = view.findViewById(R.id.btCancel);
-
-        if(type == 1){
-            etText.setText(config.getName());
-        } else {
-            etText.setText(config.getPassword());
-        }
 
         btChange.setOnClickListener(new View.OnClickListener() {
             @Override

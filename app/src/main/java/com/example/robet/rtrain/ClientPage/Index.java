@@ -101,7 +101,8 @@ public class Index extends AppCompatActivity{
                 break;
 
             case R.id.btShop:
-                startActivity(new Intent(getApplicationContext(), Shop.class));
+                Intent intent = new Intent(getApplicationContext(), Shop.class);
+                startActivityForResult(intent, 2);
                 break;
 
             case R.id.btCredit:
@@ -243,6 +244,9 @@ public class Index extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == 1){
             tvName.setText(config.getName());
+        } else if(requestCode == 2){
+            tvCredit.setText(config.getCredit());
         }
     }
+
 }
