@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,13 +57,18 @@ public class PurchaseTicketGuest extends AppCompatActivity {
     Button btBuy;
     @BindView(R.id.spPay)
     Spinner spPay;
+    @BindView(R.id.etRekening)
+    TextInputEditText etRekening;
+    @BindView(R.id.cvRekening)
+    CardView cvRekening;
 
     HashMap<String, String> map;
     Bundle bundle;
     Loading loading;
     Config config;
     String trainId, trainName, guestId, date, seat, mPay;
-    String time, cart, category, destination, depart;
+    String time, cart, category, destination, depart, rekening;
+    boolean bank = false;
     int pay = 0;
     int finalPrice = 0;
     int price = 0;
@@ -103,6 +109,8 @@ public class PurchaseTicketGuest extends AppCompatActivity {
         tvSeat.setText(seat);
         tvPrice.setText(String.valueOf(finalPrice));
 
+        cvRekening.setVisibility(View.GONE);
+
         String[] mPay = {"alfamaret", "indomaret", "bca", "bri", "mandiri"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(PurchaseTicketGuest.this,
                 android.R.layout.simple_spinner_dropdown_item, mPay);
@@ -111,21 +119,31 @@ public class PurchaseTicketGuest extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 int index = adapterView.getSelectedItemPosition();
-                switch(index){
+                switch (index) {
                     case 0:
                         tax = 2500;
+                        cvRekening.setVisibility(View.GONE);
+                        bank = false;
                         break;
                     case 1:
                         tax = 2500;
+                        cvRekening.setVisibility(View.GONE);
+                        bank = false;
                         break;
                     case 2:
                         tax = 5000;
+                        cvRekening.setVisibility(View.VISIBLE);
+                        bank = true;
                         break;
                     case 3:
                         tax = 7500;
+                        cvRekening.setVisibility(View.VISIBLE);
+                        bank = true;
                         break;
                     case 4:
                         tax = 5000;
+                        cvRekening.setVisibility(View.VISIBLE);
+                        bank = true;
                         break;
                 }
                 finalPrice = price + tax;
@@ -151,8 +169,21 @@ public class PurchaseTicketGuest extends AppCompatActivity {
 
                 mPay = etPay.getText().toString();
                 pay = Integer.valueOf(mPay);
+                rekening = etRekening.getText().toString();
 
-                if (mPay.equals("")) {
+                if(bank){
+                    if(rekening.equals("")){
+                        bank = false;
+                    } else {
+                        bank = true;
+                    }
+                } else {
+                    bank = true;
+                }
+
+                if(!bank){
+                    Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
+                } else if (mPay.equals("")) {
                     Toast.makeText(getApplicationContext(), "masukkan uang pembayaran dahulu", Toast.LENGTH_SHORT).show();
                 } else if (pay < finalPrice) {
                     Toast.makeText(getApplicationContext(), "uang anda kurang", Toast.LENGTH_SHORT).show();

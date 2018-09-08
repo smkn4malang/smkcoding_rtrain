@@ -37,8 +37,10 @@ public class Index extends AppCompatActivity{
 
     Config config;
     Loading loading;
+    String rekening;
     int tax, pay;
     String[] time, city;
+    boolean bank = false;
 
     @BindView(R.id.btTicket)
     CardView btTicket;
@@ -120,8 +122,11 @@ public class Index extends AppCompatActivity{
                 Button btBack = CreditView.findViewById(R.id.btBack);
                 Button btAdd = CreditView.findViewById(R.id.btAdd);
                 Spinner spPay = CreditView.findViewById(R.id.spPay);
+                final CardView cvRekening = view.findViewById(R.id.cvRekening);
+                final TextInputEditText etRekening = view.findViewById(R.id.etRekening);
                 final TextInputEditText etPay = CreditView.findViewById(R.id.etPay);
                 final TextInputEditText etTax = CreditView.findViewById(R.id.etTax);
+                cvRekening.setVisibility(View.GONE);
 
                 String[] payMethod = {"indomaret", "alfamaret", "bca", "bri", "mandiri"};
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(Index.this,
@@ -134,18 +139,28 @@ public class Index extends AppCompatActivity{
                         switch (index) {
                             case 0:
                                 tax = 2500;
+                                cvRekening.setVisibility(View.GONE);
+                                bank = false;
                                 break;
                             case 1:
                                 tax = 2500;
+                                cvRekening.setVisibility(View.GONE);
+                                bank = false;
                                 break;
                             case 2:
                                 tax = 5000;
+                                cvRekening.setVisibility(View.VISIBLE);
+                                bank = true;
                                 break;
                             case 3:
                                 tax = 7500;
+                                cvRekening.setVisibility(View.VISIBLE);
+                                bank = true;
                                 break;
                             case 4:
                                 tax = 5000;
+                                cvRekening.setVisibility(View.VISIBLE);
+                                bank = true;
                                 break;
                         }
                         etTax.setText(String.valueOf(tax));
@@ -160,9 +175,26 @@ public class Index extends AppCompatActivity{
                 btAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         String mPay = etPay.getText().toString();
                         pay = Integer.valueOf(mPay);
-                        if(pay < 50000){
+                        rekening = etRekening.getText().toString();
+
+                        if(bank){
+                            if(rekening.equals("")){
+                                bank = false;
+                            } else {
+                                bank = true;
+                            }
+                        } else {
+                            bank = true;
+                        }
+
+                        if(mPay.equals("")){
+                            Toast.makeText(getApplicationContext(), "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
+                        } else if(!bank){
+                            Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
+                        } else if(pay < 50000){
                             Toast.makeText(getApplicationContext(), "anda harus topup minimal 50ribu", Toast.LENGTH_SHORT).show();
                         } else {
 

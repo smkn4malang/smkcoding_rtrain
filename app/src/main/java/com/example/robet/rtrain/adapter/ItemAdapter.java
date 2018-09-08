@@ -6,13 +6,17 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +37,12 @@ import retrofit2.Response;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapter> {
 
     public ArrayList<ItemItem> listItem = new ArrayList<>();
-    String id, name, price, pic, desc;
-    String mId, mName, mPrice, mPic, userId, Price;
+    String id, name, price, pic, desc, mBank, address;
+    String mId, mName, mPrice, mPic, userId, Price, mPay;
     int amount = 1;
-    int credit;
+    int credit, tax = 0;
     Config config;
+    boolean bank = false;
     Loading loading;
 
     @NonNull
@@ -124,6 +129,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
 
         if(config.getInfo("user")){
             user(mCtx, view, dialog);
+        } else {
+            guest(mCtx, view, dialog);
         }
 
     }
@@ -134,8 +141,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         final TextView tvName, tvAmount;
         ImageView btPlus, btMin;
         Button btCancel, btBuy;
-        final TextInputEditText tvPrice, tvCredit;
+        final TextInputEditText tvPrice, tvCredit, etAddress;
 
+        etAddress = view.findViewById(R.id.tvAddress);
         itemPic = view.findViewById(R.id.itemPic);
         tvName = view.findViewById(R.id.tvName);
         tvAmount = view.findViewById(R.id.tvAmount);
@@ -187,16 +195,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
 
                 userId = String.valueOf(config.getId());
                 Price = tvPrice.getText().toString();
+                address = etAddress.getText().toString();
 
-                if(Integer.valueOf(Price) <= credit) {
+                if(address.equals("")){
+                    Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
+                } else if (Integer.valueOf(Price) <= credit) {
                     loading.start();
-                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price).enqueue(new Callback<Value>() {
+                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price, address.toString()).enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
                             loading.stop();
                             Toast.makeText(mCtx, "detail pembelian akan dikirim melalui email", Toast.LENGTH_SHORT).show();
                             config.setCredit(config.getCredit() - Integer.valueOf(Price));
                             credit = config.getCredit() - Integer.valueOf(Price);
+                            amount = 1;
                             dialog.cancel();
                         }
 
@@ -210,6 +222,159 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                     Toast.makeText(mCtx, "uang anda kurang", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+    }
+
+    private void guest(final Context mCtx, View view, final AlertDialog dialog){
+
+        final String[] pay = {"indomaret", "alfamaret", "bca", "bri", "mandiri"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mCtx, android.R.layout.simple_spinner_dropdown_item, pay);
+
+        de.hdodenhof.circleimageview.CircleImageView itemPic;
+        final TextInputLayout layoutPay;
+        final TextView tvName, tvAmount;
+        final TextInputEditText tvPrice, etAddress, etPay, etRekening;
+        ImageView btMin, btPlus;
+        Button btCancel, btBuy;
+        Spinner spPay;
+
+        etRekening = view.findViewById(R.id.etRekening);
+        etAddress = view.findViewById(R.id.tvAddress);
+        itemPic = view.findViewById(R.id.itemPic);
+        tvName = view.findViewById(R.id.tvName);
+        tvAmount = view.findViewById(R.id.tvAmount);
+        btPlus = view.findViewById(R.id.btPlus);
+        btMin = view.findViewById(R.id.btMin);
+        btCancel = view.findViewById(R.id.btCancel);
+        btBuy = view.findViewById(R.id.btBuy);
+        tvPrice = view.findViewById(R.id.tvPrice);
+        layoutPay = view.findViewById(R.id.layoutPay);
+        etPay = view.findViewById(R.id.etPay);
+        spPay = view.findViewById(R.id.spPay);
+
+        Glide.with(mCtx).load(mPic).into(itemPic);
+        tvName.setText(mName);
+        tvAmount.setText(String.valueOf(amount));
+        credit = config.getCredit();
+        tvPrice.setText(mPrice);
+        layoutPay.setVisibility(View.GONE);
+        spPay.setAdapter(adapter);
+        tax = 2500;
+
+        spPay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int index = adapterView.getSelectedItemPosition();
+                switch (index) {
+                    case 0:
+                        tax = 2500;
+                        layoutPay.setVisibility(View.GONE);
+                        bank = false;
+                        break;
+                    case 1:
+                        tax = 2500;
+                        layoutPay.setVisibility(View.GONE);
+                        bank = false;
+                        break;
+                    case 2:
+                        tax = 5000;
+                        layoutPay.setVisibility(View.VISIBLE);
+                        bank = true;
+                        break;
+                    case 3:
+                        tax = 7500;
+                        layoutPay.setVisibility(View.VISIBLE);
+                        bank = true;
+                        break;
+                    case 4:
+                        tax = 5000;
+                        layoutPay.setVisibility(View.VISIBLE);
+                        bank = true;
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        btPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                amount += 1;
+                tvAmount.setText(String.valueOf(amount));
+                tvPrice.setText(String.valueOf(Integer.valueOf(mPrice) * amount));
+            }
+        });
+
+        btMin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(amount > 1){
+                    amount -= 1;
+                    tvAmount.setText(String.valueOf(amount));
+                    tvPrice.setText(String.valueOf(Integer.valueOf(mPrice) * amount));
+                }
+            }
+        });
+
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+
+        btBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mBank = etRekening.getText().toString();
+                price = tvPrice.getText().toString();
+                mPay = etPay.getText().toString();
+                address = etAddress.getText().toString();
+
+                if(bank){
+                    if(mBank.equals("")){
+                        bank = false;
+                    } else {
+                        bank = true;
+                    }
+                } else {
+                    bank = true;
+                }
+
+                if(!bank){
+                    Toast.makeText(mCtx, "masukkan nomor rekening", Toast.LENGTH_SHORT).show();
+                } else if(mPay.equals("")){
+                    Toast.makeText(mCtx, "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
+                } else if(address.equals("")){
+                    Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
+                } else if(Integer.valueOf(price) + tax > Integer.valueOf(mPay) ) {
+                    Toast.makeText(mCtx, "uang anda kurang", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    loading.start();
+                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price, address.toString()).enqueue(new Callback<Value>() {
+                        @Override
+                        public void onResponse(Call<Value> call, Response<Value> response) {
+                            loading.stop();
+                            Toast.makeText(mCtx, "detail pembelian akan dikirim melalui email", Toast.LENGTH_SHORT).show();
+                            amount = 1;
+                            dialog.cancel();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Value> call, Throwable t) {
+                            loading.stop();
+                            Toast.makeText(mCtx, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
             }
         });
     }

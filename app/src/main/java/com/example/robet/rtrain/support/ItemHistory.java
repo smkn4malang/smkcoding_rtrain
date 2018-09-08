@@ -2,7 +2,7 @@ package com.example.robet.rtrain.support;
 
 public class ItemHistory {
 
-    String itemName, desc, Qty, pic, price, date;
+    String itemName, desc, Qty, pic, price, date, address;
 
     public String getItemName() {
         return itemName;
@@ -50,5 +50,13 @@ public class ItemHistory {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getAddress(){
+        return this.address;
+    }
+
+    public void  setAddress(String address){
+        this.address = address;
     }
 }
