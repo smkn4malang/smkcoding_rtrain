@@ -245,7 +245,7 @@ public class Index extends AppCompatActivity{
         if(requestCode == 1){
             tvName.setText(config.getName());
         } else if(requestCode == 2){
-            tvCredit.setText(config.getCredit());
+            tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
         }
     }
 

@@ -61,7 +61,7 @@ public class Shop extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         intent = new Intent();
-        setResult(1, intent);
+        setResult(2, intent);
         Shop.this.finish();
     }
 }
