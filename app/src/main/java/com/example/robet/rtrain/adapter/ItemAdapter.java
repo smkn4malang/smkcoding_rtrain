@@ -240,7 +240,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         Spinner spPay;
 
         etRekening = view.findViewById(R.id.etRekening);
-        etAddress = view.findViewById(R.id.tvAddress);
+        etAddress = view.findViewById(R.id.etAddress);
         itemPic = view.findViewById(R.id.itemPic);
         tvName = view.findViewById(R.id.tvName);
         tvAmount = view.findViewById(R.id.tvAmount);

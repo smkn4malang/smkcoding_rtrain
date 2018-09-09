@@ -168,8 +168,7 @@
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
                             android:hint="Pay"
-                            android:background="@null"
-                            android:text="Pay" />
+                            android:background="@null"/>
 
                     </android.support.design.widget.TextInputLayout>
 

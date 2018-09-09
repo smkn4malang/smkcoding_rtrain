@@ -169,7 +169,6 @@ public class PurchaseTicketGuest extends AppCompatActivity {
             case R.id.btBuy:
 
                 mPay = Objects.requireNonNull(etPay.getText()).toString();
-                pay = Integer.valueOf(mPay);
                 rekening = Objects.requireNonNull(etRekening.getText()).toString();
 
                 if (bank) {
@@ -182,9 +181,11 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                     bank = true;
                 }
 
-                if(!bank)
+                if (!bank) {
                     Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
-                else if (mPay.equals("") || mPay.isEmpty()) {
+                } else if (!mPay.equals("")) {
+                    pay = Integer.valueOf(mPay);
+                } else if (mPay.equals("")) {
                     Toast.makeText(getApplicationContext(), "masukkan uang pembayaran dahulu", Toast.LENGTH_SHORT).show();
                 } else if (pay < finalPrice) {
                     Toast.makeText(getApplicationContext(), "uang anda kurang", Toast.LENGTH_SHORT).show();

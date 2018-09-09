@@ -77,6 +77,7 @@ public class guestLogin extends AppCompatActivity {
 
                                 config.setName(name);
                                 config.setEmail(email);
+                                config.setId(response.body().getId());
                                 config.setInfo("guest", true);
 
                                 newAct = new Intent(getApplicationContext(), Index.class);

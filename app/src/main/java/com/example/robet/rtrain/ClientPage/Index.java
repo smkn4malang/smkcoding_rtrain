@@ -42,7 +42,7 @@ public class Index extends AppCompatActivity {
     String rekening;
     int tax, pay;
     String[] time, city;
-    boolean bank = false;
+    boolean bank = false, status = true;
 
     @BindView(R.id.btTicket)
     CardView btTicket;
@@ -69,11 +69,21 @@ public class Index extends AppCompatActivity {
 
         RestApi.getData().systemHistoryDelete();
 
+
         config = new Config(this);
         loading = new Loading(this);
 
         tvName.setText(config.getName());
-        tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
+        if(config.getInfo("user")) {
+            tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
+        } else if (config.getInfo("guest")){
+            tvCredit.setText("Logout");
+        }
+
+        getData();
+        if(!status){
+            Toast.makeText(getApplicationContext(), "gagal memperbaru data", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -181,7 +191,6 @@ public class Index extends AppCompatActivity {
                         public void onClick(View view) {
 
                             String mPay = etPay.getText().toString();
-                            pay = Integer.valueOf(mPay);
                             rekening = etRekening.getText().toString();
 
                             if (bank) {
@@ -196,6 +205,8 @@ public class Index extends AppCompatActivity {
 
                             if (mPay.equals("")) {
                                 Toast.makeText(getApplicationContext(), "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
+                            } else if(!mPay.equals("")){
+                                pay = Integer.valueOf(mPay);
                             } else if (!bank) {
                                 Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
                             } else if (pay < 50000) {
@@ -262,18 +273,19 @@ public class Index extends AppCompatActivity {
                             city[i] = response.body().getCity().get(i).getName();
                         }
                         config.setCity(city);
+                        status = true;
                     }
 
                     @Override
                     public void onFailure(Call<CityResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                        status = false;
                     }
                 });
             }
 
             @Override
             public void onFailure(Call<TimeResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                status = false;
             }
         });
 
@@ -285,6 +297,17 @@ public class Index extends AppCompatActivity {
             tvName.setText(config.getName());
         } else if (requestCode == 2) {
             tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
+        }
+    }
+
+    @OnClick(R.id.tvCredit)
+    public void onLogoutClicked(View ciew){
+        if(config.getInfo("guest")){
+            config.setInfo("guest", false);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
     }
 
