@@ -8,10 +8,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.robet.rtrain.R;
+import com.example.robet.rtrain.gson.CityResponse;
 import com.example.robet.rtrain.gson.HistoryItem;
 import com.example.robet.rtrain.support.ItemHistory;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
+import com.example.robet.rtrain.support.TicketHistory;
 import com.example.robet.rtrain.support.Value;
 
 import butterknife.BindView;
@@ -55,13 +57,15 @@ public class HistoryItems extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         id = (String) bundle.get("id");
+        loading = new Loading(this);
 
         loading.start();
-        RestApi.getData().itemHistory(id).enqueue(new Callback<ItemHistory>() {
+        RestApi.getData().historyItem(id).enqueue(new Callback<ItemHistory>() {
             @Override
             public void onResponse(Call<ItemHistory> call, Response<ItemHistory> response) {
 
                 loading.stop();
+
                 itemName = response.body().getItemName();
                 desc = response.body().getDesc();
                 Qty = response.body().getQty();
@@ -70,7 +74,8 @@ public class HistoryItems extends AppCompatActivity {
                 date = response.body().getDate();
                 address = response.body().getAddress();
 
-                Glide.with(HistoryItems.this).load(pic).into(itemPic);
+                Glide.with(getApplicationContext()).load(pic).into(itemPic);
+
                 tvItemName.setText(itemName);
                 tvDesc.setText(desc);
                 tvQty.setText(Qty);

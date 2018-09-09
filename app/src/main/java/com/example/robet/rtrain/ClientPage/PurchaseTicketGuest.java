@@ -21,6 +21,7 @@ import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -167,12 +168,12 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                 break;
             case R.id.btBuy:
 
-                mPay = etPay.getText().toString();
+                mPay = Objects.requireNonNull(etPay.getText()).toString();
                 pay = Integer.valueOf(mPay);
-                rekening = etRekening.getText().toString();
+                rekening = Objects.requireNonNull(etRekening.getText()).toString();
 
-                if(bank){
-                    if(rekening.equals("")){
+                if (bank) {
+                    if (rekening.equals("") || rekening.isEmpty()) {
                         bank = false;
                     } else {
                         bank = true;
@@ -181,9 +182,9 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                     bank = true;
                 }
 
-                if(!bank){
+                if(!bank)
                     Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
-                } else if (mPay.equals("")) {
+                else if (mPay.equals("") || mPay.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "masukkan uang pembayaran dahulu", Toast.LENGTH_SHORT).show();
                 } else if (pay < finalPrice) {
                     Toast.makeText(getApplicationContext(), "uang anda kurang", Toast.LENGTH_SHORT).show();

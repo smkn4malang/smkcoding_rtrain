@@ -8,8 +8,8 @@ public class ItemHistory {
         return itemName;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setItemName(String itenName) {
+        this.itemName = itenName;
     }
 
     public String getDesc() {
@@ -52,11 +52,11 @@ public class ItemHistory {
         this.date = date;
     }
 
-    public String getAddress(){
-        return this.address;
+    public String getAddress() {
+        return address;
     }
 
-    public void  setAddress(String address){
+    public void setAddress(String address) {
         this.address = address;
     }
 }

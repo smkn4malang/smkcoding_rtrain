@@ -37,7 +37,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MainView
         color = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
         holder.topLayout.setBackgroundColor(color);
 
-        holder.purchaseId.setText("id " + listHistory.get(position).getPurchaseId());
+        holder.purchaseId.setText("id " + listHistory.get(position).getId());
         holder.type.setText(listHistory.get(position).getType());
         holder.date.setText(listHistory.get(position).getDate());
 
@@ -52,7 +52,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MainView
                     intent = new Intent(holder.itemView.getContext(), HistoryItems.class);
                 }
 
-                intent.putExtra("id", listHistory.get(position).getId());
+                intent.putExtra("id", listHistory.get(position).getPurchaseId());
                 holder.itemView.getContext().startActivity(intent);
             }
         });

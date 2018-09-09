@@ -7,13 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
-
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.adapter.ItemAdapter;
 import com.example.robet.rtrain.gson.ItemResponse;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

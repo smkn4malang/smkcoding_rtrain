@@ -373,6 +373,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp"
+                    android:id="@+id/cvRekening"
                     app:cardElevation="10dp">
 
                     <android.support.design.widget.TextInputLayout
@@ -381,11 +382,11 @@
                         android:layout_margin="10dp">
 
                         <android.support.design.widget.TextInputEditText
-                            android:id="@+id/etPay"
+                            android:id="@+id/etRekening"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:hint="uang pembayaran"
+                            android:hint="rekening"
                             android:inputType="number"
                             android:textColor="#000" />
 
@@ -398,7 +399,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp"
-                    android:id="@+id/cvRekening"
                     app:cardElevation="10dp">
 
                     <android.support.design.widget.TextInputLayout
@@ -407,7 +407,7 @@
                         android:layout_margin="10dp">
 
                         <android.support.design.widget.TextInputEditText
-                            android:id="@+id/etRekening"
+                            android:id="@+id/etPay"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"

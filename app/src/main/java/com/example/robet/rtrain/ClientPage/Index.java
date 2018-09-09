@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.robet.rtrain.gson.CityResponse;
 import com.example.robet.rtrain.gson.TimeResponse;
 import com.example.robet.rtrain.support.Config;
@@ -26,6 +27,7 @@ import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Index extends AppCompatActivity{
+public class Index extends AppCompatActivity {
 
     Config config;
     Loading loading;
@@ -95,8 +97,8 @@ public class Index extends AppCompatActivity{
     }
 
     @OnClick({R.id.btHistory, R.id.btShop, R.id.btCredit})
-    public void onFeatureClicked(View view){
-        switch (view.getId()){
+    public void onFeatureClicked(View view) {
+        switch (view.getId()) {
 
             case R.id.btHistory:
                 startActivity(new Intent(getApplicationContext(), History.class));
@@ -109,139 +111,144 @@ public class Index extends AppCompatActivity{
 
             case R.id.btCredit:
 
-                LayoutInflater layoutInflater = LayoutInflater.from(Index.this);
-                final View CreditView = layoutInflater.inflate(R.layout.add_credit, null);
-                final AlertDialog.Builder builder = new AlertDialog.Builder(Index.this);
-                builder.setView(CreditView);
-                builder.setCancelable(false);
+                if (config.getInfo("user")) {
 
-                final AlertDialog alertDialog = builder.create();
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                alertDialog.show();
+                    LayoutInflater layoutInflater = LayoutInflater.from(Index.this);
+                    final View CreditView = layoutInflater.inflate(R.layout.add_credit, null);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(Index.this);
+                    builder.setView(CreditView);
+                    builder.setCancelable(false);
 
-                Button btBack = CreditView.findViewById(R.id.btBack);
-                Button btAdd = CreditView.findViewById(R.id.btAdd);
-                Spinner spPay = CreditView.findViewById(R.id.spPay);
-                final CardView cvRekening = CreditView.findViewById(R.id.cvRekening);
-                final TextInputEditText etRekening = CreditView.findViewById(R.id.etRekening);
-                final TextInputEditText etPay = CreditView.findViewById(R.id.etPay);
-                final TextInputEditText etTax = CreditView.findViewById(R.id.etTax);
-                cvRekening.setVisibility(View.GONE);
+                    final AlertDialog alertDialog = builder.create();
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    alertDialog.show();
 
-                String[] payMethod = {"indomaret", "alfamaret", "bca", "bri", "mandiri"};
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Index.this,
-                        android.R.layout.simple_spinner_dropdown_item, payMethod);
-                spPay.setAdapter(adapter);
-                spPay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        int index = adapterView.getSelectedItemPosition();
-                        switch (index) {
-                            case 0:
-                                tax = 2500;
-                                cvRekening.setVisibility(View.GONE);
-                                bank = false;
-                                break;
-                            case 1:
-                                tax = 2500;
-                                cvRekening.setVisibility(View.GONE);
-                                bank = false;
-                                break;
-                            case 2:
-                                tax = 5000;
-                                cvRekening.setVisibility(View.VISIBLE);
-                                bank = true;
-                                break;
-                            case 3:
-                                tax = 7500;
-                                cvRekening.setVisibility(View.VISIBLE);
-                                bank = true;
-                                break;
-                            case 4:
-                                tax = 5000;
-                                cvRekening.setVisibility(View.VISIBLE);
-                                bank = true;
-                                break;
+                    Button btBack = CreditView.findViewById(R.id.btBack);
+                    Button btAdd = CreditView.findViewById(R.id.btAdd);
+                    Spinner spPay = CreditView.findViewById(R.id.spPay);
+                    final CardView cvRekening = CreditView.findViewById(R.id.cvRekening);
+                    final TextInputEditText etRekening = CreditView.findViewById(R.id.etRekening);
+                    final TextInputEditText etPay = CreditView.findViewById(R.id.etPay);
+                    final TextInputEditText etTax = CreditView.findViewById(R.id.etTax);
+                    cvRekening.setVisibility(View.GONE);
+
+                    String[] payMethod = {"indomaret", "alfamaret", "bca", "bri", "mandiri"};
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Index.this,
+                            android.R.layout.simple_spinner_dropdown_item, payMethod);
+                    spPay.setAdapter(adapter);
+                    spPay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            int index = adapterView.getSelectedItemPosition();
+                            switch (index) {
+                                case 0:
+                                    tax = 2500;
+                                    cvRekening.setVisibility(View.GONE);
+                                    bank = false;
+                                    break;
+                                case 1:
+                                    tax = 2500;
+                                    cvRekening.setVisibility(View.GONE);
+                                    bank = false;
+                                    break;
+                                case 2:
+                                    tax = 5000;
+                                    cvRekening.setVisibility(View.VISIBLE);
+                                    bank = true;
+                                    break;
+                                case 3:
+                                    tax = 7500;
+                                    cvRekening.setVisibility(View.VISIBLE);
+                                    bank = true;
+                                    break;
+                                case 4:
+                                    tax = 5000;
+                                    cvRekening.setVisibility(View.VISIBLE);
+                                    bank = true;
+                                    break;
+                            }
+                            etTax.setText(String.valueOf(tax));
                         }
-                        etTax.setText(String.valueOf(tax));
-                    }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
 
-                    }
-                });
+                        }
+                    });
 
-                btAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                    btAdd.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
-                        String mPay = etPay.getText().toString();
-                        pay = Integer.valueOf(mPay);
-                        rekening = etRekening.getText().toString();
+                            String mPay = etPay.getText().toString();
+                            pay = Integer.valueOf(mPay);
+                            rekening = etRekening.getText().toString();
 
-                        if(bank){
-                            if(rekening.equals("")){
-                                bank = false;
+                            if (bank) {
+                                if (rekening.equals("")) {
+                                    bank = false;
+                                } else {
+                                    bank = true;
+                                }
                             } else {
                                 bank = true;
                             }
-                        } else {
-                            bank = true;
+
+                            if (mPay.equals("")) {
+                                Toast.makeText(getApplicationContext(), "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
+                            } else if (!bank) {
+                                Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
+                            } else if (pay < 50000) {
+                                Toast.makeText(getApplicationContext(), "anda harus topup minimal 50ribu", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                pay -= tax;
+                                mPay = String.valueOf(pay);
+
+                                loading.start();
+                                RestApi.getData().creditAdd(config.getId(), mPay).enqueue(new Callback<Value>() {
+                                    @Override
+                                    public void onResponse(Call<Value> call, Response<Value> response) {
+                                        loading.stop();
+                                        Toast.makeText(getApplicationContext(), "berhasil tambah credit", Toast.LENGTH_SHORT).show();
+                                        config.setCredit(config.getCredit() + pay);
+                                        tvCredit.setText("Credit: Rp" + config.getCredit());
+                                        alertDialog.cancel();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Value> call, Throwable t) {
+                                        loading.stop();
+                                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
                         }
+                    });
 
-                        if(mPay.equals("")){
-                            Toast.makeText(getApplicationContext(), "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
-                        } else if(!bank){
-                            Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
-                        } else if(pay < 50000){
-                            Toast.makeText(getApplicationContext(), "anda harus topup minimal 50ribu", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            pay -= tax;
-                            mPay = String.valueOf(pay);
-
-                            loading.start();
-                            RestApi.getData().creditAdd(config.getId(), mPay).enqueue(new Callback<Value>() {
-                                @Override
-                                public void onResponse(Call<Value> call, Response<Value> response) {
-                                    loading.stop();
-                                    Toast.makeText(getApplicationContext(), "berhasil tambah credit", Toast.LENGTH_SHORT).show();
-                                    config.setCredit(config.getCredit() + pay);
-                                    tvCredit.setText("Credit: Rp" + config.getCredit());
-                                    alertDialog.cancel();
-                                }
-
-                                @Override
-                                public void onFailure(Call<Value> call, Throwable t) {
-                                    loading.stop();
-                                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
+                    btBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            alertDialog.cancel();
                         }
-                    }
-                });
-
-                btBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog.cancel();
-                    }
-                });
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "anda harus menjadi user terlebih dahulu", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
         }
     }
 
-    public void  getData(){
+    public void getData() {
 
         RestApi.getData().TimeList().enqueue(new Callback<TimeResponse>() {
             @Override
             public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
                 int size = response.body().getTime().size();
                 time = new String[size];
-                for(int i = 0; i < size; i++){
+                for (int i = 0; i < size; i++) {
                     time[i] = response.body().getTime().get(i).getTime();
                 }
                 config.setTime(time);
@@ -251,7 +258,7 @@ public class Index extends AppCompatActivity{
                     public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
                         int size = response.body().getCity().size();
                         city = new String[size];
-                        for(int i = 0; i < size; i++){
+                        for (int i = 0; i < size; i++) {
                             city[i] = response.body().getCity().get(i).getName();
                         }
                         config.setCity(city);
@@ -273,10 +280,10 @@ public class Index extends AppCompatActivity{
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == 1){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
             tvName.setText(config.getName());
-        } else if(requestCode == 2){
+        } else if (requestCode == 2) {
             tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
         }
     }

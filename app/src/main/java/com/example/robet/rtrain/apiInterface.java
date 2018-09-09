@@ -315,12 +315,6 @@ public interface apiInterface {
     );
 
     @FormUrlEncoded
-    @POST("public/index.php/history/item")
-    Call<ItemHistory> itemHistory(
-            @Field("id") String id
-    );
-
-    @FormUrlEncoded
     @POST("public/index.php/item/buy")
     Call<Value> itemBuy(
             @Field("id") String id,
@@ -328,5 +322,11 @@ public interface apiInterface {
             @Field("qty") String qty,
             @Field("price") String price,
             @Field("address") String address
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/history/item")
+    Call<ItemHistory> historyItem(
+            @Field("id") String id
     );
 }
