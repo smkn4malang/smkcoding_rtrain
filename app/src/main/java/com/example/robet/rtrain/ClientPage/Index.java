@@ -122,8 +122,8 @@ public class Index extends AppCompatActivity{
                 Button btBack = CreditView.findViewById(R.id.btBack);
                 Button btAdd = CreditView.findViewById(R.id.btAdd);
                 Spinner spPay = CreditView.findViewById(R.id.spPay);
-                final CardView cvRekening = view.findViewById(R.id.cvRekening);
-                final TextInputEditText etRekening = view.findViewById(R.id.etRekening);
+                final CardView cvRekening = CreditView.findViewById(R.id.cvRekening);
+                final TextInputEditText etRekening = CreditView.findViewById(R.id.etRekening);
                 final TextInputEditText etPay = CreditView.findViewById(R.id.etPay);
                 final TextInputEditText etTax = CreditView.findViewById(R.id.etTax);
                 cvRekening.setVisibility(View.GONE);

@@ -143,7 +143,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         Button btCancel, btBuy;
         final TextInputEditText tvPrice, tvCredit, etAddress;
 
-        etAddress = view.findViewById(R.id.tvAddress);
+        etAddress = view.findViewById(R.id.etAddress);
         itemPic = view.findViewById(R.id.itemPic);
         tvName = view.findViewById(R.id.tvName);
         tvAmount = view.findViewById(R.id.tvAmount);
@@ -201,7 +201,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                     Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
                 } else if (Integer.valueOf(Price) <= credit) {
                     loading.start();
-                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price, address.toString()).enqueue(new Callback<Value>() {
+                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price, address).enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
                             loading.stop();
