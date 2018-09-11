@@ -60,6 +60,8 @@ public class Index extends AppCompatActivity {
     TextView tvName;
     @BindView(R.id.tvCredit)
     TextView tvCredit;
+    @BindView(R.id.btLogout)
+    CardView btLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,27 +69,40 @@ public class Index extends AppCompatActivity {
         setContentView(R.layout.index);
         ButterKnife.bind(this);
 
-        RestApi.getData().systemHistoryDelete();
+        RestApi.getData().systemHistoryDelete().enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         config = new Config(this);
         loading = new Loading(this);
 
         tvName.setText(config.getName());
-        if(config.getInfo("user")) {
-            tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
-        } else if (config.getInfo("guest")){
-            tvCredit.setText("Logout");
+        tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
+
+        if(config.getInfo("user")){
+            btLogout.setAlpha(0);
+            tvCredit.setAlpha(1);
+        } else {
+            btLogout.setAlpha(1);
+            tvCredit.setAlpha(0);
         }
 
         getData();
-        if(!status){
+        if (!status) {
             Toast.makeText(getApplicationContext(), "gagal memperbaru data", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    @OnClick({R.id.btTicket, R.id.btSetting})
+    @OnClick({R.id.btTicket, R.id.btSetting, R.id.btLogout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -101,6 +116,16 @@ public class Index extends AppCompatActivity {
                 } else if (config.getInfo("user")) {
                     Intent intent = new Intent(getApplicationContext(), UserSetting.class);
                     startActivityForResult(intent, 1);
+                }
+                break;
+
+            case R.id.btLogout:
+                if(config.getInfo("guest")){
+                    config.setInfo("guest", false);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
                 break;
         }
@@ -205,7 +230,7 @@ public class Index extends AppCompatActivity {
 
                             if (mPay.equals("")) {
                                 Toast.makeText(getApplicationContext(), "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
-                            } else if(!mPay.equals("")){
+                            } else if (!mPay.equals("")) {
                                 pay = Integer.valueOf(mPay);
                             } else if (!bank) {
                                 Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
@@ -297,17 +322,6 @@ public class Index extends AppCompatActivity {
             tvName.setText(config.getName());
         } else if (requestCode == 2) {
             tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
-        }
-    }
-
-    @OnClick(R.id.tvCredit)
-    public void onLogoutClicked(View ciew){
-        if(config.getInfo("guest")){
-            config.setInfo("guest", false);
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
         }
     }
 

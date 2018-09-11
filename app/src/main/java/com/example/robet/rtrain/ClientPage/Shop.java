@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.adapter.ItemAdapter;
 import com.example.robet.rtrain.gson.ItemResponse;
+import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 
@@ -24,6 +25,7 @@ public class Shop extends AppCompatActivity {
     Intent intent;
     ItemAdapter adapter;
     Loading loading;
+    Config config;
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -36,6 +38,7 @@ public class Shop extends AppCompatActivity {
 
         adapter = new ItemAdapter();
         loading = new Loading(this);
+        config = new Config(this);
 
         recyclerView.setLayoutManager(new GridLayoutManager(Shop.this, 2));
         recyclerView.setAdapter(adapter);
@@ -60,8 +63,10 @@ public class Shop extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        intent = new Intent();
-        setResult(2, intent);
+        if(config.getInfo("user")){
+            intent = new Intent();
+            setResult(2, intent);
+        }
         Shop.this.finish();
     }
 }

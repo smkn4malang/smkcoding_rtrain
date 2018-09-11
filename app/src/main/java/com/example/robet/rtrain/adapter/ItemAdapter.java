@@ -2,6 +2,7 @@ package com.example.robet.rtrain.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.robet.rtrain.ClientPage.ItemMore;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.ItemItem;
 import com.example.robet.rtrain.support.Config;
@@ -78,6 +80,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                 mPic = listItem.get(position).getPic();
 
                 showDialog(holder.itemView.getContext());
+            }
+        });
+
+        holder.btMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), ItemMore.class);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
 
@@ -201,7 +211,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                     Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
                 } else if (Integer.valueOf(Price) <= credit) {
                     loading.start();
-                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price, address).enqueue(new Callback<Value>() {
+                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price, address, config.getEmail(), "1").enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
                             loading.stop();
@@ -254,13 +264,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         spPay = view.findViewById(R.id.spPay);
 
         Glide.with(mCtx).load(mPic).into(itemPic);
+        userId = String.valueOf(config.getId());
         tvName.setText(mName);
         tvAmount.setText(String.valueOf(amount));
         credit = config.getCredit();
-        tvPrice.setText(mPrice);
         layoutPay.setVisibility(View.GONE);
         spPay.setAdapter(adapter);
         tax = 2500;
+        tvPrice.setText(String.valueOf(Integer.valueOf(mPrice) + tax));
 
         spPay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -270,26 +281,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                     case 0:
                         tax = 2500;
                         layoutPay.setVisibility(View.GONE);
+                        tvPrice.setText(String.valueOf((Integer.valueOf(mPrice) * amount) + tax));
                         bank = false;
                         break;
                     case 1:
                         tax = 2500;
                         layoutPay.setVisibility(View.GONE);
+                        tvPrice.setText(String.valueOf((Integer.valueOf(mPrice) * amount) + tax));
                         bank = false;
                         break;
                     case 2:
                         tax = 5000;
                         layoutPay.setVisibility(View.VISIBLE);
+                        tvPrice.setText(String.valueOf((Integer.valueOf(mPrice) * amount) + tax));
                         bank = true;
                         break;
                     case 3:
                         tax = 7500;
                         layoutPay.setVisibility(View.VISIBLE);
+                        tvPrice.setText(String.valueOf((Integer.valueOf(mPrice) * amount) + tax));
                         bank = true;
                         break;
                     case 4:
                         tax = 5000;
                         layoutPay.setVisibility(View.VISIBLE);
+                        tvPrice.setText(String.valueOf((Integer.valueOf(mPrice) * amount) + tax));
                         bank = true;
                         break;
                 }
@@ -306,7 +322,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
             public void onClick(View view) {
                 amount += 1;
                 tvAmount.setText(String.valueOf(amount));
-                tvPrice.setText(String.valueOf(Integer.valueOf(mPrice) * amount));
+                tvPrice.setText(String.valueOf((Integer.valueOf(mPrice) * amount) + tax));
             }
         });
 
@@ -349,16 +365,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
 
                 if(!bank){
                     Toast.makeText(mCtx, "masukkan nomor rekening", Toast.LENGTH_SHORT).show();
+                    bank = false;
                 } else if(mPay.equals("")){
                     Toast.makeText(mCtx, "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
+                    bank = false;
                 } else if(address.equals("")){
                     Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
-                } else if(Integer.valueOf(price) + tax > Integer.valueOf(mPay) ) {
+                    bank = false;
+                } else if(Integer.valueOf(price) > Integer.valueOf(mPay) ) {
                     Toast.makeText(mCtx, "uang anda kurang", Toast.LENGTH_SHORT).show();
+                    bank = false;
                 } else {
 
+                    bank = false;
                     loading.start();
-                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), Price, address.toString()).enqueue(new Callback<Value>() {
+                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), price, address, config.getEmail(),"2").enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
                             loading.stop();
@@ -373,7 +394,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                             Toast.makeText(mCtx, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-
                 }
             }
         });

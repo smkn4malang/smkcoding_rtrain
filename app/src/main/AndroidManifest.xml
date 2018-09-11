@@ -74,6 +74,7 @@
         <activity android:name=".ClientPage.Shop" />
         <activity android:name=".ClientPage.HistoryItems" />
         <activity android:name=".ClientPage.HistoryTickets" />
+        <activity android:name=".ClientPage.Main2Activity"></activity>
     </application>
 
 </manifest>

@@ -172,7 +172,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                 rekening = Objects.requireNonNull(etRekening.getText()).toString();
 
                 if (bank) {
-                    if (rekening.equals("") || rekening.isEmpty()) {
+                    if (rekening.equals("")) {
                         bank = false;
                     } else {
                         bank = true;
@@ -181,16 +181,21 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                     bank = true;
                 }
 
+                if(!mPay.equals("")){
+                    pay = Integer.valueOf(mPay);
+                }
+
                 if (!bank) {
                     Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
-                } else if (!mPay.equals("")) {
-                    pay = Integer.valueOf(mPay);
                 } else if (mPay.equals("")) {
                     Toast.makeText(getApplicationContext(), "masukkan uang pembayaran dahulu", Toast.LENGTH_SHORT).show();
+                    bank =false;
                 } else if (pay < finalPrice) {
                     Toast.makeText(getApplicationContext(), "uang anda kurang", Toast.LENGTH_SHORT).show();
+                    bank = false;
                 } else {
 
+                    bank = false;
                     loading.start();
                     RestApi.getData().ticketPurchase(
                             trainId, guestId, date, seat, destination, depart,

@@ -321,7 +321,9 @@ public interface apiInterface {
             @Field("item") String item,
             @Field("qty") String qty,
             @Field("price") String price,
-            @Field("address") String address
+            @Field("address") String address,
+            @Field("email") String email,
+            @Field("type") String type
     );
 
     @FormUrlEncoded

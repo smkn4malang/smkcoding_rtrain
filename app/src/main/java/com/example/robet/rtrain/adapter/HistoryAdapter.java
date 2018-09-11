@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.robet.rtrain.ClientPage.HistoryItems;
 import com.example.robet.rtrain.ClientPage.HistoryTickets;
 import com.example.robet.rtrain.R;
@@ -52,7 +54,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MainView
                     intent = new Intent(holder.itemView.getContext(), HistoryItems.class);
                 }
 
-                intent.putExtra("id", listHistory.get(position).getPurchaseId());
+                intent.putExtra("id", listHistory.get(position).getId());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
