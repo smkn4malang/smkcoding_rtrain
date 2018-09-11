@@ -54,9 +54,13 @@ public class History extends AppCompatActivity {
         RestApi.getData().historyShow(String.valueOf(config.getId())).enqueue(new Callback<HistoryResponse>() {
             @Override
             public void onResponse(Call<HistoryResponse> call, Response<HistoryResponse> response) {
-                loading.stop();
-                adapter.listHistory.addAll(response.body().getHistory());
-                adapter.notifyDataSetChanged();
+                if(response.body().getInfo()){
+                    loading.stop();
+                    adapter.listHistory.addAll(response.body().getHistory());
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getApplicationContext(), "anda belum memiliki history", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

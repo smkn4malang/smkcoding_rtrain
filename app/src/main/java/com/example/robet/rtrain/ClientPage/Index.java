@@ -72,7 +72,9 @@ public class Index extends AppCompatActivity {
         RestApi.getData().systemHistoryDelete().enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
-
+                if(!response.body().getInfo()){
+                    Toast.makeText(getApplicationContext(), "jaringan bermasalah", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
