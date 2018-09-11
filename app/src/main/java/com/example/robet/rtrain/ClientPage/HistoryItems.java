@@ -28,7 +28,7 @@ public class HistoryItems extends AppCompatActivity {
 
     Bundle bundle;
     Loading loading;
-    String itemName, desc, Qty, pic, price, date, address, id;
+    String itemName, desc, Qty, pic, price, date, address, id, pid;
 
     @BindView(R.id.itemPic)
     CircleImageView itemPic;
@@ -57,10 +57,11 @@ public class HistoryItems extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         id = (String) bundle.get("id");
+        pid = (String) bundle.get("pid");
         loading = new Loading(this);
 
         loading.start();
-        RestApi.getData().historyItem(id).enqueue(new Callback<ItemHistory>() {
+        RestApi.getData().historyItem(pid).enqueue(new Callback<ItemHistory>() {
             @Override
             public void onResponse(Call<ItemHistory> call, Response<ItemHistory> response) {
 
@@ -108,6 +109,7 @@ public class HistoryItems extends AppCompatActivity {
                     public void onResponse(Call<Value> call, Response<Value> response) {
                         loading.stop();
                         Toast.makeText(getApplicationContext(), "berhasil hapus data", Toast.LENGTH_SHORT).show();
+                        setResult(25);
                         HistoryItems.this.finish();
                     }
 

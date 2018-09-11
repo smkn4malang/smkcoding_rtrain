@@ -1,5 +1,6 @@
 package com.example.robet.rtrain.adapter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -55,7 +56,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MainView
                 }
 
                 intent.putExtra("id", listHistory.get(position).getId());
-                holder.itemView.getContext().startActivity(intent);
+                intent.putExtra("pid", listHistory.get(position).getPurchaseId());
+                ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 25);
             }
         });
 

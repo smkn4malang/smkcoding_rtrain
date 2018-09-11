@@ -1,5 +1,6 @@
 package com.example.robet.rtrain.ClientPage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -92,6 +93,15 @@ public class History extends AppCompatActivity {
                 });
 
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int RequestCode, int resultCode, Intent intent){
+        if(RequestCode == 25){
+            Intent i = getIntent();
+            finish();
+            startActivity(i);
         }
     }
 }

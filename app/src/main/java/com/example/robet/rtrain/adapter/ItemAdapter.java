@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.robet.rtrain.ClientPage.ItemMore;
 import com.example.robet.rtrain.R;
@@ -31,6 +30,7 @@ import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +46,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
     Config config;
     boolean bank = false;
     Loading loading;
+    HashMap<String, String> map = new HashMap<>();
 
     @NonNull
     @Override
@@ -86,7 +87,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         holder.btMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                map.put("id", listItem.get(position).getId());
+                map.put("name", listItem.get(position).getName());
+                map.put("price", listItem.get(position).getPrice());
+                map.put("pic", listItem.get(position).getPic());
+                map.put("desc", listItem.get(position).getDescription());
+
                 Intent intent = new Intent(holder.itemView.getContext(), ItemMore.class);
+                intent.putExtra("data", map);
                 holder.itemView.getContext().startActivity(intent);
             }
         });
@@ -113,6 +122,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
             tvName = itemView.findViewById(R.id.tvName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             btBuy = itemView.findViewById(R.id.btBuy);
+            btMore = itemView.findViewById(R.id.btMore);
 
         }
     }
@@ -131,7 +141,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
-        builder.setView(view).setCancelable(false);
+        builder.setView(view).setCancelable(true);
 
         final AlertDialog dialog = builder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

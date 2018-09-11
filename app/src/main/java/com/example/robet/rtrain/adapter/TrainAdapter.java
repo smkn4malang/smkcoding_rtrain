@@ -160,7 +160,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         spCart.setAdapter(adapter);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         builder.setView(view);
 
         final AlertDialog dialog = builder.create();

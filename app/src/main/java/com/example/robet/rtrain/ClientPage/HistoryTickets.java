@@ -48,7 +48,7 @@ public class HistoryTickets extends AppCompatActivity {
     @BindView(R.id.btDelete)
     Button btDelete;
 
-    String id;
+    String id, pid;
     Bundle bundle;
     Loading loading;
 
@@ -60,10 +60,11 @@ public class HistoryTickets extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         id = (String) bundle.get("id");
+        pid = (String) bundle.get("pid");
         loading = new Loading(this);
 
         loading.start();
-        RestApi.getData().ticketHistory(id).enqueue(new Callback<TicketHistory>() {
+        RestApi.getData().ticketHistory(pid).enqueue(new Callback<TicketHistory>() {
             @Override
             public void onResponse(Call<TicketHistory> call, Response<TicketHistory> response) {
 
@@ -106,6 +107,7 @@ public class HistoryTickets extends AppCompatActivity {
                     public void onResponse(Call<Value> call, Response<Value> response) {
                         loading.stop();
                         Toast.makeText(getApplicationContext(), "berhasil hapus data", Toast.LENGTH_SHORT).show();
+                        setResult(25);
                         HistoryTickets.this.finish();
                     }
 
