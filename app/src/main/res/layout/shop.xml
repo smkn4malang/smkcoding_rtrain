@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Happy Buy !!"
             android:textColor="#000"
+            android:id="@+id/tvHappy"
             android:textAlignment="center"
             android:layout_gravity="center"
             android:textSize="25sp"/>

@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,13 +16,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.example.robet.rtrain.MainActivity;
+import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.CityResponse;
 import com.example.robet.rtrain.gson.TimeResponse;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
-import com.example.robet.rtrain.MainActivity;
-import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
 
@@ -52,19 +49,33 @@ public class Index extends AppCompatActivity {
     CardView btSetting;
     @BindView(R.id.tvPromo)
     TextView tvPromo;
-    @BindView(R.id.Promo)
-    RecyclerView Promo;
     @BindView(R.id.btHistory)
     CardView btHistory;
     @BindView(R.id.tvName)
     TextView tvName;
-    @BindView(R.id.tvCredit)
-    TextView tvCredit;
+    @BindView(R.id.tvAddCredit)
+    TextView tvAddCredit;
     @BindView(R.id.btLogout)
     CardView btLogout;
+    @BindView(R.id.tvFeatures)
+    TextView tvFeatures;
+    @BindView(R.id.tvTicket)
+    TextView tvTicket;
+    @BindView(R.id.tvShop)
+    TextView tvShop;
+    @BindView(R.id.tvHistory)
+    TextView tvHistory;
+    @BindView(R.id.tvSetting)
+    TextView tvSetting;
+    @BindView(R.id.btCredit)
+    CardView btCredit;
+    @BindView(R.id.tvLogout)
+    TextView tvLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index);
         ButterKnife.bind(this);
@@ -72,7 +83,7 @@ public class Index extends AppCompatActivity {
         RestApi.getData().systemHistoryDelete().enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
-                if(!response.body().getInfo()){
+                if (!response.body().getInfo()) {
                     Toast.makeText(getApplicationContext(), "jaringan bermasalah", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -83,18 +94,14 @@ public class Index extends AppCompatActivity {
             }
         });
 
-        config = new Config(this);
         loading = new Loading(this);
 
         tvName.setText(config.getName());
-        tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
 
-        if(config.getInfo("user")){
+        if (config.getInfo("user")) {
             btLogout.setAlpha(0);
-            tvCredit.setAlpha(1);
         } else {
             btLogout.setAlpha(1);
-            tvCredit.setAlpha(0);
         }
 
         getData();
@@ -122,7 +129,7 @@ public class Index extends AppCompatActivity {
                 break;
 
             case R.id.btLogout:
-                if(config.getInfo("guest")){
+                if (config.getInfo("guest")) {
                     config.setInfo("guest", false);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -250,7 +257,6 @@ public class Index extends AppCompatActivity {
                                         loading.stop();
                                         Toast.makeText(getApplicationContext(), "berhasil tambah credit", Toast.LENGTH_SHORT).show();
                                         config.setCredit(config.getCredit() + pay);
-                                        tvCredit.setText("Credit: Rp" + config.getCredit());
                                         alertDialog.cancel();
                                     }
 
@@ -322,8 +328,6 @@ public class Index extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             tvName.setText(config.getName());
-        } else if (requestCode == 2) {
-            tvCredit.setText("Credit: Rp " + String.valueOf(config.getCredit()));
         }
     }
 

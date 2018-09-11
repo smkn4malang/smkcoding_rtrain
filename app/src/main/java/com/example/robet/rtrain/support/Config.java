@@ -3,6 +3,8 @@ package com.example.robet.rtrain.support;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.robet.rtrain.R;
+
 public class Config {
 
     SharedPreferences pref;
@@ -144,6 +146,24 @@ public class Config {
 
     public boolean getStatus(){
         return pref.getBoolean("status", false);
+    }
+
+    public void setResourche(int resourche){
+        editor.putInt("resourche", resourche);
+        editor.commit();
+    }
+
+    public int getResourche(){
+        return pref.getInt("resourche", 0);
+    }
+
+    public void setFont(String font){
+        editor.putString("font", font);
+        editor.commit();
+    }
+
+    public String getFont(){
+        return pref.getString("font", "Default");
     }
 
 }

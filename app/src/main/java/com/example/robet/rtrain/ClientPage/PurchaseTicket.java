@@ -62,13 +62,14 @@ public class PurchaseTicket extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.purchase_ticket);
         ButterKnife.bind(this);
 
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");
-        config = new Config(this);
         loading = new Loading(this);
 
         trainId = map.get("trainId");

@@ -1,7 +1,9 @@
 package com.example.robet.rtrain.ClientPage;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -9,10 +11,9 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.MainActivity;
@@ -22,8 +23,6 @@ import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
 import com.jgabrielfreitas.core.BlurImageView;
-
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +47,18 @@ public class UserSetting extends AppCompatActivity {
     TextInputEditText tvName;
     @BindView(R.id.tvPassword)
     TextInputEditText tvPassword;
+    @BindView(R.id.tvBtName)
+    TextView tvBtName;
+    @BindView(R.id.tvBtPassword)
+    TextView tvBtPassword;
+    @BindView(R.id.tvBack)
+    TextView tvBack;
+    @BindView(R.id.tvLogout)
+    TextView tvLogout;
+    @BindView(R.id.tvFont)
+    TextInputEditText tvFont;
+    @BindView(R.id.btFont)
+    TextInputLayout btFont;
 
     Config config;
     Loading loading;
@@ -55,6 +66,8 @@ public class UserSetting extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_setting);
         ButterKnife.bind(this);
@@ -63,17 +76,19 @@ public class UserSetting extends AppCompatActivity {
         tvName.setText(config.getName());
         tvPassword.setText(config.getPassword());
         loading = new Loading(this);
+        tvFont.setText(config.getFont());
+
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         intent = new Intent();
         setResult(1, intent);
         UserSetting.this.finish();
     }
 
-    @OnClick({R.id.btName, R.id.btPassword, R.id.btBack, R.id.btLogout})
+    @OnClick({R.id.btName, R.id.btPassword, R.id.btBack, R.id.btLogout, R.id.btFont})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btName:
@@ -99,15 +114,18 @@ public class UserSetting extends AppCompatActivity {
                 startActivity(intent);
 
                 break;
+            case R.id.btFont:
+                changeFont();
+                break;
         }
     }
 
-    private void editDialog(final int type){
+    private void editDialog(final int type) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(UserSetting.this);
         View view;
 
-        if(type == 1){
+        if (type == 1) {
             view = layoutInflater.inflate(R.layout.item_edit_name, null);
         } else {
             view = layoutInflater.inflate(R.layout.item_edit_password, null);
@@ -115,7 +133,7 @@ public class UserSetting extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(UserSetting.this);
         builder.setView(view);
-        builder.setCancelable(false);
+        builder.setCancelable(true);
 
         final AlertDialog dialog = builder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -131,7 +149,7 @@ public class UserSetting extends AppCompatActivity {
         btChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (type){
+                switch (type) {
                     case 1:
 
                         loading.start();
@@ -188,6 +206,89 @@ public class UserSetting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+            }
+        });
+
+    }
+
+    private void changeFont() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(UserSetting.this);
+        View view = layoutInflater.inflate(R.layout.item_font, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserSetting.this);
+        builder.setView(view);
+        builder.setCancelable(true);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        CardView cat, fette, gloria, olivers, ray, roof;
+        cat = view.findViewById(R.id.cat);
+        fette = view.findViewById(R.id.fette);
+        gloria = view.findViewById(R.id.gloria);
+        olivers = view.findViewById(R.id.olivers);
+        ray = view.findViewById(R.id.ray);
+        roof = view.findViewById(R.id.roof);
+
+        cat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                config.setResourche(R.style.CatChilds);
+                config.setFont("Default");
+                alertDialog.cancel();
+                startActivity(getIntent());
+            }
+        });
+
+        fette.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                config.setResourche(R.style.FetteMikado);
+                config.setFont("Fette Mikado");
+                alertDialog.cancel();
+                startActivity(getIntent());
+            }
+        });
+
+        gloria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                config.setResourche(R.style.Gloria);
+                config.setFont("Gloria");
+                alertDialog.cancel();
+                startActivity(getIntent());
+            }
+        });
+
+        olivers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                config.setResourche(R.style.OliversBarney);
+                config.setFont("Olivers");
+                alertDialog.cancel();
+                startActivity(getIntent());
+            }
+        });
+
+        ray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                config.setResourche(R.style.RayJohns);
+                config.setFont("Ray Johns");
+                alertDialog.cancel();
+                startActivity(getIntent());
+            }
+        });
+
+        roof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                config.setResourche(R.style.RoofRunners);
+                config.setFont("Roof Runners");
+                alertDialog.cancel();
+                startActivity(getIntent());
             }
         });
 

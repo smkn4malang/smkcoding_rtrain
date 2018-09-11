@@ -77,12 +77,13 @@ public class PurchaseTicketGuest extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.purchase_ticket_guest);
         ButterKnife.bind(this);
 
         loading = new Loading(this);
-        config = new Config(this);
         bundle = getIntent().getExtras();
         map = (HashMap<String, String>) bundle.get("extra");
         tax = 2500;

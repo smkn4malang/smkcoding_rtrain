@@ -48,6 +48,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="ekonomi"
+                android:id="@+id/tvEkonomi"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
@@ -73,6 +74,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="bisnis"
+                android:id="@+id/tvBisnis"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
@@ -98,6 +100,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="express"
+                android:id="@+id/tvExpress"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>

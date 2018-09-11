@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.robet.rtrain.AdminPage.AdminEdit;
 import com.example.robet.rtrain.gson.AdminItem;
 import com.example.robet.rtrain.R;
+import com.example.robet.rtrain.support.Config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,6 +83,8 @@ public class AdminShowAdapter extends RecyclerView.Adapter<AdminShowAdapter.Main
 
         public MainViewAdapter(@NonNull View itemView) {
             super(itemView);
+            Config config = new Config(itemView.getContext());
+            itemView.getContext().setTheme(config.getResourche());
 
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);

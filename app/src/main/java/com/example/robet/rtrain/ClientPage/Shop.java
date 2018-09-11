@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
@@ -29,16 +30,19 @@ public class Shop extends AppCompatActivity {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.tvHappy)
+    TextView tvHappy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop);
         ButterKnife.bind(this);
 
         adapter = new ItemAdapter();
         loading = new Loading(this);
-        config = new Config(this);
 
         recyclerView.setLayoutManager(new GridLayoutManager(Shop.this, 2));
         recyclerView.setAdapter(adapter);
@@ -63,7 +67,7 @@ public class Shop extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(config.getInfo("user")){
+        if (config.getInfo("user")) {
             intent = new Intent();
             setResult(2, intent);
         }

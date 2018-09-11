@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.support.design.widget.TextInputEditText;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
@@ -24,9 +25,9 @@ public class forgot extends AppCompatActivity {
 
     Intent newAct;
     Loading loading;
-
     String username = "";
     String message = "";
+    Config config;
     boolean info;
 
     @BindView(R.id.btnRegister)
@@ -38,6 +39,8 @@ public class forgot extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot);
         ButterKnife.bind(this);

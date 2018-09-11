@@ -1,8 +1,6 @@
 package com.example.robet.rtrain.ClientPage;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,19 +9,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-import com.example.robet.rtrain.support.Loading;
+
 import com.example.robet.rtrain.R;
-import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.adapter.TrainAdapter;
 import com.example.robet.rtrain.gson.TrainResponse;
+import com.example.robet.rtrain.support.Config;
+import com.example.robet.rtrain.support.Loading;
+import com.example.robet.rtrain.support.RestApi;
+
 import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import static com.example.robet.rtrain.R.color.colorPrimary;
 import static com.example.robet.rtrain.R.color.indots3;
 
@@ -49,13 +53,22 @@ public class TrainShow extends AppCompatActivity {
     LinearLayout express;
     @BindView(R.id.navigation)
     LinearLayout navigation;
+    @BindView(R.id.tvEkonomi)
+    TextView tvEkonomi;
+    @BindView(R.id.tvBisnis)
+    TextView tvBisnis;
+    @BindView(R.id.tvExpress)
+    TextView tvExpress;
 
     String category, date;
     int day, month, year, date1, date2;
     Calendar calendar;
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ticket_show);
         ButterKnife.bind(this);
@@ -71,7 +84,7 @@ public class TrainShow extends AppCompatActivity {
         date1 = (year * 10000) + (month * 100) + day;
 
         if (date == null || date.isEmpty()) {
-            date =  day + "-" + month + "-" + year;
+            date = day + "-" + month + "-" + year;
         }
 
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
@@ -151,7 +164,7 @@ public class TrainShow extends AppCompatActivity {
                 day = mDay;
                 date2 = (year * 10000) + (month * 100) + day;
 
-                if(date1 > date2){
+                if (date1 > date2) {
 
                     Toast.makeText(getApplicationContext(), "anda harus memilih tanggal dengan benar",
                             Toast.LENGTH_SHORT).show();
@@ -165,14 +178,14 @@ public class TrainShow extends AppCompatActivity {
 
             }
 
-        },year, calendar.get(Calendar.MONTH), day).show();
+        }, year, calendar.get(Calendar.MONTH), day).show();
 
     }
 
     private void trainSearch(String mDate, String mCategory) {
 
         loading.start();
-        RestApi.getData().TrainSearch(mDate,mCategory).enqueue(new Callback<TrainResponse>() {
+        RestApi.getData().TrainSearch(mDate, mCategory).enqueue(new Callback<TrainResponse>() {
             @Override
             public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
                 loading.stop();
@@ -187,4 +200,5 @@ public class TrainShow extends AppCompatActivity {
             }
         });
     }
+
 }

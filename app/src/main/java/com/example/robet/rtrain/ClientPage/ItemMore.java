@@ -56,6 +56,8 @@ public class ItemMore extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_more);
         ButterKnife.bind(this);
@@ -63,7 +65,6 @@ public class ItemMore extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         HashMap<String, String> map = (HashMap<String, String>) bundle.get("data");
         loading = new Loading(this);
-        config = new Config(this);
 
         id = map.get("id");
         name = map.get("name");

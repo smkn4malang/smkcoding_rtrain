@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.HistoryResponse;
+import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.TicketHistory;
@@ -51,9 +52,12 @@ public class HistoryTickets extends AppCompatActivity {
     String id, pid;
     Bundle bundle;
     Loading loading;
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_tickets);
         ButterKnife.bind(this);

@@ -52,9 +52,13 @@ public class SeatPick extends AppCompatActivity {
     Button btBack;
     @BindView(R.id.btNext)
     Button btNext;
+    @BindView(R.id.tvHelp)
+    TextView tvHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seat_pick);
         ButterKnife.bind(this);

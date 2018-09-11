@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.support.design.widget.TextInputEditText;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
@@ -23,6 +24,7 @@ import retrofit2.Response;
 public class register extends AppCompatActivity {
 
     Intent newAct;
+    Config config;
     Loading loading;
 
     public static String name = "";
@@ -46,6 +48,8 @@ public class register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         ButterKnife.bind(this);

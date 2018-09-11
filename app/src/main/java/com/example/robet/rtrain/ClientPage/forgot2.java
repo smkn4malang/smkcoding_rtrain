@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.support.design.widget.TextInputEditText;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
@@ -29,6 +30,7 @@ public class forgot2 extends AppCompatActivity {
 
     Intent newAct;
     Loading loading;
+    Config config;
 
     @BindView(R.id.etToken)
     TextInputEditText etToken;
@@ -43,10 +45,11 @@ public class forgot2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot2);
         ButterKnife.bind(this);
-
         loading = new Loading(this);
     }
 

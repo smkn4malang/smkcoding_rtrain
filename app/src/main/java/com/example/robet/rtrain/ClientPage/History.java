@@ -39,6 +39,8 @@ public class History extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
         ButterKnife.bind(this);
@@ -54,8 +56,8 @@ public class History extends AppCompatActivity {
         RestApi.getData().historyShow(String.valueOf(config.getId())).enqueue(new Callback<HistoryResponse>() {
             @Override
             public void onResponse(Call<HistoryResponse> call, Response<HistoryResponse> response) {
+                loading.stop();
                 if(response.body().getInfo()){
-                    loading.stop();
                     adapter.listHistory.addAll(response.body().getHistory());
                     adapter.notifyDataSetChanged();
                 } else {

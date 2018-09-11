@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.CityResponse;
 import com.example.robet.rtrain.gson.HistoryItem;
+import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.ItemHistory;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
@@ -28,6 +29,7 @@ public class HistoryItems extends AppCompatActivity {
 
     Bundle bundle;
     Loading loading;
+    Config config;
     String itemName, desc, Qty, pic, price, date, address, id, pid;
 
     @BindView(R.id.itemPic)
@@ -51,6 +53,8 @@ public class HistoryItems extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_items);
         ButterKnife.bind(this);
