@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -18,11 +19,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
+        <item name="android:screenOrientation">portrait</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="FetteMikado" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@font/fette_mikado</item>
+        <item name="android:screenOrientation">portrait</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -33,15 +36,7 @@
     <style name="Gloria" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@font/gloria</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="OliversBarney" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:fontFamily">@font/olivers_barney</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:screenOrientation">portrait</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
@@ -52,14 +47,45 @@
         <item name="android:fontFamily">@font/ray_johns</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:screenOrientation">portrait</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="RoofRunners" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:fontFamily">@font/roof_runners</item>
+    <style name="Fantasque" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:fontFamily">@font/fantasque</item>
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Kanit" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Sarpanch" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:fontFamily">@font/sarpanch</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Walleye" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/walleye</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:screenOrientation">portrait</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>

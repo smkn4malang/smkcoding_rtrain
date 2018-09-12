@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/name"
+            android:title="change name"/>
+        <item
+            android:id="@+id/password"
+            android:title="change password"/>
+        <item
+            android:id="@+id/font"
+            android:title="change font" />
+    </group>
+</menu>

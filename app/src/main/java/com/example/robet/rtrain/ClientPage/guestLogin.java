@@ -42,8 +42,6 @@ public class guestLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        config = new Config(this);
-        setTheme(config.getResourche());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guestlogin);
         ButterKnife.bind(this);

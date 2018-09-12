@@ -148,13 +148,13 @@ public class Config {
         return pref.getBoolean("status", false);
     }
 
-    public void setResourche(int resourche){
-        editor.putInt("resourche", resourche);
+    public void setTheme(int resource){
+        editor.putInt("resource", resource);
         editor.commit();
     }
 
-    public int getResourche(){
-        return pref.getInt("resourche", 0);
+    public int getTheme(){
+        return pref.getInt("resource", 0);
     }
 
     public void setFont(String font){

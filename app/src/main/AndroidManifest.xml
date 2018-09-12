@@ -14,7 +14,7 @@
         android:theme="@style/CatChilds">
         <activity
             android:name=".Welcome"
-            android:screenOrientation="portrait">
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -46,7 +46,7 @@ public class forgot2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         config = new Config(this);
-        setTheme(config.getResourche());
+        setTheme(config.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot2);
         ButterKnife.bind(this);

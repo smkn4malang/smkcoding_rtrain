@@ -81,25 +81,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="5dp"
-                    app:cardElevation="5dp"
-                    android:id="@+id/olivers"
-                    android:layout_marginBottom="3dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Exaple"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/olivers_barney"/>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="5dp"
                     android:id="@+id/ray"
                     app:cardElevation="5dp"
                     android:layout_marginBottom="3dp">
@@ -119,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="5dp"
-                    android:id="@+id/roof"
+                    android:id="@+id/fantasque"
                     app:cardElevation="5dp"
                     android:layout_marginBottom="3dp">
 
@@ -130,7 +111,64 @@
                         android:text="Example"
                         android:textColor="#000"
                         android:textSize="20sp"
-                        android:fontFamily="@font/roof_runners"/>
+                        android:fontFamily="@font/fantasque"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/kanit"
+                    app:cardElevation="5dp"
+                    android:layout_marginBottom="3dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Example"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/kanit"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/sarpanch"
+                    app:cardElevation="5dp"
+                    android:layout_marginBottom="3dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Example"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/sarpanch"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/walleye"
+                    app:cardElevation="5dp"
+                    android:layout_marginBottom="3dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Example"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/walleye"/>
 
                 </android.support.v7.widget.CardView>
 

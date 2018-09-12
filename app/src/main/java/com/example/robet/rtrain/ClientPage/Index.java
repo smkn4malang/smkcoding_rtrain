@@ -8,14 +8,17 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.CityResponse;
@@ -41,41 +44,44 @@ public class Index extends AppCompatActivity {
     String[] time, city;
     boolean bank = false, status = true;
 
-    @BindView(R.id.btTicket)
-    CardView btTicket;
-    @BindView(R.id.btShop)
-    CardView btShop;
-    @BindView(R.id.btSetting)
-    CardView btSetting;
-    @BindView(R.id.tvPromo)
-    TextView tvPromo;
-    @BindView(R.id.btHistory)
-    CardView btHistory;
+    public Toolbar toolbar;
     @BindView(R.id.tvName)
     TextView tvName;
-    @BindView(R.id.tvAddCredit)
-    TextView tvAddCredit;
-    @BindView(R.id.btLogout)
-    CardView btLogout;
     @BindView(R.id.tvFeatures)
     TextView tvFeatures;
     @BindView(R.id.tvTicket)
     TextView tvTicket;
+    @BindView(R.id.btTicket)
+    CardView btTicket;
     @BindView(R.id.tvShop)
     TextView tvShop;
+    @BindView(R.id.btShop)
+    CardView btShop;
     @BindView(R.id.tvHistory)
     TextView tvHistory;
+    @BindView(R.id.btHistory)
+    CardView btHistory;
     @BindView(R.id.tvSetting)
     TextView tvSetting;
+    @BindView(R.id.btSetting)
+    CardView btSetting;
+    @BindView(R.id.tvAddCredit)
+    TextView tvAddCredit;
     @BindView(R.id.btCredit)
     CardView btCredit;
     @BindView(R.id.tvLogout)
     TextView tvLogout;
+    @BindView(R.id.btLogout)
+    CardView btLogout;
+    @BindView(R.id.tvPromo)
+    TextView tvPromo;
+    @BindView(R.id.llIndex)
+    LinearLayout llIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         config = new Config(this);
-        setTheme(config.getResourche());
+        setTheme(config.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index);
         ButterKnife.bind(this);
@@ -237,13 +243,18 @@ public class Index extends AppCompatActivity {
                                 bank = true;
                             }
 
-                            if (mPay.equals("")) {
-                                Toast.makeText(getApplicationContext(), "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
-                            } else if (!mPay.equals("")) {
+                            if(!mPay.equals("")){
                                 pay = Integer.valueOf(mPay);
+                            }
+
+                            if (mPay.equals("")) {
+                                bank = false;
+                                Toast.makeText(getApplicationContext(), "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
                             } else if (!bank) {
+                                bank = false;
                                 Toast.makeText(getApplicationContext(), "masukkan nomor rekening anda", Toast.LENGTH_SHORT).show();
                             } else if (pay < 50000) {
+                                bank = false;
                                 Toast.makeText(getApplicationContext(), "anda harus topup minimal 50ribu", Toast.LENGTH_SHORT).show();
                             } else {
 
@@ -327,7 +338,10 @@ public class Index extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            tvName.setText(config.getName());
+            Intent intent = getIntent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
     }
 

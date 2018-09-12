@@ -57,7 +57,7 @@ public class HistoryTickets extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         config = new Config(this);
-        setTheme(config.getResourche());
+        setTheme(config.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_tickets);
         ButterKnife.bind(this);

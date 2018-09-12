@@ -48,7 +48,7 @@ public class userLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         config = new Config(this);
-        setTheme(config.getResourche());
+        setTheme(config.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userlogin);
         ButterKnife.bind(this);

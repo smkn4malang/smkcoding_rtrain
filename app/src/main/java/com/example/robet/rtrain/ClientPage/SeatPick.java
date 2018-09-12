@@ -58,7 +58,7 @@ public class SeatPick extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         config = new Config(this);
-        setTheme(config.getResourche());
+        setTheme(config.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seat_pick);
         ButterKnife.bind(this);
