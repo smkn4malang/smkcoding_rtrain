@@ -1,8 +1,13 @@
 package com.example.robet.rtrain.ClientPage;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -57,6 +62,7 @@ public class PurchaseTicket extends AppCompatActivity {
     String trainId, trainName, userId, date, seat;
     String time, cart, category, destination, depart;
     int credit = 0;
+    int count = 1;
     int price = 0;
     Loading loading;
 
@@ -112,30 +118,114 @@ public class PurchaseTicket extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "uang anda kurang", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    loading.start();
-                    RestApi.getData().ticketPurchase(
-                            trainId, userId, date, seat, destination, depart,
-                            time, String.valueOf(price), String.valueOf(credit), cart, "user"
-                    ).enqueue(new Callback<Value>() {
+                    final int value = seat.split(",").length;
+                    final String[] mKtp = new String[value];
+
+                    LayoutInflater inflater = LayoutInflater.from(PurchaseTicket.this);
+                    View v = inflater.inflate(R.layout.ticket_ktp_dialog, null);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PurchaseTicket.this);
+                    builder.setView(v);
+                    builder.setCancelable(false);
+
+                    final AlertDialog dialog = builder.create();
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
+
+                    final TextView tvCount = v.findViewById(R.id.tvCount);
+                    final TextInputEditText etKtp = v.findViewById(R.id.etKtp);
+                    final Button btBack = v.findViewById(R.id.btBack);
+                    final Button btNext = v.findViewById(R.id.btNext);
+
+                    tvCount.setText("nomor ke " + String.valueOf(count));
+                    btBack.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onResponse(Call<Value> call, Response<Value> response) {
-                            loading.stop();
-                            if(response.body().getInfo()){
-
-                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                config.setCredit(response.body().getCredit());
-
-                                Intent intent = new Intent(getApplicationContext(), Index.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                        public void onClick(View view) {
+                            tvCount.setText("nomor ke " + String.valueOf(count));
+                            if(count == 1){
+                                btBack.setText("Back");
+                                dialog.cancel();
+                            } else if(count == 2){
+                                etKtp.setText(mKtp[(count - 1)]);
+                                btBack.setText("cancel");
+                                count -= 1;
+                            } else {
+                                etKtp.setText(mKtp[(count - 1)]);
+                                count -= 1;
                             }
                         }
+                    });
 
+                    btNext.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onFailure(Call<Value> call, Throwable t) {
-                            loading.stop();
-                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        public void onClick(View view) {
+                            tvCount.setText("nomor ke " + String.valueOf(count));
+                            if(count < value){
+
+                                if(etKtp.getText().toString().equals("")){
+                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    mKtp[(count - 1)] = etKtp.getText().toString();
+                                    etKtp.setText("");
+                                    count += 1;
+                                }
+
+                            } else if(count == (value - 1)){
+
+                                if(etKtp.getText().toString().equals("")){
+                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    mKtp[(count - 1)] = etKtp.getText().toString();
+                                    etKtp.setText("");
+                                    count += 1;
+                                    btNext.setText("Buy");
+                                }
+
+                            } else {
+
+                                if(etKtp.getText().toString().equals("")){
+                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                    btNext.setText("Next");
+                                    mKtp[(count - 1)] = etKtp.getText().toString();
+                                    StringBuilder stringBuilder = new StringBuilder();
+                                    String ktp;
+                                    for(int i = 0; i < value; i++){
+                                        stringBuilder.append(mKtp[i]).append(",");
+                                    }
+                                    ktp = stringBuilder.toString();
+
+
+                                    loading.start();
+                                    RestApi.getData().ticketPurchase(
+                                            trainId, userId, date, seat, destination, depart, time,
+                                            String.valueOf(price), String.valueOf(credit), cart, "user", ktp
+                                    ).enqueue(new Callback<Value>() {
+                                        @Override
+                                        public void onResponse(Call<Value> call, Response<Value> response) {
+                                            loading.stop();
+                                            if(response.body().getInfo()){
+
+                                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                config.setCredit(response.body().getCredit());
+
+                                                Intent intent = new Intent(getApplicationContext(), Index.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Value> call, Throwable t) {
+                                            loading.stop();
+                                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+                            }
                         }
                     });
 

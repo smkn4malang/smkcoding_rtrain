@@ -85,7 +85,7 @@ public class guestLogin extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
                                 loading.stop();
-                                Toast.makeText(getApplicationContext(), "jaringan error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
 

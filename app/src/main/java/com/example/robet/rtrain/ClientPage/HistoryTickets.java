@@ -42,8 +42,8 @@ public class HistoryTickets extends AppCompatActivity {
     TextView tvSeat;
     @BindView(R.id.tvPrice)
     TextView tvPrice;
-    @BindView(R.id.tvCredit)
-    TextView tvCredit;
+    @BindView(R.id.tvKtp)
+    TextView tvKtp;
     @BindView(R.id.btBack)
     Button btBack;
     @BindView(R.id.btDelete)
@@ -85,6 +85,7 @@ public class HistoryTickets extends AppCompatActivity {
                 tvTime.setText(response.body().getTrainName());
                 tvCart.setText(String.valueOf(cars));
                 tvPrice.setText(response.body().getPrice());
+                tvKtp.setText(response.body().getKtp());
 
             }
 
