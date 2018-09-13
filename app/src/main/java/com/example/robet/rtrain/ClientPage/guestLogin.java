@@ -3,16 +3,15 @@ package com.example.robet.rtrain.ClientPage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.support.design.widget.TextInputEditText;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
-import com.example.robet.rtrain.MainActivity;
-import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
 
@@ -30,13 +29,13 @@ public class guestLogin extends AppCompatActivity {
     Config config;
     Intent intent;
     Loading loading;
-
-    @BindView(R.id.etName)
-    TextInputEditText etName;
+    @BindView(R.id.etUsername)
+    TextInputEditText etUsername;
     @BindView(R.id.etEmail)
     TextInputEditText etEmail;
-    @BindView(R.id.btnLogin)
-    Button btnLogin;
+    @BindView(R.id.btLogin)
+    Button btLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +48,13 @@ public class guestLogin extends AppCompatActivity {
     }
 
     @OnClick(R.id.btLogin)
-    public void onLoginClicked(View view){
+    public void onLoginClicked(View view) {
 
-        name = etName.getText().toString();
+        name = etUsername.getText().toString();
         email = etEmail.getText().toString();
 
-        if(!name.equals("")){
-            if(!email.equals("")){
+        if (!name.equals("")) {
+            if (!email.equals("")) {
 
                 loading.start();
                 RestApi.getData().loginGuest(name, email).enqueue(new Callback<Value>() {
@@ -85,7 +84,7 @@ public class guestLogin extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "kolom email tidak boleh kosong", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(),"kolom nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "kolom nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
     }
 }

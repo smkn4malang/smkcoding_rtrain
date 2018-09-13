@@ -3,16 +3,16 @@ package com.example.robet.rtrain.ClientPage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.support.design.widget.TextInputEditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
-import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
 
@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class userLogin extends AppCompatActivity {
 
     Config config;
-    Intent newAct;
+    Intent intent;
     Loading loading;
 
     String name = "";
@@ -34,17 +34,16 @@ public class userLogin extends AppCompatActivity {
     String message = "";
     String username = "";
     String password = "";
-
     @BindView(R.id.etUsername)
     TextInputEditText etUsername;
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
-    @BindView(R.id.btnForgot)
-    TextView btnForgot;
-    @BindView(R.id.btnLogin)
-    Button btnLogin;
+    @BindView(R.id.btForgot)
+    TextView btForgot;
+    @BindView(R.id.btLogin)
+    Button btLogin;
     @BindView(R.id.btRegister)
-    TextView btnRegister;
+    TextView btRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,28 +56,22 @@ public class userLogin extends AppCompatActivity {
         loading = new Loading(this);
     }
 
-    @OnClick({R.id.btnForgot, R.id.btnLogin, R.id.btRegister})
+    @OnClick({R.id.btForgot, R.id.btLogin, R.id.btRegister})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btnForgot:
+            case R.id.btForgot:
 
-                newAct = new Intent(getApplicationContext(), forgot.class);
-                startActivity(newAct);
-
-                break;
-            case R.id.btRegister:
-
-                newAct = new Intent(getApplicationContext(), register.class);
-                startActivity(newAct);
+                intent = new Intent(getApplicationContext(), forgot.class);
+                startActivity(intent);
 
                 break;
-            case R.id.btnLogin:
+            case R.id.btLogin:
 
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
 
-                if (!username.equals("")){
-                    if (!password.equals("")){
+                if (!username.equals("")) {
+                    if (!password.equals("")) {
 
                         loading.start();
                         RestApi.getData().loginUser(username, password).enqueue(new Callback<Value>() {
@@ -88,7 +81,7 @@ public class userLogin extends AppCompatActivity {
                                 loading.stop();
                                 info = response.body().getLogin();
 
-                                if(info){
+                                if (info) {
 
                                     name = response.body().getName();
                                     message = response.body().getMessage();
@@ -101,13 +94,13 @@ public class userLogin extends AppCompatActivity {
                                     config.setId(response.body().getId());
 
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                    newAct = new Intent(getApplicationContext(), Index.class);
-                                    newAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    newAct.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(newAct);
+                                    intent = new Intent(getApplicationContext(), Index.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
                                 } else {
                                     message = response.body().getMessage();
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -125,6 +118,12 @@ public class userLogin extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "kolom username tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }
+
+                break;
+            case R.id.btRegister:
+
+                intent = new Intent(getApplicationContext(), register.class);
+                startActivity(intent);
 
                 break;
         }

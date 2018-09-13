@@ -4,18 +4,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.support.design.widget.TextInputEditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
-import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
 
@@ -36,13 +36,12 @@ public class forgot extends AppCompatActivity {
     boolean info;
     TextInputEditText token, password, repassword;
     Button cancel, ok;
-
-    @BindView(R.id.btRegister)
-    TextView btnRegister;
-    @BindView(R.id.btnSend)
-    Button btnSend;
     @BindView(R.id.etUsername)
     TextInputEditText etUsername;
+    @BindView(R.id.btSend)
+    Button btSend;
+    @BindView(R.id.btRegister)
+    TextView btRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class forgot extends AppCompatActivity {
         loading = new Loading(this);
     }
 
-    @OnClick({R.id.btRegister, R.id.btnSend})
+    @OnClick({R.id.btRegister, R.id.btSend})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btRegister:
@@ -64,7 +63,7 @@ public class forgot extends AppCompatActivity {
                 startActivity(intent);
 
                 break;
-            case R.id.btnSend:
+            case R.id.btSend:
 
                 username = etUsername.getText().toString();
 
@@ -102,7 +101,7 @@ public class forgot extends AppCompatActivity {
         }
     }
 
-    private void showDialog(){
+    private void showDialog() {
 
         LayoutInflater inflater = LayoutInflater.from(forgot.this);
         View view = inflater.inflate(R.layout.item_forgot, null);
@@ -132,13 +131,13 @@ public class forgot extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(token.getText().toString().equals("")){
+                if (token.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "masukkan token anda", Toast.LENGTH_SHORT).show();
-                } else if(password.getText().toString().equals("")){
+                } else if (password.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "masukkan password baru anda", Toast.LENGTH_SHORT).show();
-                } else if(repassword.getText().toString().equals("")){
+                } else if (repassword.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "masukkan kembali password anda", Toast.LENGTH_SHORT).show();
-                } else if(!password.getText().toString().equals(repassword.getText().toString())){
+                } else if (!password.getText().toString().equals(repassword.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "password tidak sama", Toast.LENGTH_SHORT).show();
                 } else {
 
