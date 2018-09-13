@@ -28,7 +28,6 @@
         <activity android:name=".ClientPage.Index" />
         <activity android:name=".ClientPage.forgot" />
         <activity android:name=".ClientPage.register" />
-        <activity android:name=".ClientPage.forgot2" />
         <activity android:name=".AdminPage.adminForgot" />
         <activity android:name=".AdminPage.adminForgot2" />
         <activity android:name=".ClientPage.TrainShow" />

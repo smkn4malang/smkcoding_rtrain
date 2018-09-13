@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.support.design.widget.TextInputEditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.support.Config;
@@ -39,11 +40,11 @@ public class userLogin extends AppCompatActivity {
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
     @BindView(R.id.btnForgot)
-    Button btnForgot;
+    TextView btnForgot;
     @BindView(R.id.btnLogin)
     Button btnLogin;
-    @BindView(R.id.btnRegister)
-    Button btnRegister;
+    @BindView(R.id.btRegister)
+    TextView btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class userLogin extends AppCompatActivity {
         loading = new Loading(this);
     }
 
-    @OnClick({R.id.btnForgot, R.id.btnLogin, R.id.btnRegister})
+    @OnClick({R.id.btnForgot, R.id.btnLogin, R.id.btRegister})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnForgot:
@@ -65,7 +66,7 @@ public class userLogin extends AppCompatActivity {
                 startActivity(newAct);
 
                 break;
-            case R.id.btnRegister:
+            case R.id.btRegister:
 
                 newAct = new Intent(getApplicationContext(), register.class);
                 startActivity(newAct);
@@ -119,7 +120,7 @@ public class userLogin extends AppCompatActivity {
                         });
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "kolo password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "kolom password tidak boleh kosong", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "kolom username tidak boleh kosong", Toast.LENGTH_SHORT).show();

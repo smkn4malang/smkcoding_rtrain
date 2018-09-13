@@ -28,74 +28,64 @@ public class guestLogin extends AppCompatActivity {
     String name, email, message;
 
     Config config;
-    Intent newAct;
+    Intent intent;
     Loading loading;
 
     @BindView(R.id.etName)
     TextInputEditText etName;
     @BindView(R.id.etEmail)
     TextInputEditText etEmail;
-    @BindView(R.id.btnBack)
-    Button btnBack;
     @BindView(R.id.btnLogin)
     Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        config = new Config(this);
+        setTheme(config.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guestlogin);
         ButterKnife.bind(this);
         loading = new Loading(this);
     }
 
-    @OnClick({R.id.btnBack, R.id.btnLogin})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btnBack:
+    @OnClick(R.id.btLogin)
+    public void onLoginClicked(View view){
 
-                newAct = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(newAct);
+        name = etName.getText().toString();
+        email = etEmail.getText().toString();
 
-                break;
-            case R.id.btnLogin:
+        if(!name.equals("")){
+            if(!email.equals("")){
 
-                name = etName.getText().toString();
-                email = etEmail.getText().toString();
+                loading.start();
+                RestApi.getData().loginGuest(name, email).enqueue(new Callback<Value>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Value> call, @NonNull Response<Value> response) {
+                        loading.stop();
+                        message = response.body().getMessage();
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-                if(!name.equals("")){
-                    if(!email.equals("")){
+                        config.setName(name);
+                        config.setEmail(email);
+                        config.setId(response.body().getId());
+                        config.setInfo("guest", true);
 
-                        loading.start();
-                        RestApi.getData().loginGuest(name, email).enqueue(new Callback<Value>() {
-                            @Override
-                            public void onResponse(@NonNull Call<Value> call, @NonNull Response<Value> response) {
-                                loading.stop();
-                                message = response.body().getMessage();
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-
-                                config.setName(name);
-                                config.setEmail(email);
-                                config.setId(response.body().getId());
-                                config.setInfo("guest", true);
-
-                                newAct = new Intent(getApplicationContext(), Index.class);
-                                startActivity(newAct);
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
-                                loading.stop();
-                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "kolom email tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getApplicationContext(), Index.class);
+                        startActivity(intent);
                     }
-                } else {
-                    Toast.makeText(getApplicationContext(),"kolom nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                }
-                break;
+
+                    @Override
+                    public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
+                        loading.stop();
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } else {
+                Toast.makeText(getApplicationContext(), "kolom email tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(),"kolom nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
     }
 }
