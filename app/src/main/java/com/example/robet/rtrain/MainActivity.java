@@ -20,13 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     Intent newAct;
     int i = 0;
-
-    @BindView(R.id.admin)
-    ImageView btnAdmin;
-    @BindView(R.id.user)
-    Button btnUser;
-    @BindView(R.id.guest)
-    TextView btnGuest;
+    @BindView(R.id.btAdmin)
+    ImageView btAdmin;
+    @BindView(R.id.btUser)
+    Button btUser;
+    @BindView(R.id.btGuest)
+    TextView btGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         i = 0;
     }
 
-    @OnClick({R.id.admin, R.id.user, R.id.guest})
+    @OnClick({R.id.btAdmin, R.id.btUser, R.id.btGuest})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.admin:
-                if(i >= 10){
+            case R.id.btAdmin:
+                if (i >= 10) {
                     i = 0;
                     newAct = new Intent(MainActivity.this, adminLogin.class);
                     startActivity(newAct);
@@ -49,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
                     i += 1;
                 }
                 break;
-            case R.id.user:
+            case R.id.btUser:
                 i = 0;
                 newAct = new Intent(MainActivity.this, userLogin.class);
                 startActivity(newAct);
                 break;
-            case R.id.guest:
+            case R.id.btGuest:
                 i = 0;
                 newAct = new Intent(MainActivity.this, guestLogin.class);
                 startActivity(newAct);

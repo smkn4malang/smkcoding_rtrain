@@ -19,6 +19,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -27,6 +28,7 @@
         <item name="android:fontFamily">@font/fette_mikado</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
@@ -38,6 +40,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -58,6 +61,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -67,6 +71,7 @@
         <item name="android:fontFamily">@font/kanit</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="windowActionBar">false</item>
@@ -75,6 +80,7 @@
 
     <style name="Sarpanch" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="android:fontFamily">@font/sarpanch</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -83,6 +89,7 @@
     </style>
 
     <style name="Walleye" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="android:fontFamily">@font/walleye</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:screenOrientation">portrait</item>

@@ -5,7 +5,6 @@
     android:id="@+id/llIndex"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/index"
     android:orientation="vertical"
     tools:context=".ClientPage.Index">
 
