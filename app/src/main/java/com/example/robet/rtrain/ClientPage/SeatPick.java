@@ -116,15 +116,26 @@ public class SeatPick extends AppCompatActivity {
 
                 seat = adapter.seat;
                 int size = seat.length;
+                String cart = map.get("cart");
+                int cars = 0;
+    
+                for(i = 0; i < config.getCart().length; i++){
+                    if(config.getCart()[i].equals(cart)){
+                        cars = i * 20;
+                    }
+                }
+
 
                 for (i = 0; i < size; i++) {
                     if (seat[i]) {
                         amount += 1;
-                        if (choose.equals("")) {
-                            choose = String.valueOf(i + 1);
+
+                        if(choose.equals("")){
+                            choose = String.valueOf(i + cars);
                         } else {
-                            choose += "," + String.valueOf(i + 1);
+                            choose += "," + String.valueOf(i + cars);
                         }
+
                     }
                 }
 

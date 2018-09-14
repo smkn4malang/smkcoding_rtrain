@@ -1,5 +1,6 @@
 package com.example.robet.rtrain.ClientPage;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -138,10 +139,11 @@ public class PurchaseTicket extends AppCompatActivity {
                     final Button btNext = v.findViewById(R.id.btNext);
 
                     tvCount.setText("nomor ke " + String.valueOf(count));
+
                     btBack.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            tvCount.setText("nomor ke " + String.valueOf(count));
+                            btBack.setText("Back");
                             if(count == 1){
                                 btBack.setText("Back");
                                 dialog.cancel();
@@ -149,17 +151,21 @@ public class PurchaseTicket extends AppCompatActivity {
                                 etKtp.setText(mKtp[(count - 1)]);
                                 btBack.setText("cancel");
                                 count -= 1;
+                                tvCount.setText("nomor ke " + String.valueOf(count));
                             } else {
                                 etKtp.setText(mKtp[(count - 1)]);
                                 count -= 1;
+                                tvCount.setText("nomor ke " + String.valueOf(count));
                             }
                         }
                     });
 
                     btNext.setOnClickListener(new View.OnClickListener() {
+                        @SuppressLint("SetTextI18n")
                         @Override
                         public void onClick(View view) {
-                            tvCount.setText("nomor ke " + String.valueOf(count));
+                            btNext.setText("Next");
+
                             if(count < value){
 
                                 if(etKtp.getText().toString().equals("")){
@@ -168,17 +174,19 @@ public class PurchaseTicket extends AppCompatActivity {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
                                     count += 1;
+                                    tvCount.setText("nomor ke " + String.valueOf(count));
                                 }
 
-                            } else if(count == (value - 1)){
+                            } else if(count == (value - 2)){
 
                                 if(etKtp.getText().toString().equals("")){
                                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
                                 } else {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
-                                    count += 1;
                                     btNext.setText("Buy");
+                                    count += 1;
+                                    tvCount.setText("nomor ke " + String.valueOf(count));
                                 }
 
                             } else {
@@ -187,15 +195,15 @@ public class PurchaseTicket extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
                                 } else {
 
-                                    btNext.setText("Next");
                                     mKtp[(count - 1)] = etKtp.getText().toString();
-                                    StringBuilder stringBuilder = new StringBuilder();
-                                    String ktp;
+                                    String ktp = "";
                                     for(int i = 0; i < value; i++){
-                                        stringBuilder.append(mKtp[i]).append(",");
+                                        if(ktp.equals("")){
+                                            ktp = mKtp[i];
+                                        } else {
+                                            ktp += "," + mKtp[i];
+                                        }
                                     }
-                                    ktp = stringBuilder.toString();
-
 
                                     loading.start();
                                     RestApi.getData().ticketPurchase(

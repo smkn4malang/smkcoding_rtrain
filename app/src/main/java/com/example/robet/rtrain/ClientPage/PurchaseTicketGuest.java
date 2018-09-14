@@ -226,7 +226,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                     btBack.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            tvCount.setText("nomor ke " + String.valueOf(count));
+                            btBack.setText("Back");
                             if (count == 1) {
                                 btBack.setText("Back");
                                 dialog.cancel();
@@ -234,9 +234,11 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                                 etKtp.setText(mKtp[(count - 1)]);
                                 btBack.setText("cancel");
                                 count -= 1;
+                                tvCount.setText("nomor ke " + String.valueOf(count));
                             } else {
                                 etKtp.setText(mKtp[(count - 1)]);
                                 count -= 1;
+                                tvCount.setText("nomor ke " + String.valueOf(count));
                             }
                         }
                     });
@@ -244,7 +246,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                     btNext.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            tvCount.setText("nomor ke " + String.valueOf(count));
+                            btNext.setText("Next");
                             if (count < value) {
 
                                 if (etKtp.getText().toString().equals("")) {
@@ -253,9 +255,10 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
                                     count += 1;
+                                    tvCount.setText("nomor ke " + String.valueOf(count));
                                 }
 
-                            } else if (count == (value - 1)) {
+                            } else if (count == (value - 2)) {
 
                                 if (etKtp.getText().toString().equals("")) {
                                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
@@ -263,6 +266,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
                                     count += 1;
+                                    tvCount.setText("nomor ke " + String.valueOf(count));
                                     btNext.setText("Buy");
                                 }
 
@@ -272,7 +276,6 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
                                 } else {
 
-                                    btNext.setText("Next");
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     StringBuilder stringBuilder = new StringBuilder();
                                     String ktp;
