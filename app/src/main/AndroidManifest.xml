@@ -11,11 +11,10 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/trains"
         android:supportsRtl="true"
-
         android:theme="@style/CatChilds">
         <activity
             android:name=".Welcome"
-                android:screenOrientation="portrait">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,57 +22,83 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ClientPage.userLogin"
+        <activity
+            android:name=".ClientPage.userLogin"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.adminLogin"
+        <activity
+            android:name=".AdminPage.adminLogin"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.guestLogin"
+        <activity
+            android:name=".ClientPage.guestLogin"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.Index"
+        <activity
+            android:name=".ClientPage.Index"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.forgot"
+        <activity
+            android:name=".ClientPage.forgot"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.register"
+        <activity
+            android:name=".ClientPage.register"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.adminForgot"
+        <activity
+            android:name=".AdminPage.adminForgot"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.adminForgot2"
+        <activity
+            android:name=".AdminPage.adminForgot2"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.TrainShow"
+        <activity
+            android:name=".ClientPage.TrainShow"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.IndexAdmin"
+        <activity
+            android:name=".AdminPage.IndexAdmin"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminManageUser"
+        <activity
+            android:name=".AdminPage.AdminManageUser"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminManageData"
+        <activity
+            android:name=".AdminPage.AdminManageData"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminSetting"
+        <activity
+            android:name=".AdminPage.AdminSetting"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.UserAdd"
+        <activity
+            android:name=".AdminPage.UserAdd"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.UserEdit"
+        <activity
+            android:name=".AdminPage.UserEdit"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminManageAdmin"
+        <activity
+            android:name=".AdminPage.AdminManageAdmin"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminManageTrainAdd"
+        <activity
+            android:name=".AdminPage.AdminManageTrainAdd"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminManageTrainEdit"
+        <activity
+            android:name=".AdminPage.AdminManageTrainEdit"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminManageTrainShow"
+        <activity
+            android:name=".AdminPage.AdminManageTrainShow"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminEdit"
+        <activity
+            android:name=".AdminPage.AdminEdit"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.AdminAdd"
+        <activity
+            android:name=".AdminPage.AdminAdd"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.ItemShow"
+        <activity
+            android:name=".AdminPage.ItemShow"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.ItemEdit"
+        <activity
+            android:name=".AdminPage.ItemEdit"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.ItemAdd"
+        <activity
+            android:name=".AdminPage.ItemAdd"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.ItemMore"
+        <activity
+            android:name=".ClientPage.ItemMore"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.UserSetting"
+        <activity
+            android:name=".ClientPage.UserSetting"
             android:screenOrientation="portrait" />
 
         <service android:name=".notification.pushNotificationToken">
@@ -94,20 +119,29 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@drawable/trains" />
 
-        <activity android:name=".ClientPage.SeatPick"
+        <activity
+            android:name=".ClientPage.SeatPick"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.PurchaseTicket"
+        <activity
+            android:name=".ClientPage.PurchaseTicket"
             android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.History"
+        <activity
+            android:name=".ClientPage.History"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ClientPage.PurchaseTicketGuest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ClientPage.Shop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ClientPage.HistoryItems"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ClientPage.HistoryTickets"
+            android:screenOrientation="portrait" />
+        <activity android:name=".promo.promoMuharram"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ClientPage.PurchaseTicketGuest"
-            android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.Shop"
-            android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.HistoryItems"
-            android:screenOrientation="portrait" />
-        <activity android:name=".ClientPage.HistoryTickets"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

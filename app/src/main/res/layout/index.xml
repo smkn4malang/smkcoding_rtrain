@@ -24,15 +24,15 @@
             android:layout_margin="10dp"
             android:src="@drawable/trains" />
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="#000"
-                android:layout_margin="10dp"
-                android:layout_alignParentRight="true"
-                android:textSize="22sp" />
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:text="Name"
+            android:textColor="#000"
+            android:textSize="22sp" />
 
     </RelativeLayout>
 
@@ -54,12 +54,12 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/tvFeatures"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:text="Features"
                     android:textAlignment="center"
-                    android:id="@+id/tvFeatures"
-                    android:layout_margin="10dp"
                     android:textColor="#000000"
                     android:textSize="35sp"
                     android:textStyle="italic|bold" />
@@ -90,7 +90,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
-                            app:cardCornerRadius="10dp"
                             app:cardElevation="10dp">
 
                             <LinearLayout
@@ -107,11 +106,11 @@
                                     android:src="@drawable/tickets" />
 
                                 <TextView
+                                    android:id="@+id/tvTicket"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Ticket"
                                     android:layout_margin="5dp"
-                                    android:id="@+id/tvTicket"
+                                    android:text="Ticket"
                                     android:textAlignment="center"
                                     android:textColor="#000" />
 
@@ -125,7 +124,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
-                            app:cardCornerRadius="10dp"
                             app:cardElevation="10dp">
 
                             <LinearLayout
@@ -142,11 +140,11 @@
                                     android:src="@drawable/bag" />
 
                                 <TextView
+                                    android:id="@+id/tvShop"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Shop"
-                                    android:id="@+id/tvShop"
                                     android:layout_margin="5dp"
+                                    android:text="Shop"
                                     android:textAlignment="center"
                                     android:textColor="#000" />
 
@@ -160,7 +158,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
-                            app:cardCornerRadius="10dp"
                             app:cardElevation="10dp">
 
                             <LinearLayout
@@ -177,11 +174,11 @@
                                     android:src="@drawable/book" />
 
                                 <TextView
+                                    android:id="@+id/tvHistory"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="History"
-                                    android:id="@+id/tvHistory"
                                     android:layout_margin="5dp"
+                                    android:text="History"
                                     android:textAlignment="center"
                                     android:textColor="#000" />
 
@@ -203,7 +200,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
-                            app:cardCornerRadius="10dp"
                             app:cardElevation="10dp">
 
                             <LinearLayout
@@ -220,11 +216,11 @@
                                     android:src="@drawable/settings" />
 
                                 <TextView
+                                    android:id="@+id/tvSetting"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Setting"
-                                    android:id="@+id/tvSetting"
                                     android:layout_margin="5dp"
+                                    android:text="Setting"
                                     android:textAlignment="center"
                                     android:textColor="#000" />
 
@@ -238,7 +234,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
-                            app:cardCornerRadius="10dp"
                             app:cardElevation="10dp">
 
                             <LinearLayout
@@ -255,11 +250,11 @@
                                     android:src="@drawable/ic_money" />
 
                                 <TextView
+                                    android:id="@+id/tvAddCredit"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="credit"
                                     android:layout_margin="5dp"
-                                    android:id="@+id/tvAddCredit"
+                                    android:text="credit"
                                     android:textAlignment="center"
                                     android:textColor="#000" />
 
@@ -273,7 +268,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
-                            app:cardCornerRadius="10dp"
                             app:cardElevation="10dp">
 
                             <LinearLayout
@@ -290,12 +284,12 @@
                                     android:src="@drawable/logout" />
 
                                 <TextView
+                                    android:id="@+id/tvLogout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Logout"
                                     android:layout_margin="5dp"
+                                    android:text="Logout"
                                     android:textAlignment="center"
-                                    android:id="@+id/tvLogout"
                                     android:textColor="#000" />
 
                             </LinearLayout>
@@ -314,21 +308,101 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:background="@drawable/top_corner">
+                android:background="@drawable/top_corner"
+                android:gravity="center">
 
                 <TextView
+                    android:id="@+id/tvPromo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Promo"
                     android:layout_margin="10dp"
+                    android:text="Promo"
                     android:textAlignment="center"
-                    android:id="@+id/tvPromo"
                     android:textColor="#000000"
                     android:textSize="35sp"
                     android:textStyle="italic|bold" />
 
             </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/promoMuharram"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="110dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/muharram" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Promo 1 Muharram"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/buy5get1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="10dp"
+                        android:layout_margin="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="110dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/buy5get1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="beli 5 ticket gratis 1"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 

@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.example.robet.rtrain.promo.promoMuharram;
 import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.CityResponse;
@@ -27,7 +27,6 @@ import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -77,6 +76,10 @@ public class Index extends AppCompatActivity {
     TextView tvPromo;
     @BindView(R.id.llIndex)
     LinearLayout llIndex;
+    @BindView(R.id.promoMuharram)
+    CardView promoMuharram;
+    @BindView(R.id.buy5get1)
+    CardView buy5get1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,7 +246,7 @@ public class Index extends AppCompatActivity {
                                 bank = true;
                             }
 
-                            if(!mPay.equals("")){
+                            if (!mPay.equals("")) {
                                 pay = Integer.valueOf(mPay);
                             }
 
@@ -345,4 +348,14 @@ public class Index extends AppCompatActivity {
         }
     }
 
+    @OnClick({R.id.promoMuharram, R.id.buy5get1})
+    public void onPromoClicked(View view) {
+        switch (view.getId()) {
+            case R.id.promoMuharram:
+                startActivity(new Intent(getApplicationContext(), promoMuharram.class));
+                break;
+            case R.id.buy5get1:
+                break;
+        }
+    }
 }
