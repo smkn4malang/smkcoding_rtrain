@@ -8,18 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.adapter.SeatAdapter;
 import com.example.robet.rtrain.gson.SeatResponse;
+import com.example.robet.rtrain.promo.Promo;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
-
 import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,21 +38,21 @@ public class SeatPick extends AppCompatActivity {
     int amount = 0;
     int price = 0;
     String choose = "";
-
+    Promo promo;
+    boolean isPromo = false;
     @BindView(R.id.tvCart)
     TextView tvCart;
-    @BindView(R.id.linear)
-    LinearLayout linear;
     @BindView(R.id.cardView)
-    LinearLayout cardView;
+    RelativeLayout cardView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.btBack)
     Button btBack;
     @BindView(R.id.btNext)
     Button btNext;
-    @BindView(R.id.tvHelp)
-    TextView tvHelp;
+    @BindView(R.id.footer)
+    LinearLayout footer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class SeatPick extends AppCompatActivity {
         map = (HashMap<String, String>) bundle.get("extra");
         adapter = new SeatAdapter();
         loading = new Loading(this);
-        config = new Config(this);
+        promo = new Promo(SeatPick.this);
 
         tvCart.setText(map.get("cart"));
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
@@ -118,9 +117,9 @@ public class SeatPick extends AppCompatActivity {
                 int size = seat.length;
                 String cart = map.get("cart");
                 int cars = 0;
-    
-                for(i = 0; i < config.getCart().length; i++){
-                    if(config.getCart()[i].equals(cart)){
+
+                for (i = 0; i < config.getCart().length; i++) {
+                    if (config.getCart()[i].equals(cart)) {
                         cars = i * 20;
                     }
                 }
@@ -130,7 +129,7 @@ public class SeatPick extends AppCompatActivity {
                     if (seat[i]) {
                         amount += 1;
 
-                        if(choose.equals("")){
+                        if (choose.equals("")) {
                             choose = String.valueOf(i + cars);
                         } else {
                             choose += "," + String.valueOf(i + cars);
@@ -139,23 +138,41 @@ public class SeatPick extends AppCompatActivity {
                     }
                 }
 
-                price = Integer.valueOf(map.get("price"));
-                amount *= price;
+                //promo
+                if (!isPromo) {
+                    isPromo = promo.Buy5Get1(amount);
+                }
 
-                if (!choose.equals("")) {
-                    map.put("amount", String.valueOf(amount));
-                    map.put("choose", choose);
-                    if(config.getInfo("user")) {
-                        Intent intent = new Intent(getApplicationContext(), PurchaseTicket.class);
-                        intent.putExtra("extra", map);
-                        startActivity(intent);
+                //promo
+                if (isPromo) {
+
+                    if (promo.isBuy5Get1(amount)) {
+                        amount -= 1;
+                    }
+
+                    price = Integer.valueOf(map.get("price"));
+                    amount *= price;
+
+                    if (!choose.equals("")) {
+                        map.put("amount", String.valueOf(amount));
+                        map.put("choose", choose);
+                        if (config.getInfo("user")) {
+                            Intent intent = new Intent(getApplicationContext(), PurchaseTicket.class);
+                            intent.putExtra("extra", map);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), PurchaseTicketGuest.class);
+                            intent.putExtra("extra", map);
+                            startActivity(intent);
+                        }
                     } else {
-                        Intent intent = new Intent(getApplicationContext(), PurchaseTicketGuest.class);
-                        intent.putExtra("extra", map);
-                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "anda harus memilih minimal satu tempat", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "anda harus memilih minimal satu tempat", Toast.LENGTH_SHORT).show();
+                    //promo
+                    isPromo = promo.showDialog("pilih satu tempat duduk lagi secara gratis !");
+                    amount = 0;
+                    choose = "";
                 }
 
                 break;

@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.robet.rtrain.promo.PromoBuy5Get1;
 import com.example.robet.rtrain.promo.promoMuharram;
 import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
@@ -355,6 +357,7 @@ public class Index extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), promoMuharram.class));
                 break;
             case R.id.buy5get1:
+                startActivity(new Intent(getApplicationContext(), PromoBuy5Get1.class));
                 break;
         }
     }
