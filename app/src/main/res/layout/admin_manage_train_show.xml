@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.robet.rtrain.AdminPage.AdminManageUser">
+    tools:context="com.example.robet.rtrain.AdminPage.manageUser.AdminManageUser">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

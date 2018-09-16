@@ -4,151 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ClientPage.Index">
+    android:gravity="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@color/back"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/trains" />
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="R-Train"
-                android:textColor="#000000"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Manage Data"
-                android:textColor="#000000"
-                android:textSize="25sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/ManageTrain"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:background="@drawable/index_button"
-                android:baselineAligned="false">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/btTrain"
+                app:cardElevation="10dp"
+                android:layout_margin="15dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="125dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="@drawable/button2"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:padding="10dp"
                         android:src="@drawable/trains" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Manage Trains"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:cardElevation="10dp"
+                android:layout_margin="15dp"
+                android:id="@+id/btItem"
+                android:layout_gravity="right">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="125dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
                     android:gravity="center"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Manage"
-                        android:textColor="#000000"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Train"
-                        android:textColor="#000000"
-                        android:textSize="25dp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ManageItem"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:background="@drawable/index_button"
-                android:baselineAligned="false">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="@drawable/button2"
-                    android:gravity="center">
 
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:padding="10dp"
                         android:src="@drawable/shop" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Manage"
-                        android:textColor="#000000"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Item"
-                        android:textColor="#000000"
-                        android:textSize="25dp" />
+                        android:text="Manage Items"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            </LinearLayout>
+            <Button
+                android:layout_width="100dp"
+                android:layout_gravity="right"
+                android:layout_height="50dp"
+                android:text="cancel"
+                android:id="@+id/btCancel"
+                android:layout_margin="10dp"/>
 
         </LinearLayout>
 
-    </ScrollView>
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>

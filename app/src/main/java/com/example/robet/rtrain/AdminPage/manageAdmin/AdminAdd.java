@@ -1,4 +1,4 @@
-package com.example.robet.rtrain.AdminPage;
+package com.example.robet.rtrain.AdminPage.manageAdmin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -80,11 +80,10 @@ public class AdminAdd extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             info = response.body().getInfo();
-                            AdminAdd.this.finish();
-                            startActivity(new Intent(getApplicationContext(), AdminManageAdmin.class));
 
-                            if(info == false){
-                                startActivity(getIntent());
+                            if(info){
+                                setResult(250);
+                                AdminAdd.this.finish();
                             }
                         }
 

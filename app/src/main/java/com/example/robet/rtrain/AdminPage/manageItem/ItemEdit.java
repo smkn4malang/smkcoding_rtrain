@@ -1,4 +1,4 @@
-package com.example.robet.rtrain.AdminPage;
+package com.example.robet.rtrain.AdminPage.manageItem;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

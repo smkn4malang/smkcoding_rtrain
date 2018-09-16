@@ -116,6 +116,7 @@ public class Index extends AppCompatActivity {
         }
 
         getData();
+
         if (!status) {
             Toast.makeText(getApplicationContext(), "gagal memperbaru data", Toast.LENGTH_SHORT).show();
         }
@@ -312,28 +313,28 @@ public class Index extends AppCompatActivity {
                     time[i] = response.body().getTime().get(i).getTime();
                 }
                 config.setTime(time);
-
-                RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
-                    @Override
-                    public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                        int size = response.body().getCity().size();
-                        city = new String[size];
-                        for (int i = 0; i < size; i++) {
-                            city[i] = response.body().getCity().get(i).getName();
-                        }
-                        config.setCity(city);
-                        status = true;
-                    }
-
-                    @Override
-                    public void onFailure(Call<CityResponse> call, Throwable t) {
-                        status = false;
-                    }
-                });
             }
 
             @Override
             public void onFailure(Call<TimeResponse> call, Throwable t) {
+                status = false;
+            }
+        });
+
+        RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
+            @Override
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                int size = response.body().getCity().size();
+                city = new String[size];
+                for (int i = 0; i < size; i++) {
+                    city[i] = response.body().getCity().get(i).getName();
+                }
+                config.setCity(city);
+                status = true;
+            }
+
+            @Override
+            public void onFailure(Call<CityResponse> call, Throwable t) {
                 status = false;
             }
         });

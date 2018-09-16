@@ -93,7 +93,7 @@ public class AdminSetting extends AppCompatActivity {
                                 public void onResponse(Call<Value> call, Response<Value> response) {
                                     loading.stop();
                                     Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
+//
                                     if (response.body().getInfo()) {
 
                                         btName.setText("edit");

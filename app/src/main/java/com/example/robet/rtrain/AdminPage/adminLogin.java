@@ -77,7 +77,7 @@ public class adminLogin extends AppCompatActivity {
 
                                 info = response.body().getLogin();
                                 loading.stop();
-//
+
                                 if(info == true){
 
                                     name = response.body().getName();

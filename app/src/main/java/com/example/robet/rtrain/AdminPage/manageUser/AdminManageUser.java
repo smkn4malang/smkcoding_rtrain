@@ -1,14 +1,16 @@
-package com.example.robet.rtrain.AdminPage;
+package com.example.robet.rtrain.AdminPage.manageUser;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.AdminPage.manageAdmin.AdminManageAdmin;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
@@ -41,9 +43,8 @@ public class AdminManageUser extends AppCompatActivity {
         loading = new Loading(this);
         adapter = new UserShowAdapter();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         loading.start();
         RestApi.getData().UserShow().enqueue(new Callback<UserShowResponse>() {
@@ -66,5 +67,13 @@ public class AdminManageUser extends AppCompatActivity {
     public void onViewClicked() {
         newAct = new Intent(getApplicationContext(), UserAdd.class);
         startActivity(newAct);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        if(resultCode == 250){
+            AdminManageUser.this.finish();
+            startActivity(getIntent());
+        }
     }
 }

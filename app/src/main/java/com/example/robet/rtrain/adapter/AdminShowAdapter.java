@@ -1,5 +1,6 @@
 package com.example.robet.rtrain.adapter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.robet.rtrain.AdminPage.AdminEdit;
+import com.example.robet.rtrain.AdminPage.manageAdmin.AdminEdit;
 import com.example.robet.rtrain.gson.AdminItem;
 import com.example.robet.rtrain.R;
-import com.example.robet.rtrain.support.Config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class AdminShowAdapter extends RecyclerView.Adapter<AdminShowAdapter.Main
 
                     Intent intent = new Intent(holder.itemView.getContext(), AdminEdit.class);
                     intent.putExtra("extra", data);
-                    holder.itemView.getContext().startActivity(intent);
+                    ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 250);
                 } catch (Exception e){
                     Toast.makeText(holder.itemView.getContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
                 }

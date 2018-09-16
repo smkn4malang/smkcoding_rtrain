@@ -44,55 +44,49 @@
             android:name=".AdminPage.adminForgot"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.adminForgot2"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ClientPage.TrainShow"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AdminPage.IndexAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.AdminManageUser"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".AdminPage.AdminManageData"
+            android:name=".AdminPage.manageUser.AdminManageUser"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AdminPage.AdminSetting"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.UserAdd"
+            android:name=".AdminPage.manageUser.UserAdd"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.UserEdit"
+            android:name=".AdminPage.manageUser.UserEdit"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.AdminManageAdmin"
+            android:name=".AdminPage.manageAdmin.AdminManageAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.AdminManageTrainAdd"
+            android:name=".AdminPage.ManageTrain.AdminManageTrainAdd"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.AdminManageTrainEdit"
+            android:name=".AdminPage.ManageTrain.AdminManageTrainEdit"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.AdminManageTrainShow"
+            android:name=".AdminPage.ManageTrain.AdminManageTrainShow"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.AdminEdit"
+            android:name=".AdminPage.manageAdmin.AdminEdit"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.AdminAdd"
+            android:name=".AdminPage.manageAdmin.AdminAdd"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.ItemShow"
+            android:name=".AdminPage.manageItem.ItemShow"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.ItemEdit"
+            android:name=".AdminPage.manageItem.ItemEdit"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminPage.ItemAdd"
+            android:name=".AdminPage.manageItem.ItemAdd"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ClientPage.ItemMore"
@@ -143,7 +137,11 @@
         <activity
             android:name=".promo.promoMuharram"
             android:screenOrientation="portrait" />
-        <activity android:name=".promo.PromoBuy5Get1"></activity>
+        <activity android:name=".promo.PromoBuy5Get1" />
+        <activity
+            android:name=".AdminPage.ManageCity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AdminPage.ManageTime"></activity>
     </application>
 
 </manifest>

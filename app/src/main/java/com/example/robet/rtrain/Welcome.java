@@ -116,10 +116,10 @@ public class Welcome extends AppCompatActivity {
     private void launchHomeScreen(){
         pref.setFlaunch(false);
 
-        if(pref.getInfo("admin")==true){
+        if(pref.getInfo("admin")){
             Intent intent = new Intent(getApplicationContext(), IndexAdmin.class);
             startActivity(intent);
-        } else if(pref.getInfo("user") == true || pref.getInfo("guest") == true) {
+        } else if(pref.getInfo("user") || pref.getInfo("guest")) {
             Intent intent = new Intent(getApplicationContext(), Index.class);
             startActivity(intent);
         } else {

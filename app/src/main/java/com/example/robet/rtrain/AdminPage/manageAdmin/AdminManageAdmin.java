@@ -1,4 +1,4 @@
-package com.example.robet.rtrain.AdminPage;
+package com.example.robet.rtrain.AdminPage.manageAdmin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.AdminPage.manageAdmin.AdminAdd;
+import com.example.robet.rtrain.AdminPage.manageUser.AdminManageUser;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
@@ -67,5 +69,13 @@ public class AdminManageAdmin extends AppCompatActivity {
     public void onViewClicked() {
         intent = new Intent(getApplicationContext(), AdminAdd.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onActivityResult(int resultCode, int requestCode, Intent data){
+        if(resultCode == 250){
+            AdminManageAdmin.this.finish();
+            startActivity(getIntent());
+        }
     }
 }

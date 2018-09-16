@@ -1,4 +1,4 @@
-package com.example.robet.rtrain.AdminPage;
+package com.example.robet.rtrain.AdminPage.ManageTrain;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
+
 import com.example.robet.rtrain.support.Loading;
+import com.example.robet.rtrain.adapter.ManageTrainAdapter;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
-import com.example.robet.rtrain.adapter.ItemAdapter;
-import com.example.robet.rtrain.gson.ItemResponse;
+import com.example.robet.rtrain.gson.TrainResponse;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -19,40 +21,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ItemShow extends AppCompatActivity {
+public class AdminManageTrainShow extends AppCompatActivity {
 
     @BindView(R.id.RecyclerView)
-    android.support.v7.widget.RecyclerView recyclerView;
+    android.support.v7.widget.RecyclerView RecyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    ManageTrainAdapter adapter;
     Loading loading;
-    ItemAdapter adapter;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_show);
+        setContentView(R.layout.admin_manage_train_show);
         ButterKnife.bind(this);
 
         loading = new Loading(this);
-        adapter = new ItemAdapter();
+        adapter = new ManageTrainAdapter();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        RecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.setAdapter(adapter);
+        RecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         loading.start();
-        RestApi.getData().ItemShow().enqueue(new Callback<ItemResponse>() {
+
+        RestApi.getData().trainShow().enqueue(new Callback<TrainResponse>() {
             @Override
-            public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
+            public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
                 loading.stop();
-                adapter.listItem.addAll(response.body().getItem());
+//                adapter.trainList.addAll(response.body().getTrain());
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<ItemResponse> call, Throwable t) {
+            public void onFailure(Call<TrainResponse> call, Throwable t) {
                 loading.stop();
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -61,6 +65,7 @@ public class ItemShow extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
-        startActivity(new Intent(getApplicationContext(), ItemAdd.class));
+        intent = new Intent(getApplicationContext(), AdminManageTrainAdd.class);
+        startActivity(intent);
     }
 }

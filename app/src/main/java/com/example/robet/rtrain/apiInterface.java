@@ -332,4 +332,42 @@ public interface apiInterface {
     Call<ItemHistory> historyItem(
             @Field("id") String id
     );
+
+    @FormUrlEncoded
+    @POST("public/index.php/add/city")
+    Call<Value> addCity(
+            @Field("city") String city
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/edit/city")
+    Call<Value> editCity(
+            @Field("old") String old,
+            @Field("city") String city
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/delete/city")
+    Call<Value> deleteCity(
+            @Field("city") String city
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/add/time")
+    Call<Value> addTime(
+            @Field("time") String time
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/edit/time")
+    Call<Value> editTime(
+            @Field("old") String old,
+            @Field("time") String time
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/delete/time")
+    Call<Value> deleteTime(
+            @Field("time") String time
+    );
 }

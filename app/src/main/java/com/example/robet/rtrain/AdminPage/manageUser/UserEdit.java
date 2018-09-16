@@ -1,11 +1,11 @@
-package com.example.robet.rtrain.AdminPage;
+package com.example.robet.rtrain.AdminPage.manageUser;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.support.design.widget.TextInputEditText;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.support.Loading;
@@ -22,29 +22,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdminEdit extends AppCompatActivity {
+public class UserEdit extends AppCompatActivity {
 
-    Bundle bundle;
-    Loading loading;
-    HashMap<String, String> data;
-
-    public String id, name, username, email, message;
-    public boolean info;
     @BindView(R.id.etName)
     TextInputEditText etName;
     @BindView(R.id.etUsername)
     TextInputEditText etUsername;
     @BindView(R.id.etEmail)
     TextInputEditText etEmail;
+    @BindView(R.id.etCredit)
+    TextInputEditText etCredit;
     @BindView(R.id.btDelete)
     Button btDelete;
     @BindView(R.id.btUpdate)
     Button btUpdate;
 
+    Bundle bundle;
+    Loading loading;
+    HashMap<String, String> data;
+
+    String id, name, username, email, credit, message;
+    boolean info;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_edit);
+        setContentView(R.layout.user_edit);
         ButterKnife.bind(this);
 
         loading = new Loading(this);
@@ -55,10 +58,12 @@ public class AdminEdit extends AppCompatActivity {
         name = data.get("name");
         username = data.get("username");
         email = data.get("email");
+        credit = data.get("credit");
 
         etName.setText(name);
         etUsername.setText(username);
         etEmail.setText(email);
+        etCredit.setText(credit);
     }
 
     @OnClick({R.id.btDelete, R.id.btUpdate})
@@ -67,14 +72,13 @@ public class AdminEdit extends AppCompatActivity {
             case R.id.btDelete:
 
                 loading.start();
-                RestApi.getData().AdminDelete(id).enqueue(new Callback<Value>() {
+                RestApi.getData().UserDelete(id).enqueue(new Callback<Value>() {
                     @Override
                     public void onResponse(Call<Value> call, Response<Value> response) {
                         loading.stop();
                         Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                        AdminEdit.this.finish();
-                        startActivity(new Intent(getApplicationContext(), AdminManageAdmin.class));
+                        setResult(250);
+                        UserEdit.this.finish();
                     }
 
                     @Override
@@ -89,14 +93,16 @@ public class AdminEdit extends AppCompatActivity {
 
                 if(!etName.getText().toString().equals(name)
                         || !etUsername.getText().toString().equals(username)
-                        || !etEmail.getText().toString().equals(email)){
+                        || !etEmail.getText().toString().equals(email)
+                        || !etCredit.getText().toString().equals(credit)){
 
                     name = etName.getText().toString();
                     username = etUsername.getText().toString();
                     email = etEmail.getText().toString();
+                    credit = etCredit.getText().toString();
 
                     loading.start();
-                    RestApi.getData().AdminUpdate(id, name, username, email).enqueue(new Callback<Value>() {
+                    RestApi.getData().UserUpdate(id, name, username, email, credit).enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
 
@@ -104,12 +110,10 @@ public class AdminEdit extends AppCompatActivity {
                             info = response.body().getInfo();
                             message = response.body().getMessage();
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                            AdminEdit.this.finish();
 
-                            if(!info){
-                                startActivity(getIntent());
-                            } else {
-                                startActivity(new Intent(getApplicationContext(), AdminManageAdmin.class));
+                            if(info){
+                                setResult(250);
+                                UserEdit.this.finish();
                             }
 
                         }

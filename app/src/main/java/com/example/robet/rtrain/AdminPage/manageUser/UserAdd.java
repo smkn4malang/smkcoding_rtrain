@@ -1,4 +1,4 @@
-package com.example.robet.rtrain.AdminPage;
+package com.example.robet.rtrain.AdminPage.manageUser;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -85,11 +85,10 @@ public class UserAdd extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             info = response.body().getInfo();
-                            UserAdd.this.finish();
-                            startActivity(new Intent(getApplicationContext(), AdminManageUser.class));
 
-                            if(!info){
-                                startActivity(getIntent());
+                            if(info){
+                                setResult(250);
+                                UserAdd.this.finish();
                             }
                         }
 

@@ -1,5 +1,6 @@
 package com.example.robet.rtrain.adapter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
-import com.example.robet.rtrain.AdminPage.UserEdit;
+import com.example.robet.rtrain.AdminPage.manageUser.UserEdit;
 import com.example.robet.rtrain.gson.UserShowItem;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
 
     public ArrayList<UserShowItem> listUser = new ArrayList<>();
     int i = 0;
+    String[] arrayName;
+    String name;
 
     @NonNull
     @Override
@@ -32,8 +35,11 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
 
     @Override
     public void onBindViewHolder(@NonNull final MainViewAdapter holder, final int position) {
-        holder.tvId.setText(listUser.get(position).getId());
-        holder.tvName.setText(listUser.get(position).getName());
+
+        arrayName = listUser.get(position).getName().split(" ");
+        name = arrayName[0];
+
+        holder.tvName.setText(name);
         holder.tvUsername.setText(listUser.get(position).getUsername());
 
         if(i % 2 == 0){
@@ -58,7 +64,7 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
 
                     Intent intent = new Intent(holder.itemView.getContext(), UserEdit.class);
                     intent.putExtra("extra", data);
-                    holder.itemView.getContext().startActivity(intent);
+                    ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 250);
                 } catch (Exception e){
                     Toast.makeText(holder.itemView.getContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
@@ -75,18 +81,14 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
 
         TextView tvName;
         TextView tvUsername;
-        TextView tvId;
         LinearLayout backId;
-        LinearLayout userEdit;
 
         public MainViewAdapter(@NonNull View itemView) {
             super(itemView);
 
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
-            tvId = (TextView) itemView.findViewById(R.id.tvId);
             backId = (LinearLayout) itemView.findViewById(R.id.backId);
-            userEdit = (LinearLayout) itemView.findViewById(R.id.userEdit);
         }
     }
 }
