@@ -98,7 +98,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
             name = itemView.findViewById(R.id.tvName);
             category = itemView.findViewById(R.id.tvCategory);
             price = itemView.findViewById(R.id.tvPrice);
-            seat = itemView.findViewById(R.id.tvSeat);
+            seat = itemView.findViewById(R.id.tvCars);
             topLayout = itemView.findViewById(R.id.TopLayout);
             showTicket = itemView.findViewById(R.id.ShowTicket);
 

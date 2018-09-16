@@ -43,7 +43,7 @@ public class AdminManageUser extends AppCompatActivity {
         loading = new Loading(this);
         adapter = new UserShowAdapter();
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         loading.start();

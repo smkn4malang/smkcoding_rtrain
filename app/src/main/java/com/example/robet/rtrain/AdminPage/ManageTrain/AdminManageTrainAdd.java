@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.support.design.widget.TextInputEditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.gson.CategoryResponse;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
@@ -25,16 +27,10 @@ public class AdminManageTrainAdd extends AppCompatActivity {
 
     @BindView(R.id.etTrainName)
     TextInputEditText etTrainName;
-    @BindView(R.id.etDestination)
-    TextInputEditText etDestination;
-    @BindView(R.id.etDepart)
-    TextInputEditText etDepart;
     @BindView(R.id.etCars)
     TextInputEditText etCars;
     @BindView(R.id.etPrice)
     TextInputEditText etPrice;
-    @BindView(R.id.spTime)
-    Spinner spTime;
     @BindView(R.id.spCategory)
     Spinner spCategory;
     @BindView(R.id.btBack)
@@ -44,6 +40,7 @@ public class AdminManageTrainAdd extends AppCompatActivity {
     Loading loading;
 
     Intent intent;
+    String[] category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +49,26 @@ public class AdminManageTrainAdd extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loading = new Loading(this);
+        loading.start();
+        RestApi.getData().showCategory().enqueue(new Callback<CategoryResponse>() {
+            @Override
+            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
+                loading.stop();
+                int size = response.body().getCategory().size();
+                category = new String[size];
+                for(int i = 0; i < size; i++){
+                    category[i] = response.body().getCategory().get(i).getName();
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AdminManageTrainAdd.this, android.R.layout.simple_spinner_dropdown_item, category);
+                spCategory.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<CategoryResponse> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @OnClick({R.id.btBack, R.id.btAdd})
@@ -67,13 +84,10 @@ public class AdminManageTrainAdd extends AppCompatActivity {
                 break;
             case R.id.btAdd:
 
-                String trainName, destination, depart, time, cars, price, category;
+                String trainName,cars, price, category;
                 trainName = etTrainName.getText().toString();
-                destination = etDestination.getText().toString();
-                depart = etDepart.getText().toString();
                 cars = etCars.getText().toString();
                 price = etPrice.getText().toString();
-                time = spTime.getSelectedItem().toString();
                 category = spCategory.getSelectedItem().toString();
 
                 loading.start();

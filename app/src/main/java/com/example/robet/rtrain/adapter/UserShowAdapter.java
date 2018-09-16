@@ -39,6 +39,7 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
         arrayName = listUser.get(position).getName().split(" ");
         name = arrayName[0];
 
+        holder.tvId.setText(listUser.get(position).getId());
         holder.tvName.setText(name);
         holder.tvUsername.setText(listUser.get(position).getUsername());
 
@@ -79,13 +80,13 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
 
     public class MainViewAdapter extends RecyclerView.ViewHolder {
 
-        TextView tvName;
-        TextView tvUsername;
+        TextView tvName, tvUsername, tvId;
         LinearLayout backId;
 
         public MainViewAdapter(@NonNull View itemView) {
             super(itemView);
 
+            tvId = itemView.findViewById(R.id.tvId);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             backId = (LinearLayout) itemView.findViewById(R.id.backId);

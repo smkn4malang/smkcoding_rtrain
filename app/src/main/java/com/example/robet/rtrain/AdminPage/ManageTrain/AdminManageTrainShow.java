@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.gson.ManageTrainResponse;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.adapter.ManageTrainAdapter;
 import com.example.robet.rtrain.R;
@@ -43,20 +44,19 @@ public class AdminManageTrainShow extends AppCompatActivity {
 
         RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerView.setAdapter(adapter);
-        RecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         loading.start();
 
-        RestApi.getData().trainShow().enqueue(new Callback<TrainResponse>() {
+        RestApi.getData().manageTrainShow().enqueue(new Callback<ManageTrainResponse>() {
             @Override
-            public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
+            public void onResponse(Call<ManageTrainResponse> call, Response<ManageTrainResponse> response) {
                 loading.stop();
-//                adapter.trainList.addAll(response.body().getTrain());
+                adapter.trainList.addAll(response.body().getTrain());
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<TrainResponse> call, Throwable t) {
+            public void onFailure(Call<ManageTrainResponse> call, Throwable t) {
                 loading.stop();
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -67,5 +67,13 @@ public class AdminManageTrainShow extends AppCompatActivity {
     public void onViewClicked() {
         intent = new Intent(getApplicationContext(), AdminManageTrainAdd.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        if(resultCode == 235){
+            AdminManageTrainShow.this.finish();
+            startActivity(getIntent());
+        }
     }
 }

@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.gson.CategoryResponse;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.RestApi;
@@ -27,16 +29,10 @@ public class AdminManageTrainEdit extends AppCompatActivity {
 
     @BindView(R.id.etTrainName)
     TextInputEditText etTrainName;
-    @BindView(R.id.etDestination)
-    TextInputEditText etDestination;
-    @BindView(R.id.etDepart)
-    TextInputEditText etDepart;
     @BindView(R.id.etCars)
     TextInputEditText etCars;
     @BindView(R.id.etPrice)
     TextInputEditText etPrice;
-    @BindView(R.id.spTime)
-    Spinner spTime;
     @BindView(R.id.spCategory)
     Spinner spCategory;
     @BindView(R.id.btDelete)
@@ -47,8 +43,9 @@ public class AdminManageTrainEdit extends AppCompatActivity {
     Loading loading;
     Bundle bundle;
     HashMap<String , String> data;
-    String id, name, category, destination, depart, cars, price, time;
-    int indexCategory, indexTime;
+    String id, name, category, cars, price;
+    int index;
+    String[] mCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,43 +60,37 @@ public class AdminManageTrainEdit extends AppCompatActivity {
         id = data.get("id");
         name = data.get("name");
         category = data.get("category");
-        destination = data.get("destination");
-        depart = data.get("depart");
         cars = data.get("cars");
         price = data.get("price");
-        time = data.get("time");
 
-        switch (category) {
-            case "ekonomi":
-                indexCategory = 0;
-                break;
-            case "bisnis":
-                indexCategory = 1;
-                break;
-            case "express":
-                indexCategory = 2;
-                break;
-        }
+        loading.start();
+        RestApi.getData().showCategory().enqueue(new Callback<CategoryResponse>() {
+            @Override
+            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
+                loading.stop();
+                int size = response.body().getCategory().size();
+                mCategory = new String[size];
+                for(int i = 0; i < size; i++){
+                    mCategory[i] = response.body().getCategory().get(i).getName();
+                    if(mCategory[i].equals(category)){
+                        index = i;
+                    }
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AdminManageTrainEdit.this, android.R.layout.simple_spinner_dropdown_item, mCategory);
+                spCategory.setAdapter(adapter);
+            }
 
-        switch (time) {
-            case "08.00.00":
-                indexTime = 0;
-                break;
-            case "12.00.00":
-                indexTime = 1;
-                break;
-            case "17.00.00":
-                indexTime = 2;
-                break;
-        }
+            @Override
+            public void onFailure(Call<CategoryResponse> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         etTrainName.setText(name);
-        etDestination.setText(destination);
-        etDepart.setText(depart);
         etCars.setText(cars);
         etPrice.setText(price);
-        spCategory.setSelection(indexCategory);
-        spTime.setSelection(indexTime);
+        spCategory.setSelection(index);
 
     }
 
@@ -133,22 +124,16 @@ public class AdminManageTrainEdit extends AppCompatActivity {
                 boolean same = true;
 
                 if(!etTrainName.getText().toString().equals(name)
-                        || !etDestination.getText().toString().equals(destination)
-                        || !etDepart.getText().toString().equals(depart)
                         || !etCars.getText().toString().equals(cars)
                         || !etPrice.getText().toString().equals(price)
-                        || !spCategory.getSelectedItem().toString().equals(category)
-                        || !spTime.getSelectedItem().toString().equals(time)){
+                        || !spCategory.getSelectedItem().toString().equals(category)){
                     same = false;
                 }
 
                 if(!etTrainName.getText().toString().equals("")
-                        || !etDestination.getText().toString().equals("")
-                        || !etDepart.getText().toString().equals("")
                         || !etCars.getText().toString().equals("")
                         || !etPrice.getText().toString().equals("")
-                        || !spCategory.getSelectedItem().toString().equals("")
-                        || !spTime.getSelectedItem().toString().equals("")){
+                        || !spCategory.getSelectedItem().toString().equals("")){
                     empty = false;
                 }
 
@@ -159,12 +144,9 @@ public class AdminManageTrainEdit extends AppCompatActivity {
                 if(!empty && !same){
 
                     name = etTrainName.getText().toString();
-                    destination = etDestination.getText().toString();
-                    depart = etDepart.getText().toString();
                     cars = etPrice.getText().toString();
                     price = etPrice.getText().toString();
                     category = spCategory.getSelectedItem().toString();
-                    time = spTime.getSelectedItem().toString();
 
                     loading.start();
                     RestApi.getData().TrainUpdate(id, name, category, price, cars).enqueue(new Callback<Value>() {

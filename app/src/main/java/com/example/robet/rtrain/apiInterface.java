@@ -2,9 +2,11 @@ package com.example.robet.rtrain;
 
 import com.example.robet.rtrain.gson.AdminResponse;
 import com.example.robet.rtrain.gson.CartResponse;
+import com.example.robet.rtrain.gson.CategoryResponse;
 import com.example.robet.rtrain.gson.CityResponse;
 import com.example.robet.rtrain.gson.HistoryResponse;
 import com.example.robet.rtrain.gson.ItemResponse;
+import com.example.robet.rtrain.gson.ManageTrainResponse;
 import com.example.robet.rtrain.gson.SeatResponse;
 import com.example.robet.rtrain.gson.TimeResponse;
 import com.example.robet.rtrain.gson.TrainResponse;
@@ -218,6 +220,9 @@ public interface apiInterface {
     @GET("public/index.php/train/show")
     Call<TrainResponse> trainShow();
 
+    @GET("public/index.php/manage/train")
+    Call<ManageTrainResponse> manageTrainShow();
+
     @FormUrlEncoded
     @POST("public/index.php/train/add")
     Call<Value> TrainAdd(
@@ -370,4 +375,7 @@ public interface apiInterface {
     Call<Value> deleteTime(
             @Field("time") String time
     );
+
+    @GET("public/index.php/show/category")
+    Call<CategoryResponse> showCategory();
 }

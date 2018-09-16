@@ -43,7 +43,7 @@ public class Index extends AppCompatActivity {
     String rekening;
     int tax, pay;
     String[] time, city;
-    boolean bank = false, status = true;
+    boolean bank = false;
 
     public Toolbar toolbar;
     @BindView(R.id.tvName)
@@ -83,6 +83,8 @@ public class Index extends AppCompatActivity {
     @BindView(R.id.buy5get1)
     CardView buy5get1;
 
+    boolean status = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         config = new Config(this);
@@ -90,6 +92,13 @@ public class Index extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index);
         ButterKnife.bind(this);
+
+
+        loading = new Loading(this);
+        tvName.setText(config.getName());
+        if(!status) {
+            getData();
+        }
 
         RestApi.getData().systemHistoryDelete().enqueue(new Callback<Value>() {
             @Override
@@ -105,20 +114,10 @@ public class Index extends AppCompatActivity {
             }
         });
 
-        loading = new Loading(this);
-
-        tvName.setText(config.getName());
-
         if (config.getInfo("user")) {
             btLogout.setAlpha(0);
         } else {
             btLogout.setAlpha(1);
-        }
-
-        getData();
-
-        if (!status) {
-            Toast.makeText(getApplicationContext(), "gagal memperbaru data", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -304,6 +303,7 @@ public class Index extends AppCompatActivity {
 
     public void getData() {
 
+        loading.start();
         RestApi.getData().TimeList().enqueue(new Callback<TimeResponse>() {
             @Override
             public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
@@ -317,7 +317,8 @@ public class Index extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TimeResponse> call, Throwable t) {
-                status = false;
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -330,14 +331,16 @@ public class Index extends AppCompatActivity {
                     city[i] = response.body().getCity().get(i).getName();
                 }
                 config.setCity(city);
-                status = true;
+                loading.stop();
             }
 
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
-                status = false;
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        status = true;
 
     }
 

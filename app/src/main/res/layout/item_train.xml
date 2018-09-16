@@ -8,8 +8,7 @@
         android:id="@+id/ShowTicket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
         app:cardElevation="20dp">
 
         <LinearLayout
@@ -21,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="@drawable/top_radius"
+                android:background="@color/back"
                 android:id="@+id/TopLayout"
                 android:orientation="horizontal" />
 
@@ -48,9 +47,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="seat: seat"
+                android:text="gerbong: gerbong"
                 android:textColor="#000000"
-                android:id="@+id/tvSeat"
+                android:id="@+id/tvCars"
                 android:layout_marginTop="5dp"/>
 
             <TextView
