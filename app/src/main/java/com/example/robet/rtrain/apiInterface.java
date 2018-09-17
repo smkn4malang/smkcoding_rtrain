@@ -15,11 +15,15 @@ import com.example.robet.rtrain.support.ItemHistory;
 import com.example.robet.rtrain.support.TicketHistory;
 import com.example.robet.rtrain.support.Value;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface apiInterface {
 
@@ -186,21 +190,6 @@ public interface apiInterface {
 
     @GET("public/index.php/item/show")
     Call<ItemResponse> ItemShow();
-
-    @FormUrlEncoded
-    @POST("public/index.php/item/update")
-    Call<Value> ItemUpdate(
-            @Field("id") String id,
-            @Field("name") String name,
-            @Field("price") String price,
-            @Field("desc") String desc
-    );
-
-    @FormUrlEncoded
-    @POST("public/index.php/item/delete")
-    Call<Value> ItemDelete(
-            @Field("id") String id
-    );
 
     @GET("public/index.php/city/show")
     Call<CityResponse> CityList();
@@ -378,4 +367,29 @@ public interface apiInterface {
 
     @GET("public/index.php/show/category")
     Call<CategoryResponse> showCategory();
+
+    @Multipart
+    @POST("public/index.php/item/add")
+    Call<Value> itemAdd(
+            @Part MultipartBody.Part photo,
+            @Part("name") RequestBody name,
+            @Part("price") RequestBody price,
+            @Part("desc") RequestBody desc
+    );
+
+    @FormUrlEncoded
+    @POST("public/index.php/item/delete")
+    Call<Value> itemDelete(
+            @Field("id") String id
+    );
+
+    @Multipart
+    @POST("public/index.php/item/update")
+    Call<Value> itemEdit(
+            @Part MultipartBody.Part photo,
+            @Part("id") RequestBody id,
+            @Part("name") RequestBody name,
+            @Part("price") RequestBody price,
+            @Part("desc") RequestBody desc
+    );
 }

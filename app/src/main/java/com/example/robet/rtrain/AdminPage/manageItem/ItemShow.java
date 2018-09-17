@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 import com.example.robet.rtrain.support.Loading;
@@ -38,9 +39,8 @@ public class ItemShow extends AppCompatActivity {
         loading = new Loading(this);
         adapter = new ItemAdapter();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         loading.start();
         RestApi.getData().ItemShow().enqueue(new Callback<ItemResponse>() {
@@ -62,5 +62,13 @@ public class ItemShow extends AppCompatActivity {
     @OnClick(R.id.fab)
     public void onViewClicked() {
         startActivity(new Intent(getApplicationContext(), ItemAdd.class));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        if(resultCode == 253){
+            ItemShow.this.finish();
+            startActivity(getIntent());
+        }
     }
 }

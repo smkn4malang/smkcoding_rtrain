@@ -116,6 +116,9 @@ public class IndexAdmin extends AppCompatActivity {
         btItem = view.findViewById(R.id.btItem);
         btCancel = view.findViewById(R.id.btCancel);
 
+        btItem.measure(btItem.getMeasuredWidth(), btItem.getMeasuredWidth());
+        btTrain.measure(btTrain.getMeasuredWidth(), btTrain.getMeasuredWidth());
+
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

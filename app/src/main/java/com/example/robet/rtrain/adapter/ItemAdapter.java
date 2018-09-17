@@ -1,5 +1,6 @@
 package com.example.robet.rtrain.adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.example.robet.rtrain.AdminPage.manageItem.ItemEdit;
 import com.example.robet.rtrain.ClientPage.ItemMore;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.gson.ItemItem;
@@ -100,6 +102,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
             }
         });
 
+        if(holder.config.getInfo("admin")){
+            holder.btMore.setVisibility(View.GONE);
+            holder.btBuy.setVisibility(View.GONE);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    map.put("id", listItem.get(position).getId());
+                    map.put("name", listItem.get(position).getName());
+                    map.put("price", listItem.get(position).getPrice());
+                    map.put("pic", listItem.get(position).getPic());
+                    map.put("desc", listItem.get(position).getDescription());
+                    Intent intent = new Intent(holder.itemView.getContext(), ItemEdit.class);
+                    intent.putExtra("extra", map);
+                    ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 253);
+                }
+            });
+        }
+
     }
 
     @Override
@@ -113,6 +134,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         de.hdodenhof.circleimageview.CircleImageView itemPic;
         TextView tvName, tvPrice, btMore;
         Button btBuy;
+        Config config;
 
         public MainViewAdapter(@NonNull View itemView) {
             super(itemView);
@@ -123,6 +145,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
             tvPrice = itemView.findViewById(R.id.tvPrice);
             btBuy = itemView.findViewById(R.id.btBuy);
             btMore = itemView.findViewById(R.id.btMore);
+            config = new Config((Activity) itemView.getContext());
 
         }
     }

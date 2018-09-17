@@ -405,20 +405,23 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btBack"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="Back" />
 
         <Button
             android:id="@+id/btDelete"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:text="Delete" />
 
     </LinearLayout>
