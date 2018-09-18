@@ -130,9 +130,9 @@ public class SeatPick extends AppCompatActivity {
                         amount += 1;
 
                         if (choose.equals("")) {
-                            choose = String.valueOf(i + cars);
+                            choose = String.valueOf(i + cars + 1);
                         } else {
-                            choose += "," + String.valueOf(i + cars);
+                            choose += "," + String.valueOf(i + cars + 1);
                         }
 
                     }
@@ -176,6 +176,13 @@ public class SeatPick extends AppCompatActivity {
                 }
 
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        if(resultCode == 12){
+            map.remove("choose");
         }
     }
 }

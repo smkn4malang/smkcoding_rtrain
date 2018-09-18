@@ -110,8 +110,8 @@ public class PurchaseTicket extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btBack:
                 map.remove("choose");
-                new SeatPick().map.remove("choose");
-                PurchaseTicket.this.finish();
+                setResult(12);
+                finish();
                 break;
             case R.id.btBuy:
 
@@ -241,5 +241,11 @@ public class PurchaseTicket extends AppCompatActivity {
 
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        setResult(12);
+        finish();
     }
 }

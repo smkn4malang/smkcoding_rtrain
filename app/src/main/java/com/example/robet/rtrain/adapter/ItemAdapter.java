@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.robet.rtrain.AdminPage.manageItem.ItemEdit;
 import com.example.robet.rtrain.ClientPage.ItemMore;
 import com.example.robet.rtrain.R;
@@ -69,6 +71,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
 
         Glide.with(holder.itemView.getContext())
                 .load(pic)
+                .apply(RequestOptions.skipMemoryCacheOf(true).diskCacheStrategy(DiskCacheStrategy.NONE))
                 .into(holder.itemPic);
 
         holder.tvName.setText(name);

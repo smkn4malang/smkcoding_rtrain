@@ -82,7 +82,7 @@ public class HistoryTickets extends AppCompatActivity {
                 tvSeat.setText(response.body().getSeat());
                 tvDestination.setText(response.body().getDestination());
                 tvDepart.setText(response.body().getDepart());
-                tvTime.setText(response.body().getTrainName());
+                tvTime.setText(response.body().getTime());
                 tvCart.setText(String.valueOf(cars));
                 tvPrice.setText(response.body().getPrice());
                 tvKtp.setText(response.body().getKtp());

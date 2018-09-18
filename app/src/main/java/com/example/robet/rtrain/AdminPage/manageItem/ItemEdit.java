@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
@@ -19,7 +21,6 @@ import com.example.robet.rtrain.support.Value;
 import com.nguyenhoanglam.imagepicker.model.Config;
 import com.nguyenhoanglam.imagepicker.model.Image;
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +56,7 @@ public class ItemEdit extends AppCompatActivity {
     String name, price, desc, pic, id, imagePath;
     Loading loading;
     File file;
+    RequestOptions options;
 
     private ArrayList<Image> imageLib = new ArrayList<>();
     RequestBody Rname, Rprice, Rdesc, Rphoto, Rid;
@@ -66,6 +68,10 @@ public class ItemEdit extends AppCompatActivity {
         setContentView(R.layout.item_add);
         ButterKnife.bind(this);
 
+        options = RequestOptions
+                .skipMemoryCacheOf(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE);
+
         bundle = getIntent().getExtras();
         loading = new Loading(this);
         map = (HashMap<String, String>) bundle.get("extra");
@@ -76,7 +82,12 @@ public class ItemEdit extends AppCompatActivity {
         desc = map.get("desc");
         pic = map.get("pic");
 
-        Glide.with(ItemEdit.this).load(pic).into(btCamera);
+
+
+        Glide.with(ItemEdit.this)
+                .load(pic)
+                .apply(options)
+                .into(btCamera);
         btDelete.setVisibility(View.VISIBLE);
         tvHeader.setText("Edit Barang");
         etName.setText(name);
@@ -179,7 +190,10 @@ public class ItemEdit extends AppCompatActivity {
         if(intent != null){
             imageLib = intent.getParcelableArrayListExtra(Config.EXTRA_IMAGES);
             imagePath = imageLib.get(0).getPath();
-            Glide.with(ItemEdit.this).load(imagePath).into(btCamera);
+            Glide.with(ItemEdit.this)
+                    .load(imagePath)
+                    .apply(options)
+                    .into(btCamera);
         }
     }
 }

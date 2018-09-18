@@ -170,7 +170,8 @@ public class PurchaseTicketGuest extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btBack:
                 map.remove("choose");
-                PurchaseTicketGuest.this.finish();
+                setResult(12);
+                finish();
                 break;
             case R.id.btBuy:
 
@@ -320,6 +321,12 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        setResult(12);
+        finish();
     }
 }
 
