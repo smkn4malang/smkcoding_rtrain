@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -105,21 +106,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
             }
         });
 
-        if(holder.config.getInfo("admin")){
+        if (holder.config.getInfo("admin")) {
             holder.btMore.setVisibility(View.GONE);
             holder.btBuy.setVisibility(View.GONE);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    map.put("id", listItem.get(position).getId());
-                    map.put("name", listItem.get(position).getName());
-                    map.put("price", listItem.get(position).getPrice());
-                    map.put("pic", listItem.get(position).getPic());
-                    map.put("desc", listItem.get(position).getDescription());
-                    Intent intent = new Intent(holder.itemView.getContext(), ItemEdit.class);
-                    intent.putExtra("extra", map);
-                    ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 253);
+                    if(holder.itemPic.getDrawable() != null) {
+                        map.put("id", listItem.get(position).getId());
+                        map.put("name", listItem.get(position).getName());
+                        map.put("price", listItem.get(position).getPrice());
+                        map.put("pic", listItem.get(position).getPic());
+                        map.put("desc", listItem.get(position).getDescription());
+                        Intent intent = new Intent(holder.itemView.getContext(), ItemEdit.class);
+                        intent.putExtra("extra", map);
+                        ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 253);
+                    } else {
+                        Toast.makeText(holder.itemView.getContext(), "masih loading", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
         }
@@ -173,7 +179,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
-        if(config.getInfo("user")){
+        if (config.getInfo("user")) {
             user(mCtx, view, dialog);
         } else {
             guest(mCtx, view, dialog);
@@ -181,7 +187,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
 
     }
 
-    private void user(final Context mCtx, View view, final AlertDialog dialog){
+    private void user(final Context mCtx, View view, final AlertDialog dialog) {
 
         de.hdodenhof.circleimageview.CircleImageView itemPic;
         final TextView tvName, tvAmount;
@@ -226,7 +232,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         btMin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(amount > 1){
+                if (amount > 1) {
                     amount -= 1;
                     tvAmount.setText(String.valueOf(amount));
                     tvPrice.setText(String.valueOf(Integer.valueOf(mPrice) * amount));
@@ -243,7 +249,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                 Price = tvPrice.getText().toString();
                 address = etAddress.getText().toString();
 
-                if(address.equals("")){
+                if (address.equals("")) {
                     Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
                 } else if (Integer.valueOf(Price) <= credit) {
                     loading.start();
@@ -272,7 +278,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         });
     }
 
-    private void guest(final Context mCtx, View view, final AlertDialog dialog){
+    private void guest(final Context mCtx, View view, final AlertDialog dialog) {
 
         final String[] pay = {"indomaret", "alfamaret", "bca", "bri", "mandiri"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(mCtx, android.R.layout.simple_spinner_dropdown_item, pay);
@@ -365,7 +371,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
         btMin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(amount > 1){
+                if (amount > 1) {
                     amount -= 1;
                     tvAmount.setText(String.valueOf(amount));
                     tvPrice.setText(String.valueOf(Integer.valueOf(mPrice) * amount));
@@ -389,8 +395,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                 mPay = etPay.getText().toString();
                 address = etAddress.getText().toString();
 
-                if(bank){
-                    if(mBank.equals("")){
+                if (bank) {
+                    if (mBank.equals("")) {
                         bank = false;
                     } else {
                         bank = true;
@@ -399,23 +405,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
                     bank = true;
                 }
 
-                if(!bank){
+                if (!bank) {
                     Toast.makeText(mCtx, "masukkan nomor rekening", Toast.LENGTH_SHORT).show();
                     bank = false;
-                } else if(mPay.equals("")){
+                } else if (mPay.equals("")) {
                     Toast.makeText(mCtx, "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
                     bank = false;
-                } else if(address.equals("")){
+                } else if (address.equals("")) {
                     Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
                     bank = false;
-                } else if(Integer.valueOf(price) > Integer.valueOf(mPay) ) {
+                } else if (Integer.valueOf(price) > Integer.valueOf(mPay)) {
                     Toast.makeText(mCtx, "uang anda kurang", Toast.LENGTH_SHORT).show();
                     bank = false;
                 } else {
 
                     bank = false;
                     loading.start();
-                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), price, address, config.getEmail(),"2").enqueue(new Callback<Value>() {
+                    RestApi.getData().itemBuy(userId, mId, String.valueOf(amount), price, address, config.getEmail(), "2").enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
                             loading.stop();

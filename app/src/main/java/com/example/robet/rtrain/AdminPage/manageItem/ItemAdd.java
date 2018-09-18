@@ -67,7 +67,6 @@ public class ItemAdd extends AppCompatActivity {
 
     @OnClick(R.id.btAdd)
     public void onViewClicked() {
-        setResult(253);
         if(etName.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "masukkan nama barang", Toast.LENGTH_SHORT).show();
         } else if (etPrice.getText().toString().equals("")){

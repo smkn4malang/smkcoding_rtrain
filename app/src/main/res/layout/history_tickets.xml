@@ -7,423 +7,293 @@
     android:orientation="vertical"
     tools:context=".ClientPage.HistoryTickets">
 
-    <android.support.v7.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/footer"
-        android:layout_margin="20dp"
-        app:cardElevation="10dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/header"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/top_corner"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/tickets" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="History Pembelian"
-                    android:textColor="#000"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.CardView
+                    <LinearLayout
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/top_radius"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/tickets" />
+
+                        <TextView
+                            android:id="@+id/tvTrainName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="trainName"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="25dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
+                        android:gravity="center_horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvCategory"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:text="Category"
+                            android:textSize="28dp"
+                            android:textStyle="bold"
+                            android:textColor="#000"/>
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Kereta"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/tvTrainName"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="trainName"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                        <android.support.v7.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardElevation="5dp">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Kategori"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:layout_gravity="center"
+                                android:gravity="bottom"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/tvCategory"
-                                android:layout_width="0dp"
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/ic_date" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="Date"
+                                    android:textColor="#000"
+                                    android:id="@+id/tvDate"
+                                    android:textSize="17dp" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Category"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:layout_gravity="center"
+                                android:gravity="bottom"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/ic_time" />
 
-                    </android.support.v7.widget.CardView>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="Time"
+                                    android:id="@+id/tvTime"
+                                    android:textColor="#000"
+                                    android:textSize="17dp" />
 
-                    <android.support.v7.widget.CardView
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_margin="5dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Asal"
+                                android:hint="Asal"
+                                android:textAlignment="center"
+                                android:focusable="false"
+                                android:enabled="false"
                                 android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:id="@+id/tvDepart"/>
 
-                            <TextView
-                                android:id="@+id/tvDepart"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Depart"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                        </android.support.design.widget.TextInputLayout>
 
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_margin="5dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Tujuan"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                            <TextView
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:hint="Tujuan"
+                                android:focusable="false"
+                                android:textAlignment="center"
+                                android:enabled="false"
                                 android:id="@+id/tvDestination"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Destination"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:layout_height="wrap_content" />
 
-                        </LinearLayout>
+                        </android.support.design.widget.TextInputLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <android.support.v7.widget.CardView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_margin="5dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Tanggal"
+                                android:hint="Gerbong"
+                                android:focusable="false"
+                                android:enabled="false"
+                                android:textAlignment="center"
                                 android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:id="@+id/tvCart"/>
 
-                            <TextView
-                                android:id="@+id/tvDate"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Date"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                        </android.support.design.widget.TextInputLayout>
 
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_margin="5dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Waktu"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                            <TextView
-                                android:id="@+id/tvTime"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Time"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Gerbong"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                            <TextView
-                                android:id="@+id/tvCart"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Cart"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="no kursi"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                            <TextView
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:hint="no Kursi"
+                                android:focusable="false"
+                                android:enabled="false"
+                                android:textAlignment="center"
                                 android:id="@+id/tvSeat"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Seat"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:layout_height="wrap_content" />
 
-                        </LinearLayout>
+                        </android.support.design.widget.TextInputLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <android.support.v7.widget.CardView
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
+                        android:layout_margin="5dp">
 
-                        <LinearLayout
+                        <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:textAlignment="center"
+                            android:focusable="false"
+                            android:id="@+id/tvKtp"
+                            android:enabled="false"
+                            android:hint="nomor pengenal"
+                            android:textColor="#000"/>
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Harga"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                    </android.support.design.widget.TextInputLayout>
 
-                            <TextView
-                                android:id="@+id/tvPrice"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Price"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="5dp">
+                        android:layout_margin="5dp">
 
-                        <LinearLayout
+                        <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:textAlignment="center"
+                            android:focusable="false"
+                            android:enabled="false"
+                            android:hint="Harga"
+                            android:id="@+id/tvPrice"
+                            android:textColor="#000"/>
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="No KTP"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                    </android.support.design.widget.TextInputLayout>
 
-                            <TextView
-                                android:id="@+id/tvKtp"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="kartu"
-                                android:textColor="#000"
-                                android:textSize="18dp" />
+                    <LinearLayout
+                        android:id="@+id/footer"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                        </LinearLayout>
+                        <Button
+                            android:id="@+id/btBack"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Back" />
 
-                    </android.support.v7.widget.CardView>
+                        <Button
+                            android:id="@+id/btDelete"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Delete" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </ScrollView>
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/footer"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btBack"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:text="Back" />
-
-        <Button
-            android:id="@+id/btDelete"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="Delete" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

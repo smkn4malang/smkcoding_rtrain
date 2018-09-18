@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,31 +31,6 @@ import retrofit2.Response;
 
 public class PurchaseTicket extends AppCompatActivity {
 
-    @BindView(R.id.tvTrainName)
-    TextView tvTrainName;
-    @BindView(R.id.tvCategory)
-    TextView tvCategory;
-    @BindView(R.id.tvDepart)
-    TextView tvDepart;
-    @BindView(R.id.tvDestination)
-    TextView tvDestination;
-    @BindView(R.id.tvDate)
-    TextView tvDate;
-    @BindView(R.id.tvTime)
-    TextView tvTime;
-    @BindView(R.id.tvCart)
-    TextView tvCart;
-    @BindView(R.id.tvSeat)
-    TextView tvSeat;
-    @BindView(R.id.tvPrice)
-    TextView tvPrice;
-    @BindView(R.id.tvCredit)
-    TextView tvCredit;
-    @BindView(R.id.btBack)
-    Button btBack;
-    @BindView(R.id.btBuy)
-    Button btBuy;
-
     Bundle bundle;
     HashMap<String, String> map;
     Config config;
@@ -66,6 +40,30 @@ public class PurchaseTicket extends AppCompatActivity {
     int count = 1;
     int price = 0;
     Loading loading;
+    @BindView(R.id.tvTrainName)
+    TextView tvTrainName;
+    @BindView(R.id.tvCategory)
+    TextView tvCategory;
+    @BindView(R.id.tvDate)
+    TextView tvDate;
+    @BindView(R.id.tvTime)
+    TextView tvTime;
+    @BindView(R.id.tvDepart)
+    TextInputEditText tvDepart;
+    @BindView(R.id.tvDestination)
+    TextInputEditText tvDestination;
+    @BindView(R.id.tvCart)
+    TextInputEditText tvCart;
+    @BindView(R.id.tvSeat)
+    TextInputEditText tvSeat;
+    @BindView(R.id.tvPrice)
+    TextInputEditText tvPrice;
+    @BindView(R.id.tvCredit)
+    TextInputEditText tvCredit;
+    @BindView(R.id.btBack)
+    Button btBack;
+    @BindView(R.id.btBuy)
+    Button btBuy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +113,7 @@ public class PurchaseTicket extends AppCompatActivity {
                 break;
             case R.id.btBuy:
 
-                if(credit < price){
+                if (credit < price) {
                     Toast.makeText(getApplicationContext(), "uang anda kurang", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -144,10 +142,10 @@ public class PurchaseTicket extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             btBack.setText("Back");
-                            if(count == 1){
+                            if (count == 1) {
                                 btBack.setText("Back");
                                 dialog.cancel();
-                            } else if(count == 2){
+                            } else if (count == 2) {
                                 etKtp.setText(mKtp[(count - 1)]);
                                 btBack.setText("cancel");
                                 count -= 1;
@@ -166,9 +164,9 @@ public class PurchaseTicket extends AppCompatActivity {
                         public void onClick(View view) {
                             btNext.setText("Next");
 
-                            if(count < value){
+                            if (count < value) {
 
-                                if(etKtp.getText().toString().equals("")){
+                                if (etKtp.getText().toString().equals("")) {
                                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
                                 } else {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
@@ -177,9 +175,9 @@ public class PurchaseTicket extends AppCompatActivity {
                                     tvCount.setText("nomor ke " + String.valueOf(count));
                                 }
 
-                            } else if(count == (value - 2)){
+                            } else if (count == (value - 2)) {
 
-                                if(etKtp.getText().toString().equals("")){
+                                if (etKtp.getText().toString().equals("")) {
                                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
                                 } else {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
@@ -191,14 +189,14 @@ public class PurchaseTicket extends AppCompatActivity {
 
                             } else {
 
-                                if(etKtp.getText().toString().equals("")){
+                                if (etKtp.getText().toString().equals("")) {
                                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
                                 } else {
 
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     String ktp = "";
-                                    for(int i = 0; i < value; i++){
-                                        if(ktp.equals("")){
+                                    for (int i = 0; i < value; i++) {
+                                        if (ktp.equals("")) {
                                             ktp = mKtp[i];
                                         } else {
                                             ktp += "," + mKtp[i];
@@ -213,7 +211,7 @@ public class PurchaseTicket extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<Value> call, Response<Value> response) {
                                             loading.stop();
-                                            if(response.body().getInfo()){
+                                            if (response.body().getInfo()) {
 
                                                 Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                                 config.setCredit(response.body().getCredit());
@@ -244,8 +242,9 @@ public class PurchaseTicket extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         setResult(12);
         finish();
     }
+
 }

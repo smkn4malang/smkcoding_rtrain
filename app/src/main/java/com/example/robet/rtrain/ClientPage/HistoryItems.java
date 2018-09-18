@@ -84,7 +84,7 @@ public class HistoryItems extends AppCompatActivity {
                 tvItemName.setText(itemName);
                 tvDesc.setText(desc);
                 tvQty.setText(Qty);
-                tvPrice.setText(price);
+                tvPrice.setText("Rp. " + price);
                 tvDate.setText(date);
                 tvAddress.setText(address);
 

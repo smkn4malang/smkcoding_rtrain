@@ -61,7 +61,7 @@ public class ItemShow extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
-        startActivity(new Intent(getApplicationContext(), ItemAdd.class));
+        startActivityForResult(new Intent(getApplicationContext(), ItemAdd.class), 253);
     }
 
     @Override

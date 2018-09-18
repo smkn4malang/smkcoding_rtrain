@@ -5,15 +5,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,37 +35,6 @@ import retrofit2.Response;
 
 public class PurchaseTicketGuest extends AppCompatActivity {
 
-    @BindView(R.id.tvTrainName)
-    TextView tvTrainName;
-    @BindView(R.id.tvCategory)
-    TextView tvCategory;
-    @BindView(R.id.tvDepart)
-    TextView tvDepart;
-    @BindView(R.id.tvDestination)
-    TextView tvDestination;
-    @BindView(R.id.tvDate)
-    TextView tvDate;
-    @BindView(R.id.tvTime)
-    TextView tvTime;
-    @BindView(R.id.tvCart)
-    TextView tvCart;
-    @BindView(R.id.tvSeat)
-    TextView tvSeat;
-    @BindView(R.id.tvPrice)
-    TextView tvPrice;
-    @BindView(R.id.etPay)
-    TextInputEditText etPay;
-    @BindView(R.id.btBack)
-    Button btBack;
-    @BindView(R.id.btBuy)
-    Button btBuy;
-    @BindView(R.id.spPay)
-    Spinner spPay;
-    @BindView(R.id.etRekening)
-    TextInputEditText etRekening;
-    @BindView(R.id.cvRekening)
-    CardView cvRekening;
-
     HashMap<String, String> map;
     Bundle bundle;
     Loading loading;
@@ -79,6 +47,36 @@ public class PurchaseTicketGuest extends AppCompatActivity {
     int price = 0;
     int count = 1;
     int tax = 0;
+    @BindView(R.id.tvTrainName)
+    TextView tvTrainName;
+    @BindView(R.id.tvCategory)
+    TextView tvCategory;
+    @BindView(R.id.tvDate)
+    TextView tvDate;
+    @BindView(R.id.tvTime)
+    TextView tvTime;
+    @BindView(R.id.tvDepart)
+    TextInputEditText tvDepart;
+    @BindView(R.id.tvDestination)
+    TextInputEditText tvDestination;
+    @BindView(R.id.tvCart)
+    TextInputEditText tvCart;
+    @BindView(R.id.tvSeat)
+    TextInputEditText tvSeat;
+    @BindView(R.id.tvPrice)
+    TextInputEditText tvPrice;
+    @BindView(R.id.spPay)
+    Spinner spPay;
+    @BindView(R.id.etRekening)
+    TextInputEditText etRekening;
+    @BindView(R.id.TilRekening)
+    TextInputLayout TilRekening;
+    @BindView(R.id.etPay)
+    TextInputEditText etPay;
+    @BindView(R.id.btBack)
+    Button btBack;
+    @BindView(R.id.btBuy)
+    Button btBuy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +114,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
         tvSeat.setText(seat);
         tvPrice.setText(String.valueOf(finalPrice));
 
-        cvRekening.setVisibility(View.GONE);
+        TilRekening.setVisibility(View.GONE);
 
         String[] mPay = {"alfamaret", "indomaret", "bca", "bri", "mandiri"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(PurchaseTicketGuest.this,
@@ -129,27 +127,27 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                 switch (index) {
                     case 0:
                         tax = 2500;
-                        cvRekening.setVisibility(View.GONE);
+                        TilRekening.setVisibility(View.GONE);
                         bank = false;
                         break;
                     case 1:
                         tax = 2500;
-                        cvRekening.setVisibility(View.GONE);
+                        TilRekening.setVisibility(View.GONE);
                         bank = false;
                         break;
                     case 2:
                         tax = 5000;
-                        cvRekening.setVisibility(View.VISIBLE);
+                        TilRekening.setVisibility(View.VISIBLE);
                         bank = true;
                         break;
                     case 3:
                         tax = 7500;
-                        cvRekening.setVisibility(View.VISIBLE);
+                        TilRekening.setVisibility(View.VISIBLE);
                         bank = true;
                         break;
                     case 4:
                         tax = 5000;
-                        cvRekening.setVisibility(View.VISIBLE);
+                        TilRekening.setVisibility(View.VISIBLE);
                         bank = true;
                         break;
                 }
@@ -324,7 +322,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         setResult(12);
         finish();
     }

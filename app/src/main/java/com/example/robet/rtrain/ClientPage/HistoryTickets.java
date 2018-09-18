@@ -1,6 +1,7 @@
 package com.example.robet.rtrain.ClientPage;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
-import com.example.robet.rtrain.gson.HistoryResponse;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
@@ -24,35 +24,35 @@ import retrofit2.Response;
 
 public class HistoryTickets extends AppCompatActivity {
 
-    @BindView(R.id.tvTrainName)
-    TextView tvTrainName;
-    @BindView(R.id.tvCategory)
-    TextView tvCategory;
-    @BindView(R.id.tvDepart)
-    TextView tvDepart;
-    @BindView(R.id.tvDestination)
-    TextView tvDestination;
-    @BindView(R.id.tvDate)
-    TextView tvDate;
-    @BindView(R.id.tvTime)
-    TextView tvTime;
-    @BindView(R.id.tvCart)
-    TextView tvCart;
-    @BindView(R.id.tvSeat)
-    TextView tvSeat;
-    @BindView(R.id.tvPrice)
-    TextView tvPrice;
-    @BindView(R.id.tvKtp)
-    TextView tvKtp;
-    @BindView(R.id.btBack)
-    Button btBack;
-    @BindView(R.id.btDelete)
-    Button btDelete;
-
     String id, pid;
     Bundle bundle;
     Loading loading;
     Config config;
+
+    @BindView(R.id.tvTrainName)
+    TextView tvTrainName;
+    @BindView(R.id.tvCategory)
+    TextView tvCategory;
+    @BindView(R.id.tvDate)
+    TextView tvDate;
+    @BindView(R.id.tvTime)
+    TextView tvTime;
+    @BindView(R.id.tvDepart)
+    TextInputEditText tvDepart;
+    @BindView(R.id.tvDestination)
+    TextInputEditText tvDestination;
+    @BindView(R.id.tvCart)
+    TextInputEditText tvCart;
+    @BindView(R.id.tvSeat)
+    TextInputEditText tvSeat;
+    @BindView(R.id.tvKtp)
+    TextInputEditText tvKtp;
+    @BindView(R.id.tvPrice)
+    TextInputEditText tvPrice;
+    @BindView(R.id.btBack)
+    Button btBack;
+    @BindView(R.id.btDelete)
+    Button btDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,4 +126,5 @@ public class HistoryTickets extends AppCompatActivity {
                 break;
         }
     }
+
 }
