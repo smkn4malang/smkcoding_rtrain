@@ -47,6 +47,21 @@ public class Shop extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(Shop.this, 2));
         recyclerView.setAdapter(adapter);
 
+        getData();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (config.getInfo("user")) {
+            intent = new Intent();
+            setResult(2, intent);
+        }
+        Shop.this.finish();
+    }
+
+    private void getData(){
+
         loading.start();
         RestApi.getData().ItemShow().enqueue(new Callback<ItemResponse>() {
             @Override
@@ -62,15 +77,5 @@ public class Shop extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (config.getInfo("user")) {
-            intent = new Intent();
-            setResult(2, intent);
-        }
-        Shop.this.finish();
     }
 }

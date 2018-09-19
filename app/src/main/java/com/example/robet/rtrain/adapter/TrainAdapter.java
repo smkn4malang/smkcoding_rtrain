@@ -39,6 +39,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
     private HashMap<String, String> map = new HashMap<>();
     private Random random = new Random();
     int color;
+    boolean stat;
 
     @NonNull
     @Override
@@ -105,7 +106,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         }
     }
 
-    private void pickDetails(final Context mCtx, String mId) {
+    private void pickDetails(final Context mCtx, final String mId) {
 
         final Config config = new Config(mCtx);
         final String[] city, time, cart;
@@ -125,25 +126,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         btBack = view.findViewById(R.id.btBack);
         btNext = view.findViewById(R.id.btNext);
 
-        loading.start();
-        RestApi.getData().cartShow(mId).enqueue(new Callback<CartResponse>() {
-            @Override
-            public void onResponse(Call<CartResponse> call, Response<CartResponse> response) {
-                loading.stop();
-                int size = response.body().getCart().size();
-                String[] data = new String[size];
-                for (int i = 0; i < size; i++) {
-                    data[i] = "Gerbong " + String.valueOf(response.body().getCart().get(i).getNum());
-                }
-                config.setCart(data);
-            }
-
-            @Override
-            public void onFailure(Call<CartResponse> call, Throwable t) {
-                loading.stop();
-                Toast.makeText(mCtx, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        getData(mCtx, mId);
 
         city = config.getCity();
         time = config.getTime();
@@ -206,16 +189,16 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
                     }
 
                     if (!departStat) {
-                        Toast.makeText(mCtx, "pilih kota asal dengan benar", Toast.LENGTH_SHORT).show();
+                        etDepart.setError("pilih dengan benar");
                     } else if (!destinationStat) {
-                        Toast.makeText(mCtx, "pilih kota tujuan dengan benar", Toast.LENGTH_SHORT).show();
+                        etDestination.setError("pilih dengan benar");
                     } else if (mDepart.equals(mDestination)) {
-                        Toast.makeText(mCtx, "anda harus memilih kota yang berbeda", Toast.LENGTH_SHORT).show();
+                        etDestination.setError("pilih tujuan yang berbeda");
                     } else {
                         String[] data = {mTrainId, mDate, mTime, mCategory, mDestination, mDepart, mCart};
-                        if(!getStatus(mCtx, data)){
-                            Toast.makeText(mCtx, "gerbong tersebut telah penuh", Toast.LENGTH_SHORT).show();
-                            loading.stop();
+                        getStatus(mCtx, data, mId, dialog);
+                        if(!config.getStatus()){
+                            Toast.makeText(mCtx, "gerbong telah penuh", Toast.LENGTH_SHORT).show();
                         } else {
                             map.put("time", mTime);
                             map.put("depart", mDepart);
@@ -233,7 +216,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         });
     }
 
-    private boolean getStatus(final Context mCtx, String[] mData) {
+    private void getStatus(final Context mCtx, final String[] mData, final String mId, final AlertDialog dialog) {
 
         final Loading loading = new Loading(mCtx);
         final Config config = new Config(mCtx);
@@ -242,9 +225,9 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         RestApi.getData().trainStatus(mData[0], mData[1], mData[2], mData[3], mData[4], mData[5], mData[6]).enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
+                stat = true;
                 loading.stop();
-                boolean status = response.body().getInfo();
-                config.setStatus(status);
+                config.setStatus(response.body().getInfo());
             }
 
             @Override
@@ -253,7 +236,30 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
                 Toast.makeText(mCtx, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        return config.getStatus();
+    private void getData(final Context context, final String id){
+        final Loading loading = new Loading(context);
+        final Config config = new Config(context);
+
+        loading.start();
+        RestApi.getData().cartShow(id).enqueue(new Callback<CartResponse>() {
+            @Override
+            public void onResponse(Call<CartResponse> call, Response<CartResponse> response) {
+                loading.stop();
+                int size = response.body().getCart().size();
+                String[] data = new String[size];
+                for (int i = 0; i < size; i++) {
+                    data[i] = "Gerbong " + String.valueOf(response.body().getCart().get(i).getNum());
+                }
+                config.setCart(data);
+            }
+
+            @Override
+            public void onFailure(Call<CartResponse> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -72,51 +72,12 @@ public class userLogin extends AppCompatActivity {
 
                 if (!username.equals("")) {
                     if (!password.equals("")) {
-
-                        loading.start();
-                        RestApi.getData().loginUser(username, password).enqueue(new Callback<Value>() {
-                            @Override
-                            public void onResponse(Call<Value> call, Response<Value> response) {
-
-                                loading.stop();
-                                info = response.body().getLogin();
-
-                                if (info) {
-
-                                    name = response.body().getName();
-                                    message = response.body().getMessage();
-
-                                    config.setName(name);
-                                    config.setInfo("user", info);
-                                    config.setCredit(response.body().getCredit());
-                                    config.setUsername(response.body().getUsername());
-                                    config.setPassword(response.body().getPassword());
-                                    config.setId(response.body().getId());
-
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                    intent = new Intent(getApplicationContext(), Index.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
-                                } else {
-                                    message = response.body().getMessage();
-                                   Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
-                                loading.stop();
-                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
+                        onLogin();
                     } else {
-                        Toast.makeText(getApplicationContext(), "kolom password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                        etPassword.setError("wajib diisi");
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "kolom username tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                    etUsername.setError("wajib diisi");
                 }
 
                 break;
@@ -127,5 +88,47 @@ public class userLogin extends AppCompatActivity {
 
                 break;
         }
+    }
+
+    private void onLogin(){
+
+        loading.start();
+        RestApi.getData().loginUser(username, password).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+
+                loading.stop();
+                info = response.body().getLogin();
+
+                if (info) {
+
+                    name = response.body().getName();
+                    message = response.body().getMessage();
+
+                    config.setName(name);
+                    config.setInfo("user", info);
+                    config.setCredit(response.body().getCredit());
+                    config.setUsername(response.body().getUsername());
+                    config.setPassword(response.body().getPassword());
+                    config.setId(response.body().getId());
+
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    intent = new Intent(getApplicationContext(), Index.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                } else {
+                    message = response.body().getMessage();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

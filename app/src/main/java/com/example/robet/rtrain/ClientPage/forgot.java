@@ -69,29 +69,7 @@ public class forgot extends AppCompatActivity {
 
                 if (!username.equals("")) {
 
-                    loading.start();
-                    RestApi.getData().forgotUser(username).enqueue(new Callback<Value>() {
-                        @Override
-                        public void onResponse(Call<Value> call, Response<Value> response) {
-
-                            loading.stop();
-                            message = response.body().getMessage();
-                            info = response.body().getInfo();
-
-                            if (info == true) {
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                showDialog();
-                            } else {
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Value> call, Throwable t) {
-                            loading.stop();
-                            Toast.makeText(getApplicationContext(), "jaringan error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    onForgotSend();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "kolom email tidak boleh kosong", Toast.LENGTH_SHORT).show();
@@ -166,5 +144,31 @@ public class forgot extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void onForgotSend(){
+        loading.start();
+        RestApi.getData().forgotUser(username).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+
+                loading.stop();
+                message = response.body().getMessage();
+                info = response.body().getInfo();
+
+                if (info == true) {
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    showDialog();
+                } else {
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

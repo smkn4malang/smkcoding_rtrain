@@ -337,16 +337,16 @@ public class ItemMore extends AppCompatActivity {
                 }
 
                 if(!bank){
-                    Toast.makeText(mCtx, "masukkan nomor rekening", Toast.LENGTH_SHORT).show();
+                    etRekening.setError("wajib diisi");
                     bank = false;
                 } else if(mPay.equals("")){
-                    Toast.makeText(mCtx, "masukkan uang pembayaran anda", Toast.LENGTH_SHORT).show();
+                    etPay.setError("wajib diisi");
                     bank = false;
                 } else if(address.equals("")){
-                    Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
+                    etAddress.setError("wajib diisi");
                     bank = false;
                 } else if(Integer.valueOf(price) > Integer.valueOf(mPay) ) {
-                    Toast.makeText(mCtx, "uang anda kurang", Toast.LENGTH_SHORT).show();
+                    etPay.setError("uang anda kurang");
                     bank = false;
                 } else {
 
@@ -364,7 +364,7 @@ public class ItemMore extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<Value> call, Throwable t) {
                             loading.stop();
-                            Toast.makeText(mCtx, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mCtx, "no internet connection", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

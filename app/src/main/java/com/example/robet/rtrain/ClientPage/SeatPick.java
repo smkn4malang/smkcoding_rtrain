@@ -72,35 +72,7 @@ public class SeatPick extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerView.setAdapter(adapter);
 
-        loading.start();
-        RestApi.getData().SeatList(map.get("trainId"),
-                map.get("date"),
-                map.get("time"),
-                map.get("category"),
-                map.get("destination"),
-                map.get("depart"),
-                map.get("cart")).enqueue(new Callback<SeatResponse>() {
-            @Override
-            public void onResponse(Call<SeatResponse> call, Response<SeatResponse> response) {
-                loading.stop();
-
-                int size = response.body().getSeat().size();
-                seat = new boolean[size];
-                for (i = 0; i < size; i++) {
-                    seat[i] = false;
-                }
-
-                adapter.seat = seat;
-                adapter.ListSeat.addAll(response.body().getSeat());
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<SeatResponse> call, Throwable t) {
-                loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        getData();
 
     }
 
@@ -184,5 +156,37 @@ public class SeatPick extends AppCompatActivity {
         if(resultCode == 12){
             map.remove("choose");
         }
+    }
+
+    private void getData(){
+        loading.start();
+        RestApi.getData().SeatList(map.get("trainId"),
+                map.get("date"),
+                map.get("time"),
+                map.get("category"),
+                map.get("destination"),
+                map.get("depart"),
+                map.get("cart")).enqueue(new Callback<SeatResponse>() {
+            @Override
+            public void onResponse(Call<SeatResponse> call, Response<SeatResponse> response) {
+                loading.stop();
+
+                int size = response.body().getSeat().size();
+                seat = new boolean[size];
+                for (i = 0; i < size; i++) {
+                    seat[i] = false;
+                }
+
+                adapter.seat = seat;
+                adapter.ListSeat.addAll(response.body().getSeat());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<SeatResponse> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

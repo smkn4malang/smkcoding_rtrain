@@ -34,7 +34,7 @@ public class PurchaseTicket extends AppCompatActivity {
     Bundle bundle;
     HashMap<String, String> map;
     Config config;
-    String trainId, trainName, userId, date, seat;
+    String trainId, trainName, userId, date, seat, ktp;
     String time, cart, category, destination, depart;
     int credit = 0;
     int count = 1;
@@ -167,7 +167,7 @@ public class PurchaseTicket extends AppCompatActivity {
                             if (count < value) {
 
                                 if (etKtp.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+                                    etKtp.setError("wajib diisi");
                                 } else {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
@@ -178,7 +178,7 @@ public class PurchaseTicket extends AppCompatActivity {
                             } else if (count == (value - 2)) {
 
                                 if (etKtp.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+                                    etKtp.setError("wajib diisi");
                                 } else {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
@@ -189,47 +189,16 @@ public class PurchaseTicket extends AppCompatActivity {
 
                             } else {
 
-                                if (etKtp.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
-                                } else {
-
-                                    mKtp[(count - 1)] = etKtp.getText().toString();
-                                    String ktp = "";
-                                    for (int i = 0; i < value; i++) {
-                                        if (ktp.equals("")) {
-                                            ktp = mKtp[i];
-                                        } else {
-                                            ktp += "," + mKtp[i];
-                                        }
+                                mKtp[(count - 1)] = etKtp.getText().toString();
+                                for (int i = 0; i < value; i++) {
+                                    if (ktp.equals("")) {
+                                        ktp = mKtp[i];
+                                    } else {
+                                        ktp += "," + mKtp[i];
                                     }
-
-                                    loading.start();
-                                    RestApi.getData().ticketPurchase(
-                                            trainId, userId, date, seat, destination, depart, time,
-                                            String.valueOf(price), String.valueOf(credit), cart, "user", ktp
-                                    ).enqueue(new Callback<Value>() {
-                                        @Override
-                                        public void onResponse(Call<Value> call, Response<Value> response) {
-                                            loading.stop();
-                                            if (response.body().getInfo()) {
-
-                                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                                config.setCredit(response.body().getCredit());
-
-                                                Intent intent = new Intent(getApplicationContext(), Index.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(intent);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<Value> call, Throwable t) {
-                                            loading.stop();
-                                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
                                 }
+
+                                onPurchase();
 
                             }
                         }
@@ -245,6 +214,35 @@ public class PurchaseTicket extends AppCompatActivity {
     public void onBackPressed() {
         setResult(12);
         finish();
+    }
+
+    private void onPurchase() {
+        loading.start();
+        RestApi.getData().ticketPurchase(
+                trainId, userId, date, seat, destination, depart, time,
+                String.valueOf(price), String.valueOf(credit), cart, "user", ktp
+        ).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                loading.stop();
+                if (response.body().getInfo()) {
+
+                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    config.setCredit(response.body().getCredit());
+
+                    Intent intent = new Intent(getApplicationContext(), Index.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -55,36 +56,43 @@ public class guestLogin extends AppCompatActivity {
 
         if (!name.equals("")) {
             if (!email.equals("")) {
-
-                loading.start();
-                RestApi.getData().loginGuest(name, email).enqueue(new Callback<Value>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Value> call, @NonNull Response<Value> response) {
-                        loading.stop();
-                        message = response.body().getMessage();
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-
-                        config.setName(name);
-                        config.setEmail(email);
-                        config.setId(response.body().getId());
-                        config.setInfo("guest", true);
-
-                        intent = new Intent(getApplicationContext(), Index.class);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
-                        loading.stop();
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    etEmail.setError("email tidak valid");
+                } else {
+                    onLogin();
+                }
             } else {
-                Toast.makeText(getApplicationContext(), "kolom email tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                etEmail.setError("wajib diisi");
             }
         } else {
-            Toast.makeText(getApplicationContext(), "kolom nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            etUsername.setError("wajib diisi");
         }
     }
+
+    private void onLogin(){
+        loading.start();
+        RestApi.getData().loginGuest(name, email).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(@NonNull Call<Value> call, @NonNull Response<Value> response) {
+                loading.stop();
+                message = response.body().getMessage();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+                config.setName(name);
+                config.setEmail(email);
+                config.setId(response.body().getId());
+                config.setInfo("guest", true);
+
+                intent = new Intent(getApplicationContext(), Index.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

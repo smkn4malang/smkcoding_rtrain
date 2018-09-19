@@ -35,6 +35,8 @@ public class UserSetting extends AppCompatActivity {
     Config config;
     Loading loading;
     Intent intent;
+    boolean stat;
+
     @BindView(R.id.imgTop)
     ImageView imgTop;
     @BindView(R.id.tvName)
@@ -152,50 +154,25 @@ public class UserSetting extends AppCompatActivity {
                 switch (type) {
                     case 1:
 
-                        loading.start();
-                        RestApi.getData().ChangeName(config.getId(), etText.getText().toString()).enqueue(new Callback<Value>() {
-                            @Override
-                            public void onResponse(Call<Value> call, Response<Value> response) {
-
-                                loading.stop();
-                                String message = response.body().getMessage();
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                config.setName(etText.getText().toString());
-                                tvName.setText(etText.getText().toString());
-                                dialog.cancel();
-                            }
-
-                            @Override
-                            public void onFailure(Call<Value> call, Throwable t) {
-                                loading.stop();
-                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        if (!etText.getText().toString().equals("")) {
+                            onEditName(config.getId(), etText.getText().toString());
+                            dialog.cancel();
+                        } else {
+                            etText.setError("wajib diisi");
+                        }
 
                         break;
                     case 2:
 
-                        loading.start();
-                        RestApi.getData().ChangePW(config.getId(), config.getPassword()).enqueue(new Callback<Value>() {
-                            @Override
-                            public void onResponse(Call<Value> call, Response<Value> response) {
+                        if (!etText.getText().toString().equals("")) {
 
-                                loading.stop();
-                                String message;
-                                message = response.body().getMessage();
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                config.setPassword(etText.getText().toString());
-                                tvPassword.setText(etText.getText().toString());
-                                dialog.cancel();
+                            onEditPassword(config.getId(), etText.getText().toString());
+                            dialog.cancel();
 
-                            }
 
-                            @Override
-                            public void onFailure(Call<Value> call, Throwable t) {
-                                loading.stop();
-                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        } else {
+                            etText.setError("wajib diisi");
+                        }
 
                         break;
                 }
@@ -322,5 +299,51 @@ public class UserSetting extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void onEditName(final int id, final String newName) {
+        loading.start();
+        RestApi.getData().ChangeName(id, newName).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+
+                loading.stop();
+                String message = response.body().getMessage();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                config.setName(newName);
+                tvName.setText(newName);
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void onEditPassword(final int id, final String password) {
+        loading.start();
+        RestApi.getData().ChangePW(id, password).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+
+                loading.stop();
+                String message;
+                message = response.body().getMessage();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                config.setPassword(password);
+                tvPassword.setText(password);
+                stat = true;
+
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                stat = false;
+                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

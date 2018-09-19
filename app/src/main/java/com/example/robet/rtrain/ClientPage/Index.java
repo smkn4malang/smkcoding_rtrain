@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,6 +28,7 @@ import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -45,7 +45,6 @@ public class Index extends AppCompatActivity {
     String[] time, city;
     boolean bank = false;
 
-    public Toolbar toolbar;
     @BindView(R.id.tvName)
     TextView tvName;
     @BindView(R.id.tvFeatures)
@@ -83,8 +82,6 @@ public class Index extends AppCompatActivity {
     @BindView(R.id.buy5get1)
     CardView buy5get1;
 
-    boolean status = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         config = new Config(this);
@@ -93,26 +90,11 @@ public class Index extends AppCompatActivity {
         setContentView(R.layout.index);
         ButterKnife.bind(this);
 
+        onDelete();
 
         loading = new Loading(this);
         tvName.setText(config.getName());
-        if(!status) {
-            getData();
-        }
-
-        RestApi.getData().systemHistoryDelete().enqueue(new Callback<Value>() {
-            @Override
-            public void onResponse(Call<Value> call, Response<Value> response) {
-                if (!response.body().getInfo()) {
-                    Toast.makeText(getApplicationContext(), "jaringan bermasalah", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Value> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        getData();
 
         if (config.getInfo("user")) {
             btLogout.setAlpha(0);
@@ -279,7 +261,7 @@ public class Index extends AppCompatActivity {
                                     @Override
                                     public void onFailure(Call<Value> call, Throwable t) {
                                         loading.stop();
-                                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
@@ -301,9 +283,8 @@ public class Index extends AppCompatActivity {
         }
     }
 
-    public void getData() {
+    private void getData() {
 
-        loading.start();
         RestApi.getData().TimeList().enqueue(new Callback<TimeResponse>() {
             @Override
             public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
@@ -313,35 +294,50 @@ public class Index extends AppCompatActivity {
                     time[i] = response.body().getTime().get(i).getTime();
                 }
                 config.setTime(time);
+
+                RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
+                    @Override
+                    public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                        loading.stop();
+                        int size = response.body().getCity().size();
+                        city = new String[size];
+                        for (int i = 0; i < size; i++) {
+                            city[i] = response.body().getCity().get(i).getName();
+                        }
+                        config.setCity(city);
+                    }
+
+                    @Override
+                    public void onFailure(Call<CityResponse> call, Throwable t) {
+                        loading.stop();
+                        Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
             public void onFailure(Call<TimeResponse> call, Throwable t) {
                 loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
             }
         });
 
-        RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
+    }
+
+    private void onDelete() {
+        RestApi.getData().systemHistoryDelete().enqueue(new Callback<Value>() {
             @Override
-            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                int size = response.body().getCity().size();
-                city = new String[size];
-                for (int i = 0; i < size; i++) {
-                    city[i] = response.body().getCity().get(i).getName();
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                if (!response.body().getInfo()) {
+                    Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
                 }
-                config.setCity(city);
-                loading.stop();
             }
 
             @Override
-            public void onFailure(Call<CityResponse> call, Throwable t) {
-                loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Value> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
             }
         });
-        status = true;
-
     }
 
     @Override

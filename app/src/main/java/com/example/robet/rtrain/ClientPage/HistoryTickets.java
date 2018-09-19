@@ -67,6 +67,25 @@ public class HistoryTickets extends AppCompatActivity {
         pid = (String) bundle.get("pid");
         loading = new Loading(this);
 
+        getData();
+
+    }
+
+    @OnClick({R.id.btBack, R.id.btDelete})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btBack:
+                HistoryTickets.this.finish();
+                break;
+            case R.id.btDelete:
+
+                onDelete();
+
+                break;
+        }
+    }
+
+    private void getData(){
         loading.start();
         RestApi.getData().ticketHistory(pid).enqueue(new Callback<TicketHistory>() {
             @Override
@@ -95,36 +114,25 @@ public class HistoryTickets extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    @OnClick({R.id.btBack, R.id.btDelete})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btBack:
+    private void onDelete(){
+        loading.start();
+        RestApi.getData().historyDelete(id).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), "berhasil hapus data", Toast.LENGTH_SHORT).show();
+                setResult(25);
                 HistoryTickets.this.finish();
-                break;
-            case R.id.btDelete:
+            }
 
-                loading.start();
-                RestApi.getData().historyDelete(id).enqueue(new Callback<Value>() {
-                    @Override
-                    public void onResponse(Call<Value> call, Response<Value> response) {
-                        loading.stop();
-                        Toast.makeText(getApplicationContext(), "berhasil hapus data", Toast.LENGTH_SHORT).show();
-                        setResult(25);
-                        HistoryTickets.this.finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Value> call, Throwable t) {
-                        loading.stop();
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                break;
-        }
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

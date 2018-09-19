@@ -90,21 +90,7 @@ public class TrainShow extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(adapter);
 
-        loading.start();
-        RestApi.getData().trainShow().enqueue(new Callback<TrainResponse>() {
-            @Override
-            public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
-                loading.stop();
-                adapter.listTrain.addAll(response.body().getTrain());
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<TrainResponse> call, Throwable t) {
-                loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        getData();
 
     }
 
@@ -186,6 +172,24 @@ public class TrainShow extends AppCompatActivity {
 
         loading.start();
         RestApi.getData().TrainSearch(mDate, mCategory).enqueue(new Callback<TrainResponse>() {
+            @Override
+            public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
+                loading.stop();
+                adapter.listTrain.addAll(response.body().getTrain());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<TrainResponse> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getData(){
+        loading.start();
+        RestApi.getData().trainShow().enqueue(new Callback<TrainResponse>() {
             @Override
             public void onResponse(Call<TrainResponse> call, Response<TrainResponse> response) {
                 loading.stop();

@@ -1,5 +1,6 @@
 package com.example.robet.rtrain.AdminPage;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class ManageCity extends AppCompatActivity {
     String[] city;
     Loading loading;
     String mCity, old;
+    boolean stat;
+
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.fab)
@@ -82,6 +85,7 @@ public class ManageCity extends AppCompatActivity {
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
                 loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -175,27 +179,9 @@ public class ManageCity extends AppCompatActivity {
                 if (mCity.equals("")) {
                     Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
                 } else {
-
-                    Toast.makeText(getApplicationContext(), mCity, Toast.LENGTH_SHORT).show();
-                    loading.start();
-                    RestApi.getData().editCity(old, mCity).enqueue(new Callback<Value>() {
-                        @Override
-                        public void onResponse(Call<Value> call, Response<Value> response) {
-                            loading.stop();
-                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            if (response.body().getInfo()) {
-                                ManageCity.this.finish();
-                                startActivity(getIntent());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Value> call, Throwable t) {
-                            loading.stop();
-                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                    onEditCity(ManageCity.this);
+                    ManageCity.this.finish();
+                    startActivity(getIntent());
                 }
 
             }
@@ -205,22 +191,49 @@ public class ManageCity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                loading.start();
-                RestApi.getData().deleteCity(old).enqueue(new Callback<Value>() {
-                    @Override
-                    public void onResponse(Call<Value> call, Response<Value> response) {
-                        loading.stop();
-                        Toast.makeText(getApplicationContext(), "berhasil hapus data", Toast.LENGTH_SHORT).show();
-                        ManageCity.this.finish();
-                        startActivity(getIntent());
-                    }
+                onDeleteCity(ManageCity.this);
+                ManageCity.this.finish();
+                startActivity(getIntent());
 
-                    @Override
-                    public void onFailure(Call<Value> call, Throwable t) {
+            }
+        });
+    }
 
-                    }
-                });
+    private void onEditCity(final Context context) {
+        loading.start();
+        RestApi.getData().editCity(old, mCity).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                stat = response.body().getInfo();
+            }
 
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void onDeleteCity(final Context context) {
+        loading.start();
+        RestApi.getData().deleteCity(old).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), "berhasil hapus data", Toast.LENGTH_SHORT).show();
+                ManageCity.this.finish();
+                startActivity(getIntent());
+                stat = true;
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

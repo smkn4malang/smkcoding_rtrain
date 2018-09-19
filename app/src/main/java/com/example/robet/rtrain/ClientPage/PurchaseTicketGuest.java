@@ -39,7 +39,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
     Bundle bundle;
     Loading loading;
     Config config;
-    String trainId, trainName, guestId, date, seat, mPay;
+    String trainId, trainName, guestId, date, seat, mPay, ktp;
     String time, cart, category, destination, depart, rekening;
     boolean bank = false;
     int pay = 0;
@@ -249,7 +249,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                             if (count < value) {
 
                                 if (etKtp.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+                                    etKtp.setError("wajib diisi");
                                 } else {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
@@ -260,7 +260,7 @@ public class PurchaseTicketGuest extends AppCompatActivity {
                             } else if (count == (value - 2)) {
 
                                 if (etKtp.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
+                                    etKtp.setError("wajib diisi");
                                 } else {
                                     mKtp[(count - 1)] = etKtp.getText().toString();
                                     etKtp.setText("");
@@ -271,45 +271,14 @@ public class PurchaseTicketGuest extends AppCompatActivity {
 
                             } else {
 
-                                if (etKtp.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "isi data dengan benar", Toast.LENGTH_SHORT).show();
-                                } else {
-
-                                    mKtp[(count - 1)] = etKtp.getText().toString();
-                                    StringBuilder stringBuilder = new StringBuilder();
-                                    String ktp;
-                                    for (int i = 0; i < value; i++) {
-                                        stringBuilder.append(mKtp[i]).append(",");
-                                    }
-                                    ktp = stringBuilder.toString();
-
-                                    loading.start();
-                                    RestApi.getData().ticketPurchase(
-                                            trainId, guestId, date, seat, destination, depart, time,
-                                            String.valueOf(price), String.valueOf(finalPrice), cart, "guest", ktp
-                                    ).enqueue(new Callback<Value>() {
-                                        @Override
-                                        public void onResponse(Call<Value> call, Response<Value> response) {
-                                            loading.stop();
-                                            if (response.body().getInfo()) {
-
-                                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                                config.setCredit(response.body().getCredit());
-
-                                                Intent intent = new Intent(getApplicationContext(), Index.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(intent);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<Value> call, Throwable t) {
-                                            loading.stop();
-                                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                mKtp[(count - 1)] = etKtp.getText().toString();
+                                StringBuilder stringBuilder = new StringBuilder();
+                                for (int i = 0; i < value; i++) {
+                                    stringBuilder.append(mKtp[i]).append(",");
                                 }
+                                ktp = stringBuilder.toString();
+
+                                onPurchase();
                             }
                         }
                     });
@@ -325,6 +294,35 @@ public class PurchaseTicketGuest extends AppCompatActivity {
     public void onBackPressed() {
         setResult(12);
         finish();
+    }
+
+    private void onPurchase() {
+        loading.start();
+        RestApi.getData().ticketPurchase(
+                trainId, guestId, date, seat, destination, depart, time,
+                String.valueOf(price), String.valueOf(finalPrice), cart, "guest", ktp
+        ).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                loading.stop();
+                if (response.body().getInfo()) {
+
+                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    config.setCredit(response.body().getCredit());
+
+                    Intent intent = new Intent(getApplicationContext(), Index.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
 

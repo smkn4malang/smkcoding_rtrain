@@ -52,6 +52,34 @@ public class History extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(adapter);
 
+        getData();
+
+    }
+
+    @OnClick({R.id.btBack, R.id.btClear})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btBack:
+                History.this.finish();
+                break;
+            case R.id.btClear:
+
+                onClear();
+
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int RequestCode, int resultCode, Intent intent){
+        if(RequestCode == 25){
+            Intent i = getIntent();
+            finish();
+            startActivity(i);
+        }
+    }
+
+    private void getData(){
         loading.start();
         RestApi.getData().historyShow(String.valueOf(config.getId())).enqueue(new Callback<HistoryResponse>() {
             @Override
@@ -71,43 +99,23 @@ public class History extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    @OnClick({R.id.btBack, R.id.btClear})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btBack:
+    private void onClear(){
+        loading.start();
+        RestApi.getData().historyDeleteAll(String.valueOf(config.getId())).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), "berhasil menghapus history", Toast.LENGTH_SHORT).show();
                 History.this.finish();
-                break;
-            case R.id.btClear:
+            }
 
-                loading.start();
-                RestApi.getData().historyDeleteAll(String.valueOf(config.getId())).enqueue(new Callback<Value>() {
-                    @Override
-                    public void onResponse(Call<Value> call, Response<Value> response) {
-                        loading.stop();
-                        Toast.makeText(getApplicationContext(), "berhasil menghapus history", Toast.LENGTH_SHORT).show();
-                        History.this.finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Value> call, Throwable t) {
-                        loading.stop();
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int RequestCode, int resultCode, Intent intent){
-        if(RequestCode == 25){
-            Intent i = getIntent();
-            finish();
-            startActivity(i);
-        }
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -69,42 +70,47 @@ public class register extends AppCompatActivity {
                 repassword = etRePassword.getText().toString();
 
                 if(name.equals("")){
-                    Toast.makeText(getApplicationContext(), "isi kolom nama", Toast.LENGTH_SHORT).show();
+                    etName.setError("wajib diisi");
                 } else if(username.equals("")){
-                    Toast.makeText(getApplicationContext(), "isi kolom username", Toast.LENGTH_SHORT).show();
+                    etUsername.setError("wajib diisi");
                 } else if(email.equals("")){
-                    Toast.makeText(getApplicationContext(), "isi kolom email", Toast.LENGTH_SHORT).show();
+                    etEmail.setError("wajib diisi");
                 } else if(password.equals("")){
-                    Toast.makeText(getApplicationContext(), "isi kolom password", Toast.LENGTH_SHORT).show();
+                    etPassword.setError("wajib diisi");
                 } else if(repassword.equals("")){
-                    Toast.makeText(getApplicationContext(), "masukkan kembali password anda", Toast.LENGTH_SHORT).show();
-                }else if(!password.equals(repassword)){
-                    Toast.makeText(getApplicationContext(), "password tidak sama", Toast.LENGTH_SHORT).show();
+                    etRePassword.setError("wajib diisi");
+                } else if(!password.equals(repassword)){
+                    etRePassword.setError("password tidak match");
+                } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    etEmail.setError("email tidak valid");
                 } else {
 
-                    loading.start();
-                    RestApi.getData().registerUser(name, username, password, email).enqueue(new Callback<Value>() {
-                        @Override
-                        public void onResponse(Call<Value> call, Response<Value> response) {
-                            loading.stop();
-                            String message = response.body().getMessage();
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), userLogin.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                        }
-
-                        @Override
-                        public void onFailure(Call<Value> call, Throwable t) {
-                            loading.stop();
-                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    onRegister();
 
                 }
 
                 break;
         }
+    }
+    private void onRegister(){
+        loading.start();
+        RestApi.getData().registerUser(name, username, password, email).enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                loading.stop();
+                String message = response.body().getMessage();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), userLogin.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

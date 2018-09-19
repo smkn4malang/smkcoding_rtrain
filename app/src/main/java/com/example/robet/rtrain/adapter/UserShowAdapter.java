@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.AdminPage.manageUser.UserEdit;
@@ -43,7 +42,7 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
         holder.tvName.setText(name);
         holder.tvUsername.setText(listUser.get(position).getUsername());
 
-        if(i % 2 == 0){
+        if (i % 2 == 0) {
             holder.backId.setBackgroundResource(R.drawable.button3);
         } else {
             holder.backId.setBackgroundResource(R.drawable.button2);
@@ -54,21 +53,17 @@ public class UserShowAdapter extends RecyclerView.Adapter<UserShowAdapter.MainVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
-                    HashMap<String, String> data = new HashMap<>();
+                HashMap<String, String> data = new HashMap<>();
 
-                    data.put("id", listUser.get(position).getId());
-                    data.put("name", listUser.get(position).getName());
-                    data.put("username", listUser.get(position).getUsername());
-                    data.put("email", listUser.get(position).getEmail());
-                    data.put("credit", listUser.get(position).getCredit());
+                data.put("id", listUser.get(position).getId());
+                data.put("name", listUser.get(position).getName());
+                data.put("username", listUser.get(position).getUsername());
+                data.put("email", listUser.get(position).getEmail());
+                data.put("credit", listUser.get(position).getCredit());
 
-                    Intent intent = new Intent(holder.itemView.getContext(), UserEdit.class);
-                    intent.putExtra("extra", data);
-                    ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 250);
-                } catch (Exception e){
-                    Toast.makeText(holder.itemView.getContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(holder.itemView.getContext(), UserEdit.class);
+                intent.putExtra("extra", data);
+                ((Activity) holder.itemView.getContext()).startActivityForResult(intent, 250);
             }
         });
     }

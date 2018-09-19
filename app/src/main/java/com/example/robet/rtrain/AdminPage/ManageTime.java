@@ -1,22 +1,14 @@
 package com.example.robet.rtrain.AdminPage;
 
 import android.app.TimePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -79,6 +71,7 @@ public class ManageTime extends AppCompatActivity {
             @Override
             public void onFailure(Call<TimeResponse> call, Throwable t) {
                 loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -132,7 +125,7 @@ public class ManageTime extends AppCompatActivity {
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
     }
 
-    private void addData(String data){
+    private void addData(final String data){
 
         loading.start();
         RestApi.getData().addTime(data).enqueue(new Callback<Value>() {
@@ -150,12 +143,13 @@ public class ManageTime extends AppCompatActivity {
             @Override
             public void onFailure(Call<Value> call, Throwable t) {
                 loading.stop();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    private void editData(final String old, String data) {
+    private void editData(final String old, final String data) {
 
         loading.start();
         RestApi.getData().editTime(old, data).enqueue(new Callback<Value>() {
@@ -179,7 +173,7 @@ public class ManageTime extends AppCompatActivity {
 
     }
 
-    private void deleteData(String data){
+    private void deleteData(final String data){
 
         loading.start();
         RestApi.getData().deleteTime(data).enqueue(new Callback<Value>() {
