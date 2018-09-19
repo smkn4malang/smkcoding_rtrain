@@ -109,7 +109,7 @@ public class register extends AppCompatActivity {
             @Override
             public void onFailure(Call<Value> call, Throwable t) {
                 loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "jaringan bermasalah", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -253,7 +253,7 @@ public class Index extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<Value> call, Response<Value> response) {
                                         loading.stop();
-                                        Toast.makeText(getApplicationContext(), "berhasil tambah credit", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "kode pembayaran akan dikirim melalui email", Toast.LENGTH_SHORT).show();
                                         config.setCredit(config.getCredit() + pay);
                                         alertDialog.cancel();
                                     }

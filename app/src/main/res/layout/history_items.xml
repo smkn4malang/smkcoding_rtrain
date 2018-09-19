@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
+            android:id="@+id/container"
             app:cardElevation="10dp">
 
             <LinearLayout
@@ -164,12 +165,12 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btBack"
+                        android:id="@+id/btSave"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Back" />
+                        android:text="Save" />
 
                     <Button
                         android:id="@+id/btDelete"

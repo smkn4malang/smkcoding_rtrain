@@ -219,8 +219,8 @@ public class PurchaseTicket extends AppCompatActivity {
     private void onPurchase() {
         loading.start();
         RestApi.getData().ticketPurchase(
-                trainId, userId, date, seat, destination, depart, time,
-                String.valueOf(price), String.valueOf(credit), cart, "user", ktp
+                trainId, userId, date, seat, destination, depart, time, String.valueOf(price),
+                String.valueOf(credit), cart, "user", ktp, config.getEmail()
         ).enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
@@ -240,7 +240,7 @@ public class PurchaseTicket extends AppCompatActivity {
             @Override
             public void onFailure(Call<Value> call, Throwable t) {
                 loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "jaringan bermasalah", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -198,7 +198,7 @@ public class ItemMore extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<Value> call, Throwable t) {
                             loading.stop();
-                            Toast.makeText(mCtx, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mCtx, "jaringan bermasalah", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {

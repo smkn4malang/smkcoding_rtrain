@@ -279,7 +279,8 @@ public interface apiInterface {
             @Field("credit") String credit,
             @Field("cart") String cart,
             @Field("type") String type,
-            @Field("ktp") String ktp
+            @Field("ktp") String ktp,
+            @Field("email") String email
     );
 
     @FormUrlEncoded

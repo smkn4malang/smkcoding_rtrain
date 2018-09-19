@@ -185,7 +185,7 @@ public class SeatPick extends AppCompatActivity {
             @Override
             public void onFailure(Call<SeatResponse> call, Throwable t) {
                 loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "jaringan bemasalah", Toast.LENGTH_SHORT).show();
             }
         });
     }

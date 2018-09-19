@@ -127,7 +127,7 @@ public class userLogin extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<Value> call, @NonNull Throwable t) {
                 loading.stop();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "jaringan bermasalah", Toast.LENGTH_SHORT).show();
             }
         });
     }
