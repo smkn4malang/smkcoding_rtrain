@@ -111,6 +111,7 @@ public class userLogin extends AppCompatActivity {
                     config.setUsername(response.body().getUsername());
                     config.setPassword(response.body().getPassword());
                     config.setId(response.body().getId());
+                    config.setEmail(response.body().getEmail());
 
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     intent = new Intent(getApplicationContext(), Index.class);
