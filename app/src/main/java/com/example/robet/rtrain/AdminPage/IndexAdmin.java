@@ -20,6 +20,7 @@ import com.example.robet.rtrain.AdminPage.manageUser.AdminManageUser;
 import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Config;
+import com.example.robet.rtrain.support.UpdateData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import com.example.robet.rtrain.R;
 
+import java.util.HashMap;
+
 public class Config {
 
     SharedPreferences pref;
@@ -164,6 +166,70 @@ public class Config {
 
     public String getFont(){
         return pref.getString("font", "Default");
+    }
+
+    public void setUpdated(boolean updated){
+        editor.putBoolean("updated", updated);
+        editor.commit();
+    }
+
+    public boolean getUpdated(){
+        return pref.getBoolean("updated", false);
+    }
+
+    public void setItem(HashMap<String, String[]> data){
+
+        String[] mId = data.get("id");
+        String[] mPic = data.get("pic");
+        String[] mName = data.get("name");
+        String[] mDesc = data.get("desc");
+        String[] mPrice = data.get("price");
+        int size = mId.length;
+        String id = null, name = null, pic = null, desc = null, price = null;
+
+        for(int i = 0; i < size; i++){
+            if(id.isEmpty()){
+                id = mId[i];
+                name = mName[i];
+                pic = mPic[i];
+                desc = mDesc[i];
+                price = mPrice[i];
+            } else {
+
+                id += "," + mId[i];
+                name += "," + mName[i];
+                pic += "," + mPic[i];
+                desc += "," + mDesc[i];
+                price += "," + mPrice[i];
+            }
+        }
+
+        editor.putString("itemId", id);
+        editor.putString("itemName", name);
+        editor.putString("itemDesc", desc);
+        editor.putString("itemPrice", desc);
+        editor.putString("itemPic", pic);
+        editor.commit();
+    }
+
+    public HashMap<String, String[]> getItem(){
+
+        String id, name, price, desc, pic;
+        HashMap<String, String[]> data = new HashMap<>();
+
+        id = pref.getString("itemId", "nothing");
+        name = pref.getString("itemName", "nothing");
+        price = pref.getString("itemPrice", "nothing");
+        desc = pref.getString("itemDesc", "nothing");
+        pic = pref.getString("itemPic", "nothing");
+
+        data.put("id", id.split(","));
+        data.put("name", name.split(","));
+        data.put("price", price.split(","));
+        data.put("desc", desc.split(","));
+        data.put("pic", pic.split(","));
+
+        return data;
     }
 
 }

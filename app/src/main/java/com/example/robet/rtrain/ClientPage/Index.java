@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.notification.pushNotificationToken;
 import com.example.robet.rtrain.promo.PromoBuy5Get1;
 import com.example.robet.rtrain.promo.promoMuharram;
 import com.example.robet.rtrain.MainActivity;
@@ -27,7 +28,9 @@ import com.example.robet.rtrain.gson.TimeResponse;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
+import com.example.robet.rtrain.support.UpdateData;
 import com.example.robet.rtrain.support.Value;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +47,7 @@ public class Index extends AppCompatActivity {
     int tax, pay;
     String[] time, city;
     boolean bank = false;
+    String token;
 
     @BindView(R.id.tvName)
     TextView tvName;
@@ -90,11 +94,14 @@ public class Index extends AppCompatActivity {
         setContentView(R.layout.index);
         ButterKnife.bind(this);
 
+        if(!config.getUpdated()){
+            new UpdateData(Index.this).update();
+        }
+
         onDelete();
 
         loading = new Loading(this);
         tvName.setText(config.getName());
-        getData();
 
         if (config.getInfo("user")) {
             btLogout.setAlpha(0);
@@ -283,54 +290,11 @@ public class Index extends AppCompatActivity {
         }
     }
 
-    private void getData() {
-
-        RestApi.getData().TimeList().enqueue(new Callback<TimeResponse>() {
-            @Override
-            public void onResponse(Call<TimeResponse> call, Response<TimeResponse> response) {
-                int size = response.body().getTime().size();
-                time = new String[size];
-                for (int i = 0; i < size; i++) {
-                    time[i] = response.body().getTime().get(i).getTime();
-                }
-                config.setTime(time);
-
-                RestApi.getData().CityList().enqueue(new Callback<CityResponse>() {
-                    @Override
-                    public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                        loading.stop();
-                        int size = response.body().getCity().size();
-                        city = new String[size];
-                        for (int i = 0; i < size; i++) {
-                            city[i] = response.body().getCity().get(i).getName();
-                        }
-                        config.setCity(city);
-                    }
-
-                    @Override
-                    public void onFailure(Call<CityResponse> call, Throwable t) {
-                        loading.stop();
-                        Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(Call<TimeResponse> call, Throwable t) {
-                loading.stop();
-                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
     private void onDelete() {
         RestApi.getData().systemHistoryDelete().enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
-                if (!response.body().getInfo()) {
-                    Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
-                }
+
             }
 
             @Override
@@ -361,4 +325,5 @@ public class Index extends AppCompatActivity {
                 break;
         }
     }
+
 }

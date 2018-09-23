@@ -11,14 +11,29 @@ import android.support.v4.app.NotificationCompat;
 
 import com.example.robet.rtrain.ClientPage.Index;
 import com.example.robet.rtrain.R;
+import com.example.robet.rtrain.support.Config;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class PushNotificationService extends FirebaseMessagingService{
 
+    private boolean update;
+    private Config config;
+
+    @Override
+    public void onCreate(){
+        super.onCreate();
+        config = new Config(PushNotificationService.this);
+    }
+
     @Override
     public void onMessageReceived(RemoteMessage message) {
         SendNotification(message.getNotification().getBody());
+        if(message.getData().get("update").equals("update")){
+            config.setUpdated(false);
+        } else {
+            config.setUpdated(true);
+        }
     }
 
     private void SendNotification(String message){

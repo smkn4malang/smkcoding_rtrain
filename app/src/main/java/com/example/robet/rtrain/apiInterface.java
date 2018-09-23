@@ -393,4 +393,13 @@ public interface apiInterface {
             @Part("price") RequestBody price,
             @Part("desc") RequestBody desc
     );
+
+    @FormUrlEncoded
+    @POST("public/index.php/send/notification")
+    Call<Value> sendNotification(
+            @Field("title") String title,
+            @Field("message") String message,
+            @Field("tokens") String tokens,
+            @Field("update") boolean update
+    );
 }
