@@ -68,14 +68,20 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
             @Override
             public void onClick(View view) {
 
-                map.put("trainId", listTrain.get(position).getId());
-                map.put("trainName", listTrain.get(position).getName());
-                map.put("category", listTrain.get(position).getCategory());
-                map.put("price", listTrain.get(position).getPrice());
-                map.put("date", listTrain.get(position).getDate());
-                map.put("seat", listTrain.get(position).getSeat());
+                if(!new Config(holder.itemView.getContext()).getTime()[0].equals("nothing")
+                        && new Config(holder.itemView.getContext()).getCity()[0].equals("nothing")) {
 
-                pickDetails(holder.itemView.getContext(), map.get("trainId"));
+                    map.put("trainId", listTrain.get(position).getId());
+                    map.put("trainName", listTrain.get(position).getName());
+                    map.put("category", listTrain.get(position).getCategory());
+                    map.put("price", listTrain.get(position).getPrice());
+                    map.put("date", listTrain.get(position).getDate());
+                    map.put("seat", listTrain.get(position).getSeat());
+
+                    pickDetails(holder.itemView.getContext(), map.get("trainId"));
+                } else {
+                    Toast.makeText(holder.itemView.getContext(), "please wait", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -111,7 +117,6 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
         final Config config = new Config(mCtx);
         final String[] city, time, cart;
         ArrayAdapter<String> adapter;
-        final Loading loading = new Loading(mCtx);
         final AutoCompleteTextView etDepart, etDestination;
         Button btBack, btNext;
         final Spinner spTime, spCart;

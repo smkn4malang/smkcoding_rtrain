@@ -10,10 +10,14 @@ import android.widget.Toast;
 
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.adapter.ItemAdapter;
+import com.example.robet.rtrain.gson.ItemItem;
 import com.example.robet.rtrain.gson.ItemResponse;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +31,9 @@ public class Shop extends AppCompatActivity {
     ItemAdapter adapter;
     Loading loading;
     Config config;
+    HashMap<String, String[]> map;
+    ArrayList<ItemItem> listItem = new ArrayList<>();
+    ItemItem itemItem = new ItemItem();
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -43,6 +50,8 @@ public class Shop extends AppCompatActivity {
 
         adapter = new ItemAdapter();
         loading = new Loading(this);
+        map = config.getItem();
+
 
         recyclerView.setLayoutManager(new GridLayoutManager(Shop.this, 2));
         recyclerView.setAdapter(adapter);

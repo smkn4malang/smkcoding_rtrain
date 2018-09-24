@@ -64,16 +64,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MainViewAdapte
     @Override
     public void onBindViewHolder(@NonNull final MainViewAdapter holder, final int position) {
 
+        config = new Config(holder.itemView.getContext());
+
         id = listItem.get(position).getId();
         name = listItem.get(position).getName();
         price = listItem.get(position).getPrice();
         pic = listItem.get(position).getPic();
         desc = listItem.get(position).getDescription();
 
-        Glide.with(holder.itemView.getContext())
-                .load(pic)
-                .apply(RequestOptions.skipMemoryCacheOf(true).diskCacheStrategy(DiskCacheStrategy.NONE))
-                .into(holder.itemPic);
+        if(!config.getApply()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(pic)
+                    .apply(RequestOptions.skipMemoryCacheOf(true).diskCacheStrategy(DiskCacheStrategy.NONE))
+                    .into(holder.itemPic);
+            config.setApply(true);
+        } else {
+            Glide.with(holder.itemView.getContext())
+                    .load(pic)
+                    .into(holder.itemPic);
+        }
 
         holder.tvName.setText(name);
         holder.tvPrice.setText(price);

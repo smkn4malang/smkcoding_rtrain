@@ -17,7 +17,6 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class PushNotificationService extends FirebaseMessagingService{
 
-    private boolean update;
     private Config config;
 
     @Override
@@ -31,8 +30,6 @@ public class PushNotificationService extends FirebaseMessagingService{
         SendNotification(message.getNotification().getBody());
         if(message.getData().get("update").equals("update")){
             config.setUpdated(false);
-        } else {
-            config.setUpdated(true);
         }
     }
 

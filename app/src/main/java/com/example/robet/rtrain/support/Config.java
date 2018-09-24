@@ -78,106 +78,106 @@ public class Config {
         editor.commit();
     }
 
-    public int getId(){
+    public int getId() {
         return pref.getInt("id", 0);
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         editor.putInt("id", id);
         editor.commit();
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         editor.putString("password", password);
         editor.commit();
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return pref.getString("password", "");
     }
 
-    public void setCity(String[] city){
+    public void setCity(String[] city) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < city.length; i++){
+        for (int i = 0; i < city.length; i++) {
             stringBuilder.append(city[i]).append(",");
         }
         editor.putString("city", stringBuilder.toString());
         editor.commit();
     }
 
-    public String[] getCity(){
+    public String[] getCity() {
         String data = pref.getString("city", "nothing");
         String[] city = data.split(",");
-        return  city;
+        return city;
     }
 
-    public void setTime(String[] city){
+    public void setTime(String[] city) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < city.length; i++){
+        for (int i = 0; i < city.length; i++) {
             stringBuilder.append(city[i]).append(",");
         }
         editor.putString("time", stringBuilder.toString());
         editor.commit();
     }
 
-    public String[] getTime(){
+    public String[] getTime() {
         String data = pref.getString("time", "nothing");
         String[] time = data.split(",");
         return time;
     }
 
-    public void setCart(String[] cart){
+    public void setCart(String[] cart) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < cart.length; i++){
+        for (int i = 0; i < cart.length; i++) {
             stringBuilder.append(cart[i]).append(",");
         }
         editor.putString("cart", stringBuilder.toString());
         editor.commit();
     }
 
-    public String[] getCart(){
+    public String[] getCart() {
         String mCart = pref.getString("cart", "nothing");
         String[] cart = mCart.split(",");
         return cart;
     }
 
-    public void setStatus(boolean status){
+    public void setStatus(boolean status) {
         editor.putBoolean("status", status);
         editor.commit();
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return pref.getBoolean("status", false);
     }
 
-    public void setTheme(int resource){
+    public void setTheme(int resource) {
         editor.putInt("resource", resource);
         editor.commit();
     }
 
-    public int getTheme(){
+    public int getTheme() {
         return pref.getInt("resource", 0);
     }
 
-    public void setFont(String font){
+    public void setFont(String font) {
         editor.putString("font", font);
         editor.commit();
     }
 
-    public String getFont(){
+    public String getFont() {
         return pref.getString("font", "Default");
     }
 
-    public void setUpdated(boolean updated){
+    public void setUpdated(boolean updated) {
         editor.putBoolean("updated", updated);
         editor.commit();
     }
 
-    public boolean getUpdated(){
+    public boolean getUpdated() {
         return pref.getBoolean("updated", false);
     }
 
-    public void setItem(HashMap<String, String[]> data){
+    public void setItem(HashMap<String, String[]> data) {
 
         String[] mId = data.get("id");
         String[] mPic = data.get("pic");
@@ -185,34 +185,37 @@ public class Config {
         String[] mDesc = data.get("desc");
         String[] mPrice = data.get("price");
         int size = mId.length;
-        String id = null, name = null, pic = null, desc = null, price = null;
+        String id, name, pic, desc, price;
 
-        for(int i = 0; i < size; i++){
-            if(id.isEmpty()){
-                id = mId[i];
-                name = mName[i];
-                pic = mPic[i];
-                desc = mDesc[i];
-                price = mPrice[i];
-            } else {
+        id = mId[0];
+        name = mName[0];
+        pic = mPic[0];
+        desc = mDesc[0];
+        price = mPrice[0];
 
-                id += "," + mId[i];
-                name += "," + mName[i];
-                pic += "," + mPic[i];
-                desc += "," + mDesc[i];
-                price += "," + mPrice[i];
-            }
+        for (int i = 0; i < size; i++) {
+
+            id += "," + mId[i];
+            name += "," + mName[i];
+            pic += "," + mPic[i];
+            desc += "," + mDesc[i];
+            price += "," + mPrice[i];
+
         }
 
         editor.putString("itemId", id);
+        editor.commit();
         editor.putString("itemName", name);
+        editor.commit();
         editor.putString("itemDesc", desc);
-        editor.putString("itemPrice", desc);
+        editor.commit();
+        editor.putString("itemPrice", price);
+        editor.commit();
         editor.putString("itemPic", pic);
         editor.commit();
     }
 
-    public HashMap<String, String[]> getItem(){
+    public HashMap<String, String[]> getItem() {
 
         String id, name, price, desc, pic;
         HashMap<String, String[]> data = new HashMap<>();
@@ -230,6 +233,15 @@ public class Config {
         data.put("pic", pic.split(","));
 
         return data;
+    }
+
+    public void setApply(boolean apply){
+        editor.putBoolean("apply", apply);
+        editor.commit();
+    }
+
+    public boolean getApply(){
+        return pref.getBoolean("apply", false);
     }
 
 }

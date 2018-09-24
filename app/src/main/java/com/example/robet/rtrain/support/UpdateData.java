@@ -1,7 +1,12 @@
 package com.example.robet.rtrain.support;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.gson.CityResponse;
@@ -30,7 +35,8 @@ public class UpdateData {
         loading = new ACProgressFlower.Builder(context)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
-                .text("Downloading Resource....")
+                .text("Downloading....")
+                .textSize(20)
                 .fadeColor(Color.DKGRAY)
                 .build();
     }
@@ -73,7 +79,7 @@ public class UpdateData {
             @Override
             public void onFailure(Call<ItemResponse> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                onFailed();
             }
         });
     }
@@ -96,7 +102,7 @@ public class UpdateData {
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                onFailed();
             }
         });
     }
@@ -120,9 +126,32 @@ public class UpdateData {
             @Override
             public void onFailure(Call<TimeResponse> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                onFailed();
             }
         });
+    }
+
+    private void onFailed(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("gagal download data");
+        builder.setMessage("mohon periksa jaringan anda dan \nulangi mendownload data lagi");
+        builder.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+                update();
+            }
+        }).setNegativeButton("later", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+                config.setUpdated(false);
+                ((Activity) context).finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

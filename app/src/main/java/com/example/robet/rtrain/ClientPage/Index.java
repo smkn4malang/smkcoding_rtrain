@@ -32,6 +32,8 @@ import com.example.robet.rtrain.support.UpdateData;
 import com.example.robet.rtrain.support.Value;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -96,6 +98,7 @@ public class Index extends AppCompatActivity {
 
         if(!config.getUpdated()){
             new UpdateData(Index.this).update();
+            config.setApply(false);
         }
 
         onDelete();
@@ -149,8 +152,12 @@ public class Index extends AppCompatActivity {
                 break;
 
             case R.id.btShop:
-                Intent intent = new Intent(getApplicationContext(), Shop.class);
-                startActivityForResult(intent, 2);
+                if(!config.getItem().get("id")[0].equals("nothing")) {
+                    Intent intent = new Intent(getApplicationContext(), Shop.class);
+                    startActivityForResult(intent, 2);
+                } else {
+                    Toast.makeText(getApplicationContext(), "please wait", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.btCredit:
