@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".ClientPage.ItemMore">
 
     <android.support.design.widget.AppBarLayout
@@ -19,26 +20,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/collapsing_toolbar"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
             android:fitsSystemWindows="true">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/page_name"
-                android:background="@color/colorAccent"
-                app:layout_collapseMode="parallax"/>
 
             <ImageView
                 android:id="@+id/itemPic"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/train_track"/>
-            
+                android:src="@drawable/train_track"
+                app:layout_collapseMode="parallax"/>
+
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:id="@+id/toolbar"
@@ -56,6 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
             android:orientation="vertical">
 
             <TextView
@@ -95,31 +91,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
 
                 <android.support.v7.widget.CardView
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="10dp"
-                    android:id="@+id/btBack"
-                    app:cardElevation="10dp"
-                    android:layout_margin="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Back"
-                        android:textColor="#000"
-                        android:textSize="22sp"
-                        android:layout_gravity="center"/>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="60dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp"
                     android:id="@+id/btBuy"

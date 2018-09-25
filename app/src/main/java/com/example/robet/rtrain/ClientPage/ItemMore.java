@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,8 +50,6 @@ public class ItemMore extends AppCompatActivity {
     TextView tvPrice;
     @BindView(R.id.tvDesc)
     TextView tvDesc;
-    @BindView(R.id.btBack)
-    CardView btBack;
     @BindView(R.id.btBuy)
     CardView btBuy;
 
@@ -63,8 +62,6 @@ public class ItemMore extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.app_bar_layout)
     AppBarLayout appBarLayout;
-    @BindView(R.id.page_name)
-    TextView pageName;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -91,7 +88,6 @@ public class ItemMore extends AppCompatActivity {
         tvDesc.setText(desc);
         Glide.with(getApplicationContext()).load(pic).into(itemPic);
 
-        pageName.setText(name);
         collapsingToolbar.setTitle(name);
         collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedToolbar);
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedTollbar);
@@ -101,14 +97,36 @@ public class ItemMore extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    @OnClick({R.id.btBack, R.id.btBuy})
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @OnClick({R.id.itemPic, R.id.btBuy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btBack:
-                ItemMore.this.finish();
-                break;
             case R.id.btBuy:
                 showDialog(ItemMore.this);
+                break;
+            case R.id.itemPic:
+
+                ImageView imageView = null;
+                Glide.with(ItemMore.this).load(pic).into(imageView);
+                View view1 = imageView;
+                AlertDialog.Builder builder = new AlertDialog.Builder(ItemMore.this);
+                builder.setView(view1);
+                builder.setCancelable(true);
+
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
                 break;
         }
     }
