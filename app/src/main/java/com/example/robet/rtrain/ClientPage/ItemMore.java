@@ -5,10 +5,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,16 +22,20 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.robet.rtrain.R;
+
 import com.bumptech.glide.Glide;
+import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Config;
 import com.example.robet.rtrain.support.Loading;
 import com.example.robet.rtrain.support.RestApi;
 import com.example.robet.rtrain.support.Value;
+
 import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,8 +45,6 @@ public class ItemMore extends AppCompatActivity {
 
     @BindView(R.id.itemPic)
     ImageView itemPic;
-    @BindView(R.id.tvName)
-    TextView tvName;
     @BindView(R.id.tvPrice)
     TextView tvPrice;
     @BindView(R.id.tvDesc)
@@ -53,6 +59,14 @@ public class ItemMore extends AppCompatActivity {
     Loading loading;
     Config config;
     int amount = 1, credit, tax;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.app_bar_layout)
+    AppBarLayout appBarLayout;
+    @BindView(R.id.page_name)
+    TextView pageName;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +87,18 @@ public class ItemMore extends AppCompatActivity {
         desc = map.get("desc");
         credit = config.getCredit();
 
-        tvName.setText(tvName.getText().toString() + name);
         tvPrice.setText(tvPrice.getText().toString() + price);
         tvDesc.setText(desc);
         Glide.with(getApplicationContext()).load(pic).into(itemPic);
 
+        pageName.setText(name);
+        collapsingToolbar.setTitle(name);
+        collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedToolbar);
+        collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedTollbar);
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @OnClick({R.id.btBack, R.id.btBuy})
@@ -110,7 +131,7 @@ public class ItemMore extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
-        if(config.getInfo("user")){
+        if (config.getInfo("user")) {
             user(mCtx, view, dialog);
         } else {
             guest(mCtx, view, dialog);
@@ -118,9 +139,9 @@ public class ItemMore extends AppCompatActivity {
 
     }
 
-    private void user(final Context mCtx, View view, final AlertDialog dialog){
+    private void user(final Context mCtx, View view, final AlertDialog dialog) {
 
-        de.hdodenhof.circleimageview.CircleImageView itemPic;
+        CircleImageView itemPic;
         final TextView tvName, tvAmount;
         ImageView btPlus, btMin;
         Button btCancel, btBuy;
@@ -163,7 +184,7 @@ public class ItemMore extends AppCompatActivity {
         btMin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(amount > 1){
+                if (amount > 1) {
                     amount -= 1;
                     tvAmount.setText(String.valueOf(amount));
                     tvPrice.setText(String.valueOf(Integer.valueOf(price) * amount));
@@ -180,7 +201,7 @@ public class ItemMore extends AppCompatActivity {
                 Price = tvPrice.getText().toString();
                 address = etAddress.getText().toString();
 
-                if(address.equals("")){
+                if (address.equals("")) {
                     Toast.makeText(mCtx, "masukkan alamat anda", Toast.LENGTH_SHORT).show();
                 } else if (Integer.valueOf(Price) <= credit) {
                     loading.start();
@@ -209,12 +230,12 @@ public class ItemMore extends AppCompatActivity {
         });
     }
 
-    private void guest(final Context mCtx, View view, final AlertDialog dialog){
+    private void guest(final Context mCtx, View view, final AlertDialog dialog) {
 
         final String[] pay = {"indomaret", "alfamaret", "bca", "bri", "mandiri"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(mCtx, android.R.layout.simple_spinner_dropdown_item, pay);
 
-        de.hdodenhof.circleimageview.CircleImageView itemPic;
+        CircleImageView itemPic;
         final TextInputLayout layoutPay;
         final TextView tvName, tvAmount;
         final TextInputEditText tvPrice, etAddress, etPay, etRekening;
@@ -302,7 +323,7 @@ public class ItemMore extends AppCompatActivity {
         btMin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(amount > 1){
+                if (amount > 1) {
                     amount -= 1;
                     tvAmount.setText(String.valueOf(amount));
                     tvPrice.setText(String.valueOf(Integer.valueOf(price) * amount));
@@ -326,8 +347,8 @@ public class ItemMore extends AppCompatActivity {
                 mPay = etPay.getText().toString();
                 address = etAddress.getText().toString();
 
-                if(bank){
-                    if(mBank.equals("")){
+                if (bank) {
+                    if (mBank.equals("")) {
                         bank = false;
                     } else {
                         bank = true;
@@ -336,23 +357,23 @@ public class ItemMore extends AppCompatActivity {
                     bank = true;
                 }
 
-                if(!bank){
+                if (!bank) {
                     etRekening.setError("wajib diisi");
                     bank = false;
-                } else if(mPay.equals("")){
+                } else if (mPay.equals("")) {
                     etPay.setError("wajib diisi");
                     bank = false;
-                } else if(address.equals("")){
+                } else if (address.equals("")) {
                     etAddress.setError("wajib diisi");
                     bank = false;
-                } else if(Integer.valueOf(price) > Integer.valueOf(mPay) ) {
+                } else if (Integer.valueOf(price) > Integer.valueOf(mPay)) {
                     etPay.setError("uang anda kurang");
                     bank = false;
                 } else {
 
                     bank = false;
                     loading.start();
-                    RestApi.getData().itemBuy(userId, id, String.valueOf(amount), price, address, config.getEmail(),"2").enqueue(new Callback<Value>() {
+                    RestApi.getData().itemBuy(userId, id, String.valueOf(amount), price, address, config.getEmail(), "2").enqueue(new Callback<Value>() {
                         @Override
                         public void onResponse(Call<Value> call, Response<Value> response) {
                             loading.stop();
