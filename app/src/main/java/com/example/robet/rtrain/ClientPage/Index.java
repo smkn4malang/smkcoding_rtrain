@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.robet.rtrain.AdminPage.IndexAdmin;
 import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.promo.PromoBuy5Get1;
@@ -85,6 +86,11 @@ public class Index extends AppCompatActivity {
         ButterKnife.bind(this);
         loading = new Loading(this);
 
+        if(config.getInfo("admin")){
+            finish();
+            startActivity(new Intent(getApplicationContext(), IndexAdmin.class));
+        }
+
         if (!config.getUpdated()) {
             new UpdateData(Index.this).update();
             config.setApply(false);
@@ -97,20 +103,20 @@ public class Index extends AppCompatActivity {
 
     }
 
-    private void initComponent(){
+    private void initComponent() {
 
-        if(config.getInfo("user")){
+        if (config.getInfo("user")) {
             tvType.setText("User Id");
             tvId.setText(": " + String.valueOf(config.getId()));
-            tvName.setText(": "+config.getName());
-            tvUsername.setText(": "+config.getUsername());
-            tvEmail.setText(": "+config.getEmail());
+            tvName.setText(": " + config.getName());
+            tvUsername.setText(": " + config.getUsername());
+            tvEmail.setText(": " + config.getEmail());
             tvCredit.setText(tvCredit.getText().toString() + String.valueOf(config.getCredit()));
-        } else if (config.getInfo("guest")){
+        } else if (config.getInfo("guest")) {
             tvType.setText("Guest Id");
             tvId.setText(": " + String.valueOf(config.getId()));
-            tvName.setText(": "+config.getName());
-            tvEmail.setText(": "+config.getEmail());
+            tvName.setText(": " + config.getName());
+            tvEmail.setText(": " + config.getEmail());
             tvUsername.setVisibility(View.GONE);
             tvCredit.setVisibility(View.GONE);
         }
@@ -125,7 +131,7 @@ public class Index extends AppCompatActivity {
         toggle.syncState();
     }
 
-    private NavigationView.OnNavigationItemSelectedListener navItem(){
+    private NavigationView.OnNavigationItemSelectedListener navItem() {
         return new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -135,12 +141,8 @@ public class Index extends AppCompatActivity {
                         break;
 
                     case R.id.btShop:
-                        if (!config.getItem().get("id")[0].equals("nothing")) {
-                            Intent intent = new Intent(getApplicationContext(), Shop.class);
-                            startActivityForResult(intent, 2);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "please wait", Toast.LENGTH_SHORT).show();
-                        }
+                        Intent intent = new Intent(getApplicationContext(), Shop.class);
+                        startActivityForResult(intent, 2);
                         break;
 
                     case R.id.btHistory:
@@ -155,7 +157,7 @@ public class Index extends AppCompatActivity {
                         if (config.getInfo("guest")) {
                             Toast.makeText(getApplicationContext(), "anda harus menjadi user dahulu", Toast.LENGTH_SHORT).show();
                         } else if (config.getInfo("user")) {
-                            Intent intent = new Intent(getApplicationContext(), UserSetting.class);
+                            intent = new Intent(getApplicationContext(), UserSetting.class);
                             startActivityForResult(intent, 1);
                         }
                         break;
@@ -163,7 +165,7 @@ public class Index extends AppCompatActivity {
                     case R.id.btLogout:
                         config.setInfo("guest", false);
                         config.setInfo("user", false);
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

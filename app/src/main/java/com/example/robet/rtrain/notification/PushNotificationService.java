@@ -28,10 +28,10 @@ public class PushNotificationService extends FirebaseMessagingService{
 
     @Override
     public void onMessageReceived(RemoteMessage message) {
-        SendNotification(message.getNotification().getBody());
-        for(String key : message.getData().keySet()){
-            Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
+        if(message.getData().get("update").equals("update")){
+            config.setUpdated(false);
         }
+        SendNotification(message.getNotification().getBody());
     }
 
     private void SendNotification(String message){

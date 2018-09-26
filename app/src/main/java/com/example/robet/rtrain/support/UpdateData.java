@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
@@ -26,10 +30,11 @@ public class UpdateData {
     ACProgressFlower loading;
     Context context;
     Config config;
-    String[] time, city, id, name, price, pic, desc;
-    HashMap<String, String[]> map = new HashMap<>();
+    String url;
+    String[] time, city;
 
     public UpdateData(Context context) {
+        url = "http://nothing-aframrpy.000webhostapp.com/rtrain/app-debug.apk";
         this.context = context;
         this.config = new Config(context);
         loading = new ACProgressFlower.Builder(context)
@@ -39,49 +44,16 @@ public class UpdateData {
                 .textSize(20)
                 .fadeColor(Color.DKGRAY)
                 .build();
+
     }
 
-    public void update(){
+    public void update() {
 
         loading.show();
+        getData1();
+        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        loading.dismiss();
 
-        RestApi.getData().ItemShow().enqueue(new Callback<ItemResponse>() {
-            @Override
-            public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
-
-                int size = response.body().getItem().size();
-                id = new String[size];
-                name = new String[size];
-                price = new String[size];
-                desc = new String[size];
-                pic = new String[size];
-
-                for(int i = 0; i < size; i++){
-                    id[i] = response.body().getItem().get(i).getId();
-                    name[i] = response.body().getItem().get(i).getName();
-                    price[i] = response.body().getItem().get(i).getPrice();
-                    desc[i] = response.body().getItem().get(i).getDescription();
-                    pic[i] = response.body().getItem().get(i).getPic();
-                }
-
-                map.put("id", id);
-                map.put("name", name);
-                map.put("price", price);
-                map.put("desc", desc);
-                map.put("pic", pic);
-
-                config.setItem(map);
-
-                getData1();
-
-            }
-
-            @Override
-            public void onFailure(Call<ItemResponse> call, Throwable t) {
-                loading.dismiss();
-                onFailed();
-            }
-        });
     }
 
     private void getData1(){
@@ -119,7 +91,6 @@ public class UpdateData {
                 }
                 config.setTime(time);
                 config.setUpdated(true);
-                loading.dismiss();
 
             }
 

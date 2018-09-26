@@ -31,9 +31,6 @@ public class Shop extends AppCompatActivity {
     ItemAdapter adapter;
     Loading loading;
     Config config;
-    HashMap<String, String[]> map;
-    ArrayList<ItemItem> listItem = new ArrayList<>();
-    ItemItem itemItem = new ItemItem();
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -50,7 +47,6 @@ public class Shop extends AppCompatActivity {
 
         adapter = new ItemAdapter();
         loading = new Loading(this);
-        map = config.getItem();
 
 
         recyclerView.setLayoutManager(new GridLayoutManager(Shop.this, 2));

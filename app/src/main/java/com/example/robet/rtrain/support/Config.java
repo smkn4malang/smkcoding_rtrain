@@ -177,64 +177,6 @@ public class Config {
         return pref.getBoolean("updated", false);
     }
 
-    public void setItem(HashMap<String, String[]> data) {
-
-        String[] mId = data.get("id");
-        String[] mPic = data.get("pic");
-        String[] mName = data.get("name");
-        String[] mDesc = data.get("desc");
-        String[] mPrice = data.get("price");
-        int size = mId.length;
-        String id, name, pic, desc, price;
-
-        id = mId[0];
-        name = mName[0];
-        pic = mPic[0];
-        desc = mDesc[0];
-        price = mPrice[0];
-
-        for (int i = 0; i < size; i++) {
-
-            id += "," + mId[i];
-            name += "," + mName[i];
-            pic += "," + mPic[i];
-            desc += "," + mDesc[i];
-            price += "," + mPrice[i];
-
-        }
-
-        editor.putString("itemId", id);
-        editor.commit();
-        editor.putString("itemName", name);
-        editor.commit();
-        editor.putString("itemDesc", desc);
-        editor.commit();
-        editor.putString("itemPrice", price);
-        editor.commit();
-        editor.putString("itemPic", pic);
-        editor.commit();
-    }
-
-    public HashMap<String, String[]> getItem() {
-
-        String id, name, price, desc, pic;
-        HashMap<String, String[]> data = new HashMap<>();
-
-        id = pref.getString("itemId", "nothing");
-        name = pref.getString("itemName", "nothing");
-        price = pref.getString("itemPrice", "nothing");
-        desc = pref.getString("itemDesc", "nothing");
-        pic = pref.getString("itemPic", "nothing");
-
-        data.put("id", id.split(","));
-        data.put("name", name.split(","));
-        data.put("price", price.split(","));
-        data.put("desc", desc.split(","));
-        data.put("pic", pic.split(","));
-
-        return data;
-    }
-
     public void setApply(boolean apply){
         editor.putBoolean("apply", apply);
         editor.commit();
