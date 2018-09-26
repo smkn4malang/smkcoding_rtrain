@@ -2,13 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/name"
-            android:title="change name"/>
+            android:id="@+id/btTicket"
+            android:title="Buy Ticket" />
         <item
-            android:id="@+id/password"
-            android:title="change password"/>
+            android:id="@+id/btShop"
+            android:title="Shop"/>
         <item
-            android:id="@+id/font"
-            android:title="change font" />
+            android:id="@+id/btCredit"
+            android:title="Add Credit" />
+        <item
+            android:id="@+id/btHistory"
+            android:title="history" />
     </group>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/btSetting"
+                android:title="Setting" />
+            <item
+                android:id="@+id/btLogout"
+                android:title="logout" />
+        </menu>
+    </item>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/btAbout"
+                android:title="About R-Train" />
+        </menu>
+    </item>
 </menu>

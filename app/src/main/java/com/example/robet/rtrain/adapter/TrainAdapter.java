@@ -69,7 +69,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.MainViewHold
             public void onClick(View view) {
 
                 if(!new Config(holder.itemView.getContext()).getTime()[0].equals("nothing")
-                        && new Config(holder.itemView.getContext()).getCity()[0].equals("nothing")) {
+                        && !new Config(holder.itemView.getContext()).getCity()[0].equals("nothing")) {
 
                     map.put("trainId", listTrain.get(position).getId());
                     map.put("trainName", listTrain.get(position).getName());

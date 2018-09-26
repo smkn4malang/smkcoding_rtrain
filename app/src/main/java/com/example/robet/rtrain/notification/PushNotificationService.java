@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
 
 import com.example.robet.rtrain.ClientPage.Index;
 import com.example.robet.rtrain.R;
@@ -28,8 +29,8 @@ public class PushNotificationService extends FirebaseMessagingService{
     @Override
     public void onMessageReceived(RemoteMessage message) {
         SendNotification(message.getNotification().getBody());
-        if(message.getData().get("update").equals("update")){
-            config.setUpdated(false);
+        for(String key : message.getData().keySet()){
+            Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
         }
     }
 
