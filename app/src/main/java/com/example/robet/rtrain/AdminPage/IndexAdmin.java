@@ -10,7 +10,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.AdminPage.ManageTrain.AdminManageTrainShow;
@@ -20,7 +19,6 @@ import com.example.robet.rtrain.AdminPage.manageUser.AdminManageUser;
 import com.example.robet.rtrain.MainActivity;
 import com.example.robet.rtrain.R;
 import com.example.robet.rtrain.support.Config;
-import com.example.robet.rtrain.support.UpdateData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,8 +27,8 @@ import butterknife.OnClick;
 public class IndexAdmin extends AppCompatActivity {
 
     Config config;
-    @BindView(R.id.btLogout)
-    ImageView btLogout;
+    @BindView(R.id.btNotif)
+    Button btNotif;
     @BindView(R.id.btManageUsers)
     CardView btManageUsers;
     @BindView(R.id.btManageData)
@@ -54,9 +52,14 @@ public class IndexAdmin extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.btNotif)
+    public void onNotifClicked(View view) {
+        startActivity(new Intent(getApplicationContext(), SendNotification.class));
+    }
+
     @OnClick({R.id.btManageUsers, R.id.btManageAdmins, R.id.btManageData})
-    public void onRow1Clicked(View view){
-        switch (view.getId()){
+    public void onRow1Clicked(View view) {
+        switch (view.getId()) {
             case R.id.btManageUsers:
                 startActivity(new Intent(getApplicationContext(), AdminManageUser.class));
                 break;
@@ -64,7 +67,7 @@ public class IndexAdmin extends AppCompatActivity {
                 showDialog();
                 break;
             case R.id.btManageAdmins:
-                if(config.getUsername().equals("root")){
+                if (config.getUsername().equals("root")) {
                     startActivity(new Intent(getApplicationContext(), AdminManageAdmin.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "hanya root admin yang dapat masuk", Toast.LENGTH_SHORT).show();
@@ -74,8 +77,8 @@ public class IndexAdmin extends AppCompatActivity {
     }
 
     @OnClick({R.id.btManageCities, R.id.btManageTime, R.id.Settings})
-    public void onRow2Clicked(View view){
-        switch (view.getId()){
+    public void onRow2Clicked(View view) {
+        switch (view.getId()) {
             case R.id.btManageCities:
                 startActivity(new Intent(getApplicationContext(), ManageCity.class));
                 break;
@@ -88,16 +91,7 @@ public class IndexAdmin extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.btLogout)
-    public void onLogoutClicked(View view){
-        config.setInfo("admin", false);
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    private void showDialog(){
+    private void showDialog() {
 
         LayoutInflater inflater = LayoutInflater.from(IndexAdmin.this);
         View view = inflater.inflate(R.layout.admin_manage_data, null);

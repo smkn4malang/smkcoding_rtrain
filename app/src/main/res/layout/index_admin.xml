@@ -45,12 +45,12 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="30dp"
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_height="30dp"
-            android:id="@+id/btLogout"
-            android:src="@drawable/signout"/>
+            android:id="@+id/btNotif"
+            android:text="Notif"/>
 
     </LinearLayout>
 

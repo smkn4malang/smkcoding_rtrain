@@ -399,7 +399,6 @@ public interface apiInterface {
     Call<Value> sendNotification(
             @Field("title") String title,
             @Field("message") String message,
-            @Field("tokens") String tokens,
-            @Field("update") boolean update
+            @Field("tokens") String tokens
     );
 }

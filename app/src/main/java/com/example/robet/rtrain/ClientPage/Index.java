@@ -47,9 +47,7 @@ public class Index extends AppCompatActivity {
     Loading loading;
     String rekening;
     int tax, pay;
-    String[] time, city;
     boolean bank = false;
-    String token;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

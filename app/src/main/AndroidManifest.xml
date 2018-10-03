@@ -141,8 +141,10 @@
         <activity
             android:name=".AdminPage.ManageCity"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.ManageTime"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".AdminPage.ManageTime"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AdminPage.SendNotification"></activity>
     </application>
 
 </manifest>
