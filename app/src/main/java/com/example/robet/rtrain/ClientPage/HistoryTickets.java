@@ -13,9 +13,10 @@ import android.os.Environment;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +72,12 @@ public class HistoryTickets extends AppCompatActivity {
     Button btDelete;
     @BindView(R.id.container)
     CardView container;
+    @BindView(R.id.header)
+    LinearLayout header;
+    @BindView(R.id.barCode)
+    ImageView barCode;
+    @BindView(R.id.footer)
+    LinearLayout footer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +93,7 @@ public class HistoryTickets extends AppCompatActivity {
         pid = (String) bundle.get("pid");
         name = config.getName();
         loading = new Loading(this);
+        barCode.setImageBitmap(config.getBarCode(id));
 
         getData();
 
@@ -97,7 +105,7 @@ public class HistoryTickets extends AppCompatActivity {
             case R.id.btSave:
                 dialog.setMessage("saving History");
                 File file = saveBitmap(HistoryTickets.this, container);
-                if(file != null){
+                if (file != null) {
                     dialog.cancel();
                     Toast.makeText(getApplicationContext(), "berhasil menyimpan history", Toast.LENGTH_SHORT).show();
                 } else {

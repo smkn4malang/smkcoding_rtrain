@@ -170,6 +170,7 @@ public class Index extends AppCompatActivity {
                         break;
 
                     case R.id.btAbout:
+                        showAbout();
                         break;
                 }
                 drawer_layout.closeDrawers();
@@ -345,5 +346,18 @@ public class Index extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "anda harus menjadi user terlebih dahulu", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void showAbout(){
+        LayoutInflater inflater = LayoutInflater.from(Index.this);
+        View view = inflater.inflate(R.layout.about, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Index.this);
+        builder.setView(view);
+        builder.setCancelable(true);
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

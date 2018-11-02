@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="center_horizontal"
-    tools:context=".AdminPage.adminLogin">
+    tools:context=".ClientPage.forgot">
 
     <ImageView
         android:layout_width="120dp"

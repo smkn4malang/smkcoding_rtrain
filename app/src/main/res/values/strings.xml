@@ -87,4 +87,74 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">cloase</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="bag1">Alat transportasi kereta modern mulai berkembang seiring dengan
+        perkembangan revolusi industri, ekspansi, dan perpindahan dari satu tempat ke tempat lain.
+        Kereta baru digunakan secara massal sejak 200 tahun lalu.
+        Namun, penemuannya terjadi jauh sebelum itu semua.
+        Kereta sederhana sebagai alat transportasi sudah mulai digunakan sekitar 2000 tahun yang lalu
+        oleh masyarakat di peradaban Mesir kuno, Babylonia dan Yunani.
+        Saat itu alat transportasi untuk mengangkut penumpang dan barang masih dilakukan menggunakan
+        gerobak yang ditarik oleh hewan (biasanya kuda atau sapi). Seiring perkembangan,
+        para ahli mulai menciptakan bentuk roda yang bulat untuk mengurangi beban saat pengangkatan,
+        saat itu roda dibuat dari bahan kayu. Untuk mengaktifkan cara baru bertransportasi,
+        mereka kemudian membangun jalan. Sisa-sisa arkeologi pembangunan ini masih dapat ditemukan
+        di Italia dan Yunani. Salah satu contoh yang paling terkenal adalah batu kuno terukir “wagonways”
+        yang dapat ditemukan di Isthmus dari Corinth, Yunani.</string>
+
+    <string name="bag2">Pada abad ke-18, setiap tambang di Inggris memiliki jaringan
+        kereta api sederhana sendiri, dengan kuda sebagai tenaga penarik gerobak dari tambang ke pabrik.
+        Perubahan kembali datang pada tahun 1774 setelah James Watt memperkenalkan penemuan mesin uap
+        stasioner pertamanya ke seluruh dunia. Kemuadian pada tahung 1800-an beberapa ahli mesin uap
+        berhasil memodifikasi mesin uap rancangan Watt, dengan merancang ruang bertekanan tinggi
+        non-kondensasi yang memungkinkan mesin untuk mengkonversi lebih banyak energi uap menjadi
+        energi mekanik.</string>
+
+    <string name="bag3">kereta apiAlat transportasi kereta modern mulai berkembang seiring dengan
+        perkembangan revolusi industri, ekspansi, dan perpindahan dari satu tempat ke tempat lain.
+        Kereta baru digunakan secara massal sejak 200 tahun lalu. Namun, penemuannya terjadi jauh
+        sebelum itu semua. Kereta sederhana sebagai alat transportasi sudah mulai digunakan sekitar 2000
+        tahun yang lalu oleh masyarakat di peradaban Mesir kuno, Babylonia dan Yunani.
+        Saat itu alat transportasi untuk mengangkut penumpang dan barang masih dilakukan menggunakan
+        gerobak yang ditarik oleh hewan (biasanya kuda atau sapi). Seiring perkembangan, para ahli
+        mulai menciptakan bentuk roda yang bulat untuk mengurangi beban saat pengangkatan, saat itu
+        roda dibuat dari bahan kayu. Untuk mengaktifkan cara baru bertransportasi, mereka kemudian
+        membangun jalan. Sisa-sisa arkeologi pembangunan ini masih dapat ditemukan di Italia dan Yunani.
+        Salah satu contoh yang paling terkenal adalah batu kuno terukir “wagonways” yang dapat ditemukan
+        di Isthmus dari Corinth, Yunani.
+    </string>
+    <string name="bag5">Pada abad ke-18, setiap tambang di Inggris memiliki jaringan kereta api
+        sederhana sendiri, dengan kuda sebagai tenaga penarik gerobak dari tambang ke pabrik.
+        Perubahan kembali datang pada tahun 1774 setelah James Watt memperkenalkan penemuan mesin
+        uap stasioner pertamanya ke seluruh dunia. Kemuadian pada tahung 1800-an beberapa ahli mesin
+        uap berhasil memodifikasi mesin uap rancangan Watt, dengan merancang ruang bertekanan tinggi
+        non-kondensasi yang memungkinkan mesin untuk mengkonversi lebih banyak energi uap menjadi
+        energi mekanik.</string>
+    <string name="bag6">Mesin uap pertama mulai dioperasikan di sepanjang rel primitif pada tahun 1804.
+        Saait itu Matthew Murray berhasil menampilkan lokomotif sederhana pertama,
+        Namun perhatian publik justru lebih banyak tertuju pada Richard Trevithick yang berhasil
+        menciptakan “Penydarren”, sebuah lokomotif yang menarik beban setara 25 ton dan 70 orang.
+        Kereta api dipergunakan secara komersial pada akhir 1820-an, George Stephenson yang
+        berkebangsaan Inggris saat itu memenangkan kompetisi dengan desain lokomotif uapnya.
+        Sejak saat itu, lokomotif uap menyebar dengan cepat hingga ke Amerika.</string>
+    <string name="bag7">Pada dekade pertama penyebaran lokomotif uap, para insinyur di London mulai
+        merencanakan untuk membangun rel kereta api antar kota dan terowongan bawah tanah.
+        Bagian pertama dari proyek ini sekarang dikenal dengan “London Underground” yang mulai dibangun
+        pada tahun 1863. Meskipun menerima banyak keluhan karena asap di terowongan, pembangunan
+        rel ini tetap diteruskan hingga  1890. Masa kejayaan kereta uap berakhir ketika seluruh
+        armada kereta di London mulai menggunakan mesin listrik. Penggunaan kereta listrik ini
+        menandai awal dari era baru sistem perkeretaan melalui transit perkotaan yang cepat, dan
+        jalan bawah tanah mulai muncul di seluruh penjuru dunia.</string>
+    <string name="bag8">dalam sejarah kereta adalah pengenalan mesin Diesel,
+        yang juga membawa lokomotif uap untuk tutup usia. Setelah perang dunia ke-2, mayoritas negara
+        di dunia mulai meninggalkan lokomotif uap dan beralih pada mesin berbahan bakar diesel yang lebih
+        handal. Mesin diesel yang dikombinasikan dengan yang listrik memungkinkan terciptanya kereta terbaik
+        kedua dunia, setelah kereta listrik. Kini kereta tercatat membawa lebih dari 40% barang di seluruh
+        dunia dan mendistribusikannya antar kota, negara, dan benua.</string>
+    <string name="desc">                  R-Train dibuat dengan tujuan untuk memudahkan pengguna
+        dalam memesan tiket kereta api agar tidak memperpanjang antrian pada stasiun kereta api.
+        aplikasi ini juga memiliki beberapa fitur seperti e-commerce, promo, dll.</string>
+
 </resources>

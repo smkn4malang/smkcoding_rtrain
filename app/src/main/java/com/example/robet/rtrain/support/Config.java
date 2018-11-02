@@ -2,9 +2,20 @@ package com.example.robet.rtrain.support;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 
 import com.example.robet.rtrain.R;
+import com.google.zxing.qrcode.QRCodeReader;
 
+import net.glxn.qrgen.android.QRCode;
+import net.glxn.qrgen.core.image.ImageType;
+import net.glxn.qrgen.core.scheme.VCard;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 
 public class Config {
@@ -184,6 +195,12 @@ public class Config {
 
     public boolean getApply(){
         return pref.getBoolean("apply", false);
+    }
+
+    public Bitmap getBarCode(String data){
+        VCard vCard = new VCard()
+                .setTitle(data);
+        return QRCode.from(vCard).bitmap();
     }
 
 }

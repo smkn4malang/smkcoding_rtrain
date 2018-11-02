@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +70,8 @@ public class HistoryItems extends AppCompatActivity {
     TextView tvDate;
     @BindView(R.id.container)
     CardView container;
+    @BindView(R.id.barCode)
+    ImageView barCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,7 @@ public class HistoryItems extends AppCompatActivity {
         pid = (String) bundle.get("pid");
         loading = new Loading(this);
         name = config.getName();
+        barCode.setImageBitmap(config.getBarCode(id));
 
         getData();
 

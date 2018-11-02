@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.robet.rtrain.AdminPage.ManageTrain.AdminManageTrainShow;
@@ -28,7 +29,7 @@ public class IndexAdmin extends AppCompatActivity {
 
     Config config;
     @BindView(R.id.btNotif)
-    Button btNotif;
+    LinearLayout btNotif;
     @BindView(R.id.btManageUsers)
     CardView btManageUsers;
     @BindView(R.id.btManageData)

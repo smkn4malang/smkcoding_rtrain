@@ -144,7 +144,8 @@
         <activity
             android:name=".AdminPage.ManageTime"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminPage.SendNotification"></activity>
+        <activity android:name=".AdminPage.SendNotification"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

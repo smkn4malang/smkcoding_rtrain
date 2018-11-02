@@ -159,7 +159,6 @@ public class PurchaseTicket extends AppCompatActivity {
                     });
 
                     btNext.setOnClickListener(new View.OnClickListener() {
-                        @SuppressLint("SetTextI18n")
                         @Override
                         public void onClick(View view) {
                             btNext.setText("Next");
@@ -191,7 +190,7 @@ public class PurchaseTicket extends AppCompatActivity {
 
                                 mKtp[(count - 1)] = etKtp.getText().toString();
                                 for (int i = 0; i < value; i++) {
-                                    if (ktp.equals("")) {
+                                    if (i == 0) {
                                         ktp = mKtp[i];
                                     } else {
                                         ktp += "," + mKtp[i];

@@ -50,8 +50,8 @@ public class PromoBuy5Get1 extends AppCompatActivity {
 
         text1.setText(msg1);
         text2.setText(msg2);
-        startDate = 201809;
-        endDate = 201810;
+        startDate = 201810;
+        endDate = 201811;
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -72,7 +72,7 @@ public class PromoBuy5Get1 extends AppCompatActivity {
     public void onViewClicked() {
         if(config.getInfo("guest")){
             showDialog(notUser, notUserHeader);
-        } else if(date > startDate){
+        } else if(date < startDate){
             showDialog(promoPending, promoPendingHeader);
         } else if(date > endDate){
             showDialog(promoEnd, promoEndHeader);

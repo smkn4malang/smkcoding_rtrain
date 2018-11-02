@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +18,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.robet.rtrain.ClientPage.Index;
 import com.example.robet.rtrain.AdminPage.IndexAdmin;
 import com.example.robet.rtrain.support.Config;
+
+import java.io.File;
 
 public class Welcome extends AppCompatActivity {
 
@@ -86,6 +90,21 @@ public class Welcome extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void makeFiles(){
+        String[] path = {
+                "/R-Train/history/item/",
+                "/R-Train/history/ticket/",
+        };
+        for(int i = 0; i < path.length; i++){
+            File dir = new File(Environment.getExternalStorageDirectory().getPath() + path[i]);
+            if(!dir.exists()){
+                if(!dir.mkdir()){
+                    Toast.makeText(getApplicationContext(), "cant make external directory files", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     private void addBotDots(int currPage){
