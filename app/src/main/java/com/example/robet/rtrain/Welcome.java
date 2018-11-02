@@ -40,6 +40,8 @@ public class Welcome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        makeFiles();
+
         //buat object intro
         pref = new Config(this);
 
