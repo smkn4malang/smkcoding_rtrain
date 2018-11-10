@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,13 +47,14 @@ public class Index extends AppCompatActivity {
     Config config;
     Loading loading;
     String rekening;
+    AlertDialog dialog;
     int tax, pay;
     boolean bank = false;
+    boolean sPromo = false;
+    boolean sProfile = false;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.tvPromo)
-    TextView tvPromo;
     @BindView(R.id.promoMuharram)
     CardView promoMuharram;
     @BindView(R.id.buy5get1)
@@ -73,6 +75,26 @@ public class Index extends AppCompatActivity {
     TextView tvEmail;
     @BindView(R.id.tvCredit)
     TextView tvCredit;
+    @BindView(R.id.btProfile)
+    CardView btProfile;
+    @BindView(R.id.profile)
+    CardView profile;
+    @BindView(R.id.btPromo)
+    CardView btPromo;
+    @BindView(R.id.promo)
+    CardView promo;
+    @BindView(R.id.btShop2)
+    LinearLayout btShop2;
+    @BindView(R.id.btTicket2)
+    LinearLayout btTicket2;
+    @BindView(R.id.btHistory2)
+    LinearLayout btHistory2;
+    @BindView(R.id.btCredit2)
+    LinearLayout btCredit2;
+    @BindView(R.id.tvProfile)
+    TextView tvProfile;
+    @BindView(R.id.tvPromo)
+    TextView tvPromo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -356,8 +378,69 @@ public class Index extends AppCompatActivity {
         builder.setView(view);
         builder.setCancelable(true);
 
-        AlertDialog dialog = builder.create();
+        LinearLayout btClose = view.findViewById(R.id.btClose);
+
+        dialog = builder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+
+        btClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+    }
+
+    @OnClick({R.id.btPromo, R.id.btProfile})
+    public void onButtonClicked(View view){
+        switch (view.getId()){
+            case R.id.btPromo:
+
+                if(sPromo){
+                    tvPromo.setText("Show Promo");
+                    promo.setVisibility(View.GONE);
+                    sPromo = false;
+                } else {
+                    tvPromo.setText("Hide Promo");
+                    promo.setVisibility(View.VISIBLE);
+                    sPromo = true;
+                }
+
+                break;
+            case R.id.btProfile:
+
+                if(sProfile){
+                    tvProfile.setText("Show Profile");
+                    profile.setVisibility(View.GONE);
+                    sProfile = false;
+                } else {
+                    tvProfile.setText("Hide Profile");
+                    profile.setVisibility(View.VISIBLE);
+                    sProfile = true;
+                }
+
+                break;
+        }
+    }
+
+    @OnClick({R.id.btShop2, R.id.btTicket2, R.id.btCredit2, R.id.btHistory2})
+    public void onPageClicked(View view){
+        switch (view.getId()){
+            case R.id.btShop2:
+                Intent intent = new Intent(getApplicationContext(), Shop.class);
+                startActivityForResult(intent, 2);
+                break;
+            case R.id.btTicket2:
+                startActivity(new Intent(getApplicationContext(), TrainShow.class));
+                break;
+            case R.id.btHistory2:
+                startActivity(new Intent(getApplicationContext(), History.class));
+                break;
+            case R.id.btCredit2:
+                addCredit();
+                break;
+        }
     }
 }

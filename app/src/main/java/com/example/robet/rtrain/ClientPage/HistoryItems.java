@@ -72,6 +72,8 @@ public class HistoryItems extends AppCompatActivity {
     CardView container;
     @BindView(R.id.barCode)
     ImageView barCode;
+    @BindView(R.id.btBack)
+    ImageView btBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,7 @@ public class HistoryItems extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btSave, R.id.btDelete})
+    @OnClick({R.id.btSave, R.id.btDelete, R.id.btBack})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btSave:
@@ -112,6 +114,8 @@ public class HistoryItems extends AppCompatActivity {
                 onDelete();
 
                 break;
+            case R.id.btBack:
+                HistoryItems.this.finish();
         }
     }
 

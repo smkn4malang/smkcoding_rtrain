@@ -102,8 +102,10 @@ public class Welcome extends AppCompatActivity {
         for(int i = 0; i < path.length; i++){
             File dir = new File(Environment.getExternalStorageDirectory().getPath() + path[i]);
             if(!dir.exists()){
-                if(!dir.mkdir()){
-                    Toast.makeText(getApplicationContext(), "cant make external directory files", Toast.LENGTH_SHORT).show();
+                try{
+                    dir.mkdir();
+                } catch (Exception e){
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         }

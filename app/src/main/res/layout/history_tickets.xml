@@ -7,14 +7,68 @@
     android:orientation="vertical"
     tools:context=".ClientPage.HistoryTickets">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/back"
+        android:id="@+id/pheader">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/btBack"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/previous"/>
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/btBack"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/tickets" />
+
+            <TextView
+                android:id="@+id/tvTrainName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="trainName"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/pheader"
+        android:scaleType="centerCrop"
+        android:src="@drawable/smooth_gradient" />
+
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_below="@id/pheader"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="100dp" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -28,32 +82,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/header"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/top_radius"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/tickets" />
-
-                        <TextView
-                            android:id="@+id/tvTrainName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="trainName"
-                            android:textAlignment="center"
-                            android:textColor="#000"
-                            android:textSize="25dp" />
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

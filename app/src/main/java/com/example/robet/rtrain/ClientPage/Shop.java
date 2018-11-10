@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +39,8 @@ public class Shop extends AppCompatActivity {
     RecyclerView recyclerView;
     @BindView(R.id.tvHappy)
     TextView tvHappy;
+    @BindView(R.id.btPrevius)
+    ImageView btPrevius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,5 +87,10 @@ public class Shop extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "jaringan bermasalah", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @OnClick(R.id.btPrevius)
+    public void onPreviusClicked(View view){
+        Shop.this.finish();
     }
 }

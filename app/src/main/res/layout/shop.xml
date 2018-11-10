@@ -13,10 +13,21 @@
         android:background="@color/back">
 
         <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/previous"
+            android:id="@+id/btPrevius"/>
+
+        <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:layout_gravity="center"
+            android:layout_toRightOf="@id/btPrevius"
+            android:id="@+id/imgBuy"
             android:src="@drawable/bag"/>
 
         <TextView
@@ -24,6 +35,7 @@
             android:layout_height="wrap_content"
             android:text="Happy Buy !!"
             android:textColor="#000"
+            android:layout_toRightOf="@id/imgBuy"
             android:id="@+id/tvHappy"
             android:layout_centerInParent="true"
             android:textSize="30sp"/>

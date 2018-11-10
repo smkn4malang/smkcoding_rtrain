@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/train_track"
+                android:src="@drawable/smooth_gradient"
                 app:layout_collapseMode="parallax"/>
 
             <android.support.v7.widget.Toolbar

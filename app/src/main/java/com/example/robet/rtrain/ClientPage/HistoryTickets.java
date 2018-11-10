@@ -78,6 +78,9 @@ public class HistoryTickets extends AppCompatActivity {
     ImageView barCode;
     @BindView(R.id.footer)
     LinearLayout footer;
+    @BindView(R.id.btBack)
+    ImageView btBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +102,7 @@ public class HistoryTickets extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btSave, R.id.btDelete})
+    @OnClick({R.id.btSave, R.id.btDelete, R.id.btBack})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btSave:
@@ -115,6 +118,9 @@ public class HistoryTickets extends AppCompatActivity {
                 break;
             case R.id.btDelete:
                 onDelete();
+                break;
+            case R.id.btBack:
+                HistoryTickets.this.finish();
                 break;
         }
     }
